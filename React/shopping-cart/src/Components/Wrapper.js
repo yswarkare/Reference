@@ -36,21 +36,21 @@ class Wrapper extends Component {
                 price: "20"
                 },
             ],
-            //cart: [],
+            cart: []
         }
     }
 
-    // addCartToWrapper = (cartCopy) => {
-    //     this.setState({
-    //         cart: cartCopy
-    //     })
-    // }
+    addCartToWrapper = (cartCopy) => {
+        this.setState({
+            cart: cartCopy
+        })
+    }
 
     render () {
         return (
             <Fragment>
-                <Products products={this.state.products} cart={this.state.cart} />
-                <Cart products={this.state.products} />
+                <Products products={this.state.products} cart={this.state.cart} getCartFromProducts={(cartCopy)=>{this.addCartToWrapper(cartCopy)}} />
+                <Cart products={this.state.products} cart={this.state.cart}/>
             </Fragment>
         )
     }

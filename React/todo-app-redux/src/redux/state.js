@@ -5,7 +5,7 @@ let todosState = {
         title: "Title",
         date: "2020-03-01",
         time: "00:00",
-        status: "Incomplete"
+        status: "Active"
     },
     todos: [
         {
@@ -18,7 +18,7 @@ let todosState = {
             title: "Second",
             date: "2020-03-16",
             time: "12:10",
-            status: "Incomplete"
+            status: "Active"
         },
         {
             title: "Third",
@@ -30,7 +30,7 @@ let todosState = {
             title: "Fourth",
             date: "2020-03-16",
             time: "12:20",
-            status: "Incomplete"
+            status: "Active"
         },
     ],
     todosCopy: undefined,

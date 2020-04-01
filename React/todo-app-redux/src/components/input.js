@@ -40,17 +40,17 @@ class Input extends Component {
     render() {
       return (
         <div class="input">
-          <input onChange={(e) => this.handleInputChange(e.target.value)} 
+          <input id="dark" onChange={(e) => this.handleInputChange(e.target.value)} 
           value={this.props.todo.title} type="text" class="form-control" /> 
 
-          <input onChange={(e) => this.handleDateChange(e.target.value)} 
+          <input id="dark" onChange={(e) => this.handleDateChange(e.target.value)} 
           value={this.props.todo.date} type="date" class="form-control"/>
 
-          <input onChange={(e) => this.timeChangeHandler(e.target.value)} type="time" class="form-control" value={this.props.todo.time}></input>
+          <input id="dark" onChange={(e) => this.timeChangeHandler(e.target.value)} type="time" class="form-control" value={this.props.todo.time}></input>
           
-          <select onChange={(e)=>{this.handleStatus(e.target.value)}} value={this.props.todo.status} class="form-control">
+          <select id="dark" onChange={(e)=>{this.handleStatus(e.target.value)}} value={this.props.todo.status} class="form-control">
           <option>Completed</option>
-          <option>Incomplete</option>
+          <option>Active</option>
           </select>
 
           {this.props.edit === false && <button onClick={() => this.addTodoToTodos()} class="btn btn-primary">Save</button>}

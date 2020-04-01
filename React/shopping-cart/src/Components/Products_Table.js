@@ -11,10 +11,11 @@ class ProductsTable extends Component {
     }
 
     componentWillMount = () => {
+        let productsCopy = this.props.products;
         this.setState({
             className: this.props.className,
-            products: this.props.products,
-            //cart: this.props.cart
+            products: productsCopy,
+            cart: this.props.cart
         })
     }
 
@@ -23,7 +24,7 @@ class ProductsTable extends Component {
         cartCopy.push(this.state.products[index]);
         this.setState({
             cart: cartCopy
-        })
+        }, ()=> {this.props.getCartArray(this.state.cart)})
     }
 
     removeProductFromCart = (index) => {

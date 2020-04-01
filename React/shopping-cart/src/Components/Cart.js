@@ -7,14 +7,14 @@ class Cart extends Component {
         this.state = {
             className: "cart",
             products: [],
-            //cart: []
+            cart: []
         }
     }
 
     componentWillMount = () => {
         this.setState({
             products: this.props.products,
-            //cart: this.props.cart
+            cart: this.props.cart
         })
     }
     
@@ -29,7 +29,7 @@ class Cart extends Component {
         console.log("State in Cart => " + this.state)
         return (
             <div className="cart">
-                <ProductsTable products={this.state.products} className={this.state.className} />
+                <ProductsTable products={this.state.products} className={this.state.className} cart={this.state.cart} />
             </div>
         )
     }

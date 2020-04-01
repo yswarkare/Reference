@@ -30,7 +30,7 @@ class Output extends Component{
         return (
             <div class="output">
                 <div class="filter">
-                    <select class="filter-status form-control" onChange={(e)=>{this.handleFilter(e.target.value)}} value={this.props.selectStatus}>
+                    <select id="dark" class="filter-status form-control" onChange={(e)=>{this.handleFilter(e.target.value)}} value={this.props.selectStatus}>
                         <option>Completed</option>
                         <option>Incomplete</option>
                         <option>All</option>
@@ -39,13 +39,13 @@ class Output extends Component{
                 <ul class="list">
                     {this.props.todos && this.props.todos.map((todo, index)=>{
                         return(
-                            <li class="list-item" key = {index} >
-                            <div class="todo-title list-group-item">{todo.title}</div>
-                            <div class="list-group-item">{todo.date}</div>
-                            <div class="list-group-item">{todo.time}</div>
-                            <div class="list-group-item">{todo.status}</div>
-                            <button onClick={() => {this.editTodo(index)}} class="btn btn-dark">Edit</button>
-                            <button onClick={() => {this.deleteTodo(index)}} class="btn btn-dark">Delete</button>
+                            <li className="list-item" id={todo.status} key = {index} >
+                                <div className="todo-title list-group-item">{todo.title}</div>
+                                <div class="list-group-item">{todo.date}</div>
+                                <div class="list-group-item">{todo.time}</div>
+                                <div class="list-group-item">{todo.status}</div>
+                                <button onClick={() => {this.editTodo(index)}} class="btn btn-dark">Edit</button>
+                                <button onClick={() => {this.deleteTodo(index)}} class="btn btn-dark">Delete</button>
                             </li>
                         )
                     })}

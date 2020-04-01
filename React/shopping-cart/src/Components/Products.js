@@ -6,14 +6,23 @@ class Products extends Component {
         super(props);
         this.state = {
             className: "products",
-            products: []
+            products: [],
+            cart: []
         }
     }
 
     componentWillMount = () => {
+        let productsCopy = this.props.products
         this.setState({
-            products: this.props.products,
+            products: productsCopy,
+            cart: this.props.cart
         })
+    }
+
+    addCartToProducts(cartCopy){
+        this.setState({
+            cart: cartCopy
+        }, (()=>{this.props.getCartFromProducts(this.state.cart)}))
     }
 
     render () {
@@ -21,7 +30,7 @@ class Products extends Component {
         console.log("State in Products => " + this.state)
         return (
             <div className="products">
-                <ProductsTable products={this.state.products} className={this.state.className} />
+                <ProductsTable products={this.state.products} cart={this.state.cart} className={this.state.className} getCartArray={(cartCopy)=>{this.addCartToProducts(cartCopy)}} />
             </div>
         )
     }

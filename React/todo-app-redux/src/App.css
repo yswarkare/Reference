@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  background-color: #0f0f0f;
 }
 
 .App-logo {
@@ -55,15 +56,18 @@
 .list-item {
   display: grid;
   grid-template-columns: repeat(6, 1fr);
+  justify-content: stretch;
   margin: 0.25rem;
-  padding: 0.25rem;
+  padding: 0.25rem; 
   grid-gap: 0.25rem;
 }
 
 .list-group-item {
   padding: 0px;
   justify-items: center;
-  align-self: center;
+  align-self: stretch;
+  color: aliceblue;
+  background-color: #0f0f0f;
 }
 
 .list-item > .btn {
@@ -71,4 +75,17 @@
   margin: 0px;
   justify-items: center;
   align-self: center;
+}
+
+#Active {
+  background-color: crimson;
+}
+
+#Completed {
+  background-color: forestgreen;
+}
+
+#dark {
+  color: aliceblue;
+  background-color: #0f0f0f;
 }
