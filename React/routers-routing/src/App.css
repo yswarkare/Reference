@@ -1,5 +1,13 @@
 .App {
   text-align: center;
+  background-color: #0f0f0f;
+  color: aliceblue;
+  padding: 1rem;
+}
+
+a{
+  text-decoration: none;
+  color: aliceblue;
 }
 
 .App-logo {
@@ -35,4 +43,39 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.header {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  justify-content: space-around;
+  grid-gap: 0.5rem;
+  padding: 0.5rem;
+  margin: 0.5rem;
+}
+
+.header-list-item {
+  text-align: center;
+  /* border-style: solid;
+  border-width: 1px;
+  border-color: bisque; */
+}
+
+.user-list {
+  display: grid;
+  grid-template-rows: auto;
+  justify-content: left; 
+}
+
+.product-list {
+  display: grid;
+  grid-template-rows: auto;
+  justify-content: left;  
+}
+
+.order-list {
+  display: grid;
+  grid-template-rows: auto;
+  justify-content: left;  
 }

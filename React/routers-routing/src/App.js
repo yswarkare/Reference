@@ -1,26 +1,36 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import Header from "./Components/Header";
+import Users from "./Components/Users";
+import Products from "./Components/Products";
+import Orders from "./Components/Orders";
+import User from "./Components/User";
+import Product from "./Components/Product";
+import Order from "./Components/Order";
+
+class App extends React.Component {
+  
+  render () {
+    return (
+      <Router>
+        <Header/>
+        <div className="App">
+          <Switch>
+            <Route exact path="/"><p>Home Page</p></Route>
+            <Route exact path="/users"><Users/></Route>
+            <Route exact path="/products"><Products/></Route>
+            <Route exact path="/orders"><Orders/></Route>
+            <Route path="/users/:userID" component={User}></Route>
+            <Route path="/products/:productID" component={Product}></Route>
+            <Route path="/orders/:orderID" component={Order}></Route>
+          </Switch>
+        </div>
+      </Router>
+    );
+  }
+  
 }
 
 export default App;

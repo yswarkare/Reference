@@ -1,0 +1,38 @@
+{
+    "todo": {
+        "title": "Title",
+        "date": "2020-03-01",
+        "time": "00:00",
+        "status": "Active"
+    },
+    "todos": [
+        {
+            "title": "First",
+            "date": "2020-03-16",
+            "time": "12:05",
+            "status": "Completed"
+        },
+        {
+            "title": "Second",
+            "date": "2020-03-16",
+            "time": "12:10",
+            "status": "Active"
+        },
+        {
+            "title": "Third",
+            "date": "2020-03-16",
+            "time": "12:15",
+            "status": "Completed"
+        },
+        {
+            "title": "Fourth",
+            "date": "2020-03-16",
+            "time": "12:20",
+            "status": "Active"
+        }
+    ],
+    "todosCopy": [],
+    "selectStatus": "All",
+    "edit": false,
+    "editIndex": ""
+}
