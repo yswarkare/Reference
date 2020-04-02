@@ -32,7 +32,7 @@ class Output extends Component{
                 <div class="filter">
                     <select id="dark" class="filter-status form-control" onChange={(e)=>{this.handleFilter(e.target.value)}} value={this.props.selectStatus}>
                         <option>Completed</option>
-                        <option>Incomplete</option>
+                        <option>Active</option>
                         <option>All</option>
                     </select>
                 </div>
