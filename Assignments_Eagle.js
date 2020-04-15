@@ -246,6 +246,208 @@ var data = {
 
 		Resources links -
 		https://reacttraining.com/react-router/web/guides/quick-start`
+	},
+	W25: {
+		D02: `Understand the data, divide into tables so as 
+		to achieve modularity and one-source-of-truth, 
+		create ER diagram and 
+		then create tables with primary keys and foreign keys 
+		IN POSTGRESQL for the following data set
+
+		Song name
+		Singer name
+		Song length
+		Song release year
+		Song awards
+		Song Movie Name
+		Song genre
+		Song language
+		Singer Age
+		Singer Awards
+		Singer Experience of singing
+		Is singer classically trained?
+		Singer gender
+		Singer native language
+
+		P.S - You can use lucidchart.com to create ER diagrams`,
+		D03: `  
+			Co-working space db -
+		employee name
+		company name
+		employee designation
+		employee phone number
+		employee email
+		company address
+		company owner
+		company email
+		company phone number
+		employee department
+		department strength
+		employee salary
+		employee benefits - health insurance, life insurance, free car parking, phone bill payment
+		holidays - national and optional
+		things given to employee - laptop, charger, phone, diary, pen
+		facilities available in the co-working space
+		staff details
+		expenses`
+	}
+	W26: {
+		D03: `
+		1. Generate 100 rows of data from Mockaroo
+
+		Company Table - Columns
+		1. Employee Name
+		2. Employee Gender
+		3. Employee Department
+		4. Employee Salary - Min. Salary 1lakh, Max salary 15lakh
+		5. Company office City, where the employee works
+
+		Find
+		1. Number of people in every department
+		2. Number of Males in every department
+		3. Number of Females in every department
+		4. Total Salary of the employees in one department ex. Finance department 10 employees, total salary = 50lakhs
+		5. Total Salary of the male employees in one department ex. Finance department 5 employees, total salary = 25lakhs
+		6. Total Salary of the female employees in one department ex. Finance department 5 employees, total salary = 25lakhs
+		7. Total number of cities in which the office is there
+		8. Return the entries from 31-50 from the table
+		9. Return all the entries after 50, where the salary is more than 5 lakhs, and the department is “SALES”
+		10. The average salary of every department in every city
+
+
+		JOINS
+
+		1. Create two tables - Singers and Songs
+		2. Both the tables should have 10 entries
+		3. Singers table columns - ID, Singer Name, Song Name, Song year
+		4. Songs table columns - ID, Song Name, Song Length
+		5. Some singers have songs which do not have an entry in the songs table
+
+		Write queries to find
+		1. All singers from the singers table who have an entry in the songs table (common data between both tables)
+		2. Get all entries from singers table, and common entries from songs
+		3. Get all entries from songs table, and common entries from singers
+		4. Get all the entries from both the tables
+		5. Get all the entries from the singers table which are not present in the songs (rows exclusive to singers table)
+		6. Get all the entries from the songs table which are not present in the singers (rows exclusive to songs table)
+		7. Get all the unique entries from both the tables (uncommon data)`,
+		D05: `https://github.com/AdiDubey0415/portfolio
+		1. Clone this repo
+		2. This has html, css and JS
+		3. Design the page again using SCSS, don't re-write the HTML, just the CSS part`
+	},
+	W27: {
+		D03: `Assignment-
+		Set up a react project, without create-react-app, with linting 
+		setup using eslint and the airbnb style guide for react, 
+		the linting rules should be enforced in all files with .js extension, 
+		for all the JSX in all the files too. 
+		The solvable problems in the file, including indentation and 
+		syntax errors should get solved upon saving the file.`,
+		D04: `Study the following documentation
+		https://developers.themoviedb.org/3/getting-started/introduction
+
+		and build an app which looks like 
+		https://www.lucidchart.com/invitations/accept/b3158075-b007-47db-ac2f-c7ac85e674ac
+
+		1. Read the documentation and see as to how to fetch movies and tv shows
+		2. Show two tabs on the screen, one for movies, one for tvshows, 
+		by default the movies tab should be selected and the page
+		populated with movies
+		3. On click of load more, the next set of movies should be fetched and shown on the screen
+		4. On click of tv shows, similar thing should happen for tv shows
+		5. The url on the first page should have movies when "movies" page is active and "tvshows" when that is active
+		6. On click of either a movie or a tv show, go to a new page where you will show details about that movie or tvshow
+		7. The url on that page should be like it is given in the lucidchart image`,
+		D05: `Create a react project without Create-React-App which should have the following
+		1. An index.html file
+		2. An index.js file - where you will pick the root element and render the App
+		3. An app.js file - rendering some JSX
+		4. A header.js file - rendering some JSX
+		5. A footer.js file - rendering some JSX
+		6. Multiple css files(one for each component)
+
+		The header and footer component must be imported and shown inside the App component
+
+		Use Webpack to setup the project, setup appropriate loaders for JS and CSS
+		Research about what loader to use and setup to convert JSX and make the app functional`
+	},
+	W28: {
+		D03: `Please go through the following link, read it, and look at all the exercises 
+		given at the end. This will help you in solving the coding challenge for the same topics
+
+		https://www.codingame.com/playgrounds/9799/learn-solve-call-apply-and-bind-methods-in-javascript `,
+		D05: `Create a medical application where someone can come and book
+
+		1. HOME CARE services - NURSE, PHYSIOTHERAPIST, COOK
+		2. CONCIERGE services - AMBULANCE, HEARSE etc
+		3. MEDICAL EQUIPMENT services - OXYGEN CYLINDER, PACE MAKER, WHEELCHAIR
+
+		There are to be shown in tabs, 3 tabs on the page, at the top, on click of which the services will be shown
+
+		P.S - It would be great if you could pick corresponding images or icons for the services from google and add them
+
+		Each of one these services, ex. Nurse, Ambulance, Oxygen Cylinder, will have their 
+		own starting and closing time in a day, and charge rates per hour, and you can book 
+		them for a certain number of hours, on a certain day, and at the bottom, 
+		you will get the total price of all the services you've booked.
+
+		Create a react application for this project, setup with webpack, using SCSS to style, and 
+		including unit test cases, integration test cases using JEST, and end to end test cases using PUPPETEER`
+	},
+	W29: {
+		D02: `Create Apis to
+		1. Employee
+		  1. Add an employee to a department
+		  2. Edit an employee
+		  3. Delete an employee
+		  4. Get a list of all employees
+		  5. Get single employee
+		  6. Get all employee of one department
+
+		2. Departments
+		  1. Add a department
+		  2. Edit a department
+		  3. Delete a department
+		  4. Get a list of all departments
+		  
+		Also
+		1. A join of all employees and departments`,
+		D04: `Create a backend for an application holding the Data
+
+		Song name
+		Singer name
+		Song length
+		Song release year
+		Song awards
+		Song Movie Name
+		Song genre
+		Song language
+		Singer Age
+		Singer Awards
+		Singer Experience of singing
+		Is singer classically trained?
+		Singer gender
+		Singer native language
+
+		create tables for
+		1. Songs
+		2. Singers
+		3. Movies
+		4. Awards
+		5. Genres
+		6. Languages
+		Use foreign keys to map data from one table into another
+
+		APIS -
+		1. CRUD for songs
+		2. CRUD for Singers
+		3. CRUD for movies
+		4. CRUD for awards
+		5. CRUD for genres
+		6. CRUD for languages
+
+		Create an express application using express-generator`
 	}
 }
 
