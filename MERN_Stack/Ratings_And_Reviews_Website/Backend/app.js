@@ -2,20 +2,27 @@ const express = require("express");
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const cors = require("cors");
+const { success, error } = require("consola");
+const passport = require("passport");
+const { strategy } = require("./middlewares/passport");
+
 
 const app = express()
 
 app.use(express.json());
 dotenv.config();
 app.use(cors());
+app.use(passport.initialize());
 
-dotenv.config();
+passport.use(
+    strategy
+);
 
 const uri = process.env.mongoURI;
 
 mongoose.connect(uri, {useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true})
-.then(()=>{console.log("MongoDB Database Connection Established Successfully");})
-.catch((err)=>{console.log(err)});
+.then(()=>success({message: `MongoDB Database Connection Established Successfully with database \n${uri}`, badge: true}))
+.catch((err)=>error({message: `MongoDB Database Connection Failed \n${err}`, badge: true}));
 
 // Routers
 

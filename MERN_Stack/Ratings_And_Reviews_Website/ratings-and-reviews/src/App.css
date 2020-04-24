@@ -1,5 +1,10 @@
 .App {
   text-align: center;
+  background-color: #ffffff;
+}
+
+a {
+  text-decoration: none;
 }
 
 .App-logo {
@@ -35,4 +40,53 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.header-list {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  list-style-type: none;
+}
+
+.user-icon {
+  display: flex;
+  flex-direction: row-reverse;
+  list-style-type: none;
+  justify-content: right;
+  align-items: center;
+}
+
+.user-login-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+}
+
+.user-login {
+  display: grid;
+  grid-template-rows: repeat(3, 1fr);
+  justify-content: center;
+  align-items: center;
+  grid-gap: 0.5rem;
+  padding: 0.5rem;
+  width: 50%;
+  align-self: center;
+}
+
+.user-registration-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+}
+
+.user-registration {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  justify-content: center;
+  align-items: center;
+  grid-gap: 0.5rem;
+  padding: 0.5rem;
+  align-self: center;
 }

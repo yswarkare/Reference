@@ -8,5 +8,5 @@ const port = process.env.PORT || 5000
 
 
 server.listen(port, function(){
-    console.log("Connection is Ready");
+    console.log(`Connection is Ready on port ${port}`);
 });
