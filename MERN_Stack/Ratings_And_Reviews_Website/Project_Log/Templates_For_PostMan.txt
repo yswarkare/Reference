@@ -1,0 +1,20 @@
+
+{
+    "firstName": "Yogesh",
+    "middleName": "Suryakant",
+    "lastName": "Warkare",
+    "userName": "yswarkare",
+    "emailId": "yogeshwarkare@gmail.com",
+    "password": "yogesh2580"
+}
+
+
+{
+    "firstName": "Stewie",
+    "middleName": "John",
+    "lastName": "Griffin",
+    "userName": "sjgriffin",
+    "emailId": "sjgriffin@gmail.com",
+    "password": "stewie2580"
+}
+
