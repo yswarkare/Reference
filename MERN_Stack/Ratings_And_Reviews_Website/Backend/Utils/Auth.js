@@ -6,7 +6,7 @@ const jwt = require("jsonwebtoken");
 const passport = require("passport");
 const { SECRET } = require("../Config/config")
 const { strategy } = require("../middlewares/passport");
-const { validateAdmin, validateUser, validateEmailId, validateUserName } = require("./Validations");
+const { validateAdmin, validateUser, validateEmailId, validateUsername } = require("./Validations");
 
 passport.use(
     strategy
@@ -14,11 +14,11 @@ passport.use(
 
 const userRegistration = async (userData, res) => {
 
-    const userNameLowercase = (userData.userName).toLowerCase();
+    const usernameLowercase = (userData.username).toLowerCase();
     const emailIdLowercase = (userData.emailId).toLowerCase();
     // Validate Username
-    let userNameTaken = await validateUserName(userNameLowercase);
-    if (userNameTaken) {
+    let usernameTaken = await validateUsername(usernameLowercase);
+    if (usernameTaken) {
         return res.status(400).json({message: `Username already exists`, success: false});
     }
 
@@ -44,7 +44,7 @@ const userRegistration = async (userData, res) => {
             middleName: userData.middleName,
             lastName: userData.lastName
         },
-        userName: userNameLowercase,
+        username: usernameLowercase,
         emailId : emailIdLowercase,
         password : hashedPassword
     });
@@ -65,8 +65,8 @@ const userLogin = async (userData, res) => {
     const userIsAdmin = await validateAdmin(userData);
     if (userIsAdmin === true){
         let admin;
-        if(userData.userName){
-            admin = await Admins.findOne({userName: userData.userName});
+        if(userData.username){
+            admin = await Admins.findOne({username: userData.username});
         }
         if(userData.emailId){
             admin = await Admins.findOne({emailId: userData.emailId})
@@ -75,14 +75,15 @@ const userLogin = async (userData, res) => {
             let isMatch = await bcrypt.compare(userData.password, hashPassword);
             if(isMatch === true){
                 let token = jwt.sign({
-                    userId: admin._id,
-                    userName: admin.userName,
+                    _id: admin._id,
+                    username: admin.username,
                     emailId: admin.emailId
                 }, SECRET, {expiresIn: "1 day"})
                 
                 let result = {
-                    userId: admin._id,
-                    userName: admin.userName,
+                    userIsAdmin: userIsAdmin,
+                    _id: admin._id,
+                    username: admin.username,
                     emailId: admin.emailId,
                     token: `Bearer ${token}`,
                     expiresIn: 24
@@ -93,7 +94,7 @@ const userLogin = async (userData, res) => {
                     success: true
                 })
             } else {
-            return res.status(403).json({
+            return  res.status(403).json({
                 message: `Incorrect Password`,
                 success: false
             })
@@ -106,8 +107,8 @@ const userLogin = async (userData, res) => {
     }
     
     let user;
-    if(userData.userName){
-        user = await Users.findOne({userName: userData.userName});
+    if(userData.username){
+        user = await Users.findOne({username: userData.username});
     }
     if(userData.emailId){
         user = await Users.findOne({emailId: userData.emailId})
@@ -117,14 +118,15 @@ const userLogin = async (userData, res) => {
         let isMatch = await bcrypt.compare(userData.password, hashPassword);
         if(isMatch === true){
             let token = jwt.sign({
-                userId: user._id,
-                userName: user.userName,
+                _id: user._id,
+                username: user.username,
                 emailId: user.emailId
             }, SECRET, {expiresIn: "1 day"})
             
             let result = {
-                userId: user._id,
-                userName: user.userName,
+                userIsAdmin: false,
+                _id: user._id,
+                username: user.username,
                 emailId: user.emailId,
                 token: `Bearer ${token}`,
                 expiresIn: 24
@@ -143,6 +145,8 @@ const userLogin = async (userData, res) => {
 }
 
 const userAuth = passport.authenticate("jwt", {session: false});
+
+
 
 module.exports = {
     userRegistration,

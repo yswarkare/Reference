@@ -90,3 +90,52 @@ a {
   padding: 0.5rem;
   align-self: center;
 }
+
+#categories-table, #categories-table-body {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.add-product {
+  display: grid;
+  grid-template-rows: auto;
+  grid-gap: 0.5rem;
+}
+
+.add-description {
+  width: 60%;
+}
+
+.header-navbar {
+  display: flex;
+}
+
+.admin-navbar {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 1rem;
+  padding: 0.25rem;
+}
+
+.user-navbar {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 1rem;
+  padding: 0.25rem;
+}
+
+.user-login-logout {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: right;
+  align-self: flex-end;
+}
+
+.login-link, .register-link, .logout-link {
+  align-self: flex-end;
+}
+
+.product-image-in-list {
+  width: 50px;
+  height: 50px;;
+}

@@ -12,20 +12,20 @@ router.get("/", (req, res) => {
 
 router.post("/", (req, res) => {
     const newReview = new Reviews({
-        review : req.body.review,
-        likes: req.body.likes,
-        dislikes: req.body.dislikes,
-        date: req.body.date
+        review : req.body.review.review,
+        likes: req.body.review.likes,
+        dislikes: req.body.review.dislikes,
+        date: req.body.review.date
     });
     newReview.save().then(review => res.json(review)).catch(err => console.log(err))
 })
 
 router.put("/:id", (req, res) => {
     Reviews.findOneAndUpdate({_id: req.params.id}, {
-        review : req.body.review,
-        likes: req.body.likes,
-        dislikes: req.body.dislikes,
-        date: req.body.date
+        review : req.body.review.review,
+        likes: req.body.review.likes,
+        dislikes: req.body.review.dislikes,
+        date: req.body.review.date
     }).then(review => res.json(review)).catch(err => console.log(err))
 })
 
@@ -43,24 +43,24 @@ router.get("/user-review", userAuth, (req, res) => {
 
 router.post("/user-review", userAuth, async (req, res) => {
     const newReview = new Reviews({
-        review : req.body.review,
-        likes: req.body.likes,
-        dislikes: req.body.dislikes,
-        date: req.body.date,
-        product: req.body.product,
-        user: req.body.user
+        review : req.body.review.review,
+        likes: req.body.review.likes,
+        dislikes: req.body.review.dislikes,
+        date: req.body.review.date,
+        product: req.body.review.product,
+        user: req.body.review.user
     }).populate("product").populate("user");
     await newReview.save().then(review => res.json(review)).catch(err => console.log(err))
 })
 
 router.put("/user-review/:id", userAuth, async (req, res) => {
     await Reviews.findOneAndUpdate({_id: req.params.id}, {
-        review : req.body.review,
-        likes: req.body.likes,
-        dislikes: req.body.dislikes,
-        date: req.body.date,
-        product: req.body.product,
-        user: req.body.user
+        review : req.body.review.review,
+        likes: req.body.review.likes,
+        dislikes: req.body.review.dislikes,
+        date: req.body.review.date,
+        product: req.body.review.product,
+        user: req.body.review.user
     }).populate("product").populate("user").then(review => res.json(review)).catch(err => console.log(err))
 })
 

@@ -1,14 +1,14 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import AddCategories from "./addCategories";
-import AddProducts from "./addProducts";
+
 
 class AdminDashboard extends Component {
+
+    
     render(){
         return(
             <div className="admin-dashboard">
-                <AddCategories></AddCategories>
-                <AddProducts></AddProducts>
+                This Is Admin Dashboard
             </div>
         )
     }

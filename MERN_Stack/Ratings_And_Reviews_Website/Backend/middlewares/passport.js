@@ -9,8 +9,8 @@ const opts = {
 }
 
 const checkUserId = async (jwt_payload) => {
-    let admin1 = await Admins.findOne({_id: jwt_payload.userId});
-    let user1 = await Users.findOne({_id: jwt_payload.userId});
+    let admin1 = await Admins.findOne({_id: jwt_payload._id});
+    let user1 = await Users.findOne({_id: jwt_payload._id});
     if (user1){
         return user1;
     } else if (admin1){
@@ -24,9 +24,9 @@ const strategy = new Strategy(opts, async (jwt_payload, done) => {
     let user = checkUserId(jwt_payload)
         .then(() =>{
             if(user){
-                // console.log(user);
-                // console.log(jwt_payload);
-                return done(null, user);
+                console.log(user);
+                console.log(jwt_payload);
+                return done(null, jwt_payload);
             } else {
                 return done(null, false);
             }

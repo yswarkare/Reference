@@ -1,16 +1,20 @@
 import React, { Component } from "react";
 import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
-import Header from "./header";
+import Header from "./Navbars/header";
 import HomePage from "./homePage";
-import UserDashboard from "./userDashboard";
-import UserProfile from "./userProfile";
-import UserLogin from "./userLogin";
-import UserRegistration from "./userRegistration"
-import AdminDashboard from "./adminDashboard";
-import AdminProfile from "./adminProfile";
-import Products from "./products";
+import UserDashboard from "./User/userDashboard";
+import UserProfile from "./User/userProfile";
+import UserLogin from "./User/userLogin";
+import UserRegistration from "./User/userRegistration"
+import AdminDashboard from "./Admin/adminDashboard";
+import AdminProfile from "./Admin/adminProfile";
+import Products from "./Products/products";
+import UserAccount from "./User/userAccount";
+import AddCategories from "./Categories/addCategories";
+import AddProducts from "./Products/addProducts";
 
 class Wrapper extends Component {
+
     render(){
         return(
             <Router>
@@ -25,6 +29,9 @@ class Wrapper extends Component {
                         <Route exact path="/admin-dashboard"><AdminDashboard></AdminDashboard></Route>
                         <Route exact path="/user-login"><UserLogin></UserLogin></Route>
                         <Route exact path="/user-registration"><UserRegistration></UserRegistration></Route>
+                        <Route exact path="/user-account"><UserAccount></UserAccount></Route>
+                        <Route exact path="/add-categories"><AddCategories></AddCategories></Route>
+                        <Route exact path="/add-products"><AddProducts></AddProducts></Route>
                     </Switch>
                 </div>
             </Router>

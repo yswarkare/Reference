@@ -6,46 +6,66 @@ const { userAuth } = require("../Utils/Auth");
 
 // Admin Protected Routes
 
-router.get("/", userAuth, async (req, res) => {
-    if (validateAdmin(req.body) === true){
-        await SubCategories.find().populate("products").populate("subSubCategories")
-        .them(subCategories =>  res.json(subCategories))
-        .catch(err => console.log(err));
-    } else {
-        res.json({message: "User is unauthorized"})
+router.get("/", async (req, res) => {
+    try {
+        let subCategories = await SubCategories.find().populate("products").populate("subSubCategories")
+        return res.json(subCategories)
+    } catch (err) {
+        return res.json({message: "User is Unauthorized", success: false, error: err})
     }
 })
 
 router.post("/", userAuth, async (req, res) => {
-    if (validateAdmin(req.body) === true){
+    try{
+        console.log("after validation => "+req.user);
         const newSubCategory = new SubCategories({
-            subCategoryName : req.body.subCategoryName
+            subCategoryName : req.body.subCategory.subCategoryName
         });
-        await newSubCategory.save().then(subCategory => res.json(subCategory)).catch(err => console.log(err))
-    } else {
-        res.json({message: "User is unauthorized"})
+        await newSubCategory.save().then(subCategory => res.json({subCategory})).catch(err => console.log(err))
+    } catch {
+        return res.json({message: "Unable To Add Sub-Category", success: false})
     }
 })
 
 router.put("/:id", userAuth, async (req, res) => {
-    if (validateAdmin(req.body) === true){
+    if (validateAdmin(req.body.user) === true){
         await SubCategories.findOneAndUpdate({_id: req.params.id}, {
-            subCategoryName : req.body.subCategoryName
+            subCategoryName : req.body.subCategory.subCategoryName
         }).then(subCategory => res.json(subCategory)).catch(err => console.log(err))
     } else {
-        res.json({message: "User is unauthorized"})
+        return res.json({message: "User is Unauthorized", success: false})
     }
 })
 
 router.delete("/:id", userAuth, async (req, res) => {
-    if (validateAdmin(req.body) === true){
+    if (validateAdmin(req.body.user) === true){
         await SubCategories.findOneAndRemove({_id: req.params.id})
             .then(subCategory => res.json(subCategory))
             .catch(err => console.log(err));
     } else {
-        res.json({message: "User is unauthorized"})
+        return res.json({message: "User is Unauthorized", success: false})
     }
 })
+
+router.patch("/update-sub-category-name", userAuth, async (req, res) => {
+    try {
+        let update = await SubCategories.findOneAndUpdate({_id: req.body._id}, {subCategoryName: req.body.subCategoryName});
+        return res.json({message: "Category name updated successfully", success: true, update })
+    } catch {
+        return res.json({message: "Unable to update category name", success: false})
+    }
+})
+
+router.delete("/delete-sub-category", userAuth, async (req, res) => {
+    try {
+        let deleted = await SubCategories.findOneAndDelete({_id: req.body._id})
+        return res.json({message: "Sub-Category deleted successfully", success: true, deleted})
+    } catch {
+        return res.json({message: "Unabe to delete sub-category", success: false})
+    }
+})
+
+module.exports = router;
 
 // UnProtected Routes
 
@@ -57,14 +77,14 @@ router.delete("/:id", userAuth, async (req, res) => {
 
 // router.post("/", (req, res) => {
 //     const newSubCategory = new SubCategories({
-//         subCategoryName : req.body.subCategoryName
+//         subCategoryName : req.body.subCategory.subCategoryName
 //     });
 //     newSubCategory.save().then(subCategory => res.json(subCategory)).catch(err => console.log(err))
 // })
 
 // router.put("/:id", (req, res) => {
 //     SubCategories.findOneAndUpdate({_id: req.params.id}, {
-//         subCategoryName : req.body.subCategoryName
+//         subCategoryName : req.body.subCategory.subCategoryName
 //     }).then(subCategory => res.json(subCategory)).catch(err => console.log(err))
 // })
 
@@ -74,4 +94,3 @@ router.delete("/:id", userAuth, async (req, res) => {
 //         .catch(err => console.log(err));
 // })
 
-module.exports = router;

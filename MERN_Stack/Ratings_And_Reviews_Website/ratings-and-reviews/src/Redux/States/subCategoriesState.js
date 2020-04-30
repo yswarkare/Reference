@@ -1,11 +1,24 @@
 
 let subCategoriesState = {
     subCategory: {
+        _id: "",
         subCategoryName: "",
         products: [],
         subSubCategories: []
     },
-    subCategories: [],
+    subCategories: [{
+        subCategoryName: "Mobile Phones",
+        products: [],
+        subSubCategories: []
+    },{
+        subCategoryName: "TV",
+        products: [],
+        subSubCategories: []
+    },{
+        subCategoryName: "Fridge",
+        products: [],
+        subSubCategories: []
+    },],
     subCategoriesCopy: []
 }
 
