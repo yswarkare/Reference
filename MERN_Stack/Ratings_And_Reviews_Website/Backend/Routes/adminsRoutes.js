@@ -17,14 +17,12 @@ router.get("/", async (req, res) => {
 
 router.post("/", async (req, res) => {
     console.log(req.body);
-    let salt = await bcrypt.genSaltSync(10);
-    const hashedPassword = await bcrypt.hashSync(req.body.admin.password, salt);
+    let salt = bcrypt.genSaltSync(10);
+    const hashedPassword = bcrypt.hashSync(req.body.admin.password, salt);
     const newAdmin = new Admins({
-        fullName: {
-            firstName: req.body.admin.firstName,
-            middleName: req.body.admin.middleName,
-            lastName: req.body.admin.lastName
-        },
+        firstName: req.body.admin.firstName,
+        middleName: req.body.admin.middleName,
+        lastName: req.body.admin.lastName,
         username: req.body.admin.username,
         emailId : req.body.admin.emailId,
         password : hashedPassword,
@@ -36,11 +34,9 @@ router.put("/:id", userAuth, async (req, res) => {
     let salt = await bcrypt.genSaltSync(10);
     const hashedPassword = await bcrypt.hashSync(req.body.admin.password, salt);
     Admins.findOneAndUpdate({_id: req.params.id}, {
-        fullName: {
-            firstName: req.body.admin.firstName,
-            middleName: req.body.admin.middleName,
-            lastName: req.body.admin.lastName
-        },
+        firstName: req.body.admin.firstName,
+        middleName: req.body.admin.middleName,
+        lastName: req.body.admin.lastName,
         username: req.body.admin.username,
         emailId : req.body.admin.emailId,
         password : hashedPassword,

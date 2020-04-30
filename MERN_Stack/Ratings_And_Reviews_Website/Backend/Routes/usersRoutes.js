@@ -25,11 +25,9 @@ router.post("/", async (req, res) => {
     let salt = bcrypt.genSaltSync(10);
     const hashedPassword = bcrypt.hashSync(req.body.user.password, salt);
     const newUser = new Users({
-        fullName : {
-            firstName: req.body.user.firstName,
-            middleName: req.body.user.middleName,
-            lastName: req.body.user.lastName
-        },
+        firstName: req.body.user.firstName,
+        middleName: req.body.user.middleName,
+        lastName: req.body.user.lastName,
         username: req.body.user.username,
         emailId : req.body.user.emailId,
         password : hashedPassword,
@@ -41,11 +39,9 @@ router.put("/:id", userAuth, async (req, res) => {
     let salt = bcrypt.genSaltSync(10);
     const hashedPassword = bcrypt.hashSync(req.body.user.password, salt);
     await Users.findOneAndUpdate({_id: req.params.id}, {
-        fullName : {
-            firstName: req.body.user.firstName,
-            middleName: req.body.user.middleName,
-            lastName: req.body.user.lastName
-        },
+        firstName: req.body.user.firstName,
+        middleName: req.body.user.middleName,
+        lastName: req.body.user.lastName,
         username: (req.body.user.username).toLowerCase(),
         emailId : req.body.user.emailId,
         password : hashedPassword,
