@@ -10,7 +10,9 @@ const productsSchema = new Schema({
     subCategory : {type: Schema.Types.ObjectId, ref: "SubCategories"},
     subSubCategory : {type: Schema.Types.ObjectId, ref: "SubSubCategories"},
     ratings: [{type: Schema.Types.ObjectId, ref: "Ratings"}],
-    reviews: [{type: Schema.Types.ObjectId, ref: "Reviews"}]
+    reviews: [{type: Schema.Types.ObjectId, ref: "Reviews"}],
+    images: [{type: String, trim: true}],
+    image: {type: String, trim: true}
 });
 
 const Products = mongoose.model("Products", productsSchema);

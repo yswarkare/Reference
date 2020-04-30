@@ -18,3 +18,5 @@
     "password": "stewie2580"
 }
 
+
+Mongo URI mongodb+srv://userMayank:mayank5650@raingsandreviewsproject-notaz.mongodb.net/test?retryWrites=true&w=majority

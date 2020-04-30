@@ -20,7 +20,7 @@ passport.use(
 
 const uri = process.env.mongoURI;
 
-mongoose.connect(uri, {useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true})
+mongoose.connect(uri, {useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true, useFindAndModify: false })
 .then(()=>success({message: `MongoDB Database Connection Established Successfully with database \n${uri}`, badge: true}))
 .catch((err)=>error({message: `MongoDB Database Connection Failed \n${err}`, badge: true}));
 
@@ -48,13 +48,13 @@ app.use("/categories", categoriesRouter);
 
 const subCategoriesRouter = require("./Routes/subCategoriesRoutes");
 
-app.use("/subcategories", subCategoriesRouter);
+app.use("/sub-categories", subCategoriesRouter);
 
 // SubSubCategories Router
 
 const subSubCategoriesRouter = require("./Routes/subSubCategoriesRoutes");
 
-app.use("/subsubcategories", subSubCategoriesRouter);
+app.use("/sub-sub-categories", subSubCategoriesRouter);
 
 // Products Router
 

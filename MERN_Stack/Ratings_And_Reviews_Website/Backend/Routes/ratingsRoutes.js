@@ -12,14 +12,14 @@ router.get("/", (req, res) => {
 
 router.post("/", (req, res) => {
     const newRating = new Ratings({
-        rating : req.body.rating
+        rating : req.body.rating.rating
     });
     newRating.save().then(rating => res.json(rating)).catch(err => console.log(err))
 })
 
 router.put("/:id", (req, res) => {
     Ratings.findOneAndUpdate({_id: req.params.id}, {
-        rating : req.body.rating
+        rating : req.body.rating.rating
     }).then(rating => res.json(rating)).catch(err => console.log(err))
 })
 
@@ -38,18 +38,18 @@ router.get("/user-rating", userAuth, async (req, res) => {
 
 router.post("/user-rating", userAuth, async (req, res) => {
     const newRating = new Ratings({
-        rating : req.body.rating,
-        product: req.body.product,
-        user: req.body.user
+        rating : req.body.rating.rating,
+        product: req.body.rating.product,
+        user: req.body.rating.user
     }).populate("product").populate("user");
     await newRating.save().then(rating => res.json(rating)).catch(err => console.log(err))
 })
 
 router.put("/user-rating/:id", userAuth, async (req, res) => {
     await Ratings.findOneAndUpdate({_id: req.params.id}, {
-        rating : req.body.rating,
-        product: req.body.product,
-        user: req.body.user
+        rating : req.body.rating.rating,
+        product: req.body.rating.product,
+        user: req.body.rating.user
     }).populate("product").populate("user").then(rating => res.json(rating)).catch(err => console.log(err))
 })
 

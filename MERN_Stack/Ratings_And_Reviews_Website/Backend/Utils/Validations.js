@@ -1,11 +1,12 @@
 const Users = require("../Models/Users");
 const Admins = require("../Models/Admins");
+// const validator = require("validator");
 
 // Validate Unique Username
 
-const validateUserName = async (username) => {
+const validateUsername = async (username) => {
 
-    let user = await Users.findOne({userName: username});
+    let user = await Users.findOne({username: username});
     if(user){
         return true
     } else {
@@ -27,13 +28,18 @@ const validateEmailId = async (emailId) => {
 
 const validateAdmin = async (userData) => {
     
-    if(userData.userName){
-        let admin = await Admins.findOne({userName: userData.userName})
+    if (userData._id) {
+        let admin = await Admins.findOne({_id: userData._id})
         if(admin){
             return true
         }
     } else if (userData.emailId){
         let admin = await Admins.findOne({emailId: userData.emailId})
+        if(admin){
+            return true
+        }
+    } else if(userData.username){
+        let admin = await Admins.findOne({username: userData.username})
         if(admin){
             return true
         }
@@ -44,8 +50,8 @@ const validateAdmin = async (userData) => {
 
 const getAdminByEmailOrUsername = async (userData) => {
     
-    if(userData.userName){
-        let admin = await Admins.findOne({userName: userData.userName})
+    if(userData.username){
+        let admin = await Admins.findOne({username: userData.username})
         if(admin){
             return admin;
         }
@@ -61,8 +67,8 @@ const getAdminByEmailOrUsername = async (userData) => {
 
 const validateUser = async (userData) => {
     
-    if(userData.userName){
-        let user = await Users.findOne({userName: userData.userName})
+    if(userData.username){
+        let user = await Users.findOne({username: userData.username})
         if(user){
             return true
         }
@@ -78,8 +84,8 @@ const validateUser = async (userData) => {
 
 const getUserByEmailOrUsername = async (userData) => {
     
-    if(userData.userName){
-        let user = await Users.findOne({userName: userData.userName})
+    if(userData.username){
+        let user = await Users.findOne({username: userData.username})
         if(user){
             return user;
         }
@@ -93,13 +99,18 @@ const getUserByEmailOrUsername = async (userData) => {
     }
 }
 
-
+// const checkIsItUsernameOrEmail = async (userData) => {
+//     if (validator.isEmail(userData.usernameOrEmailId) === true){
+//         return 
+//     }
+// }
 
 module.exports = {
     validateAdmin,
     validateUser,
     validateEmailId,
-    validateUserName,
+    validateUsername,
     getUserByEmailOrUsername,
-    getAdminByEmailOrUsername
+    getAdminByEmailOrUsername,
+    // checkIsItUsernameOrEmail
 }
