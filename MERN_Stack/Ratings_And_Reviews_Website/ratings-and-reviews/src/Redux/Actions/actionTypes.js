@@ -57,3 +57,7 @@ export const Update_Product = "Update_Product"
 
 
 //| Reviews Action Types
+
+//| Admin Action Types
+
+export const Get_User_Info = "Get_Admin_Info";

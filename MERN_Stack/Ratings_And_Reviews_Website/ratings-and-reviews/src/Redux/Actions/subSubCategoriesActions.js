@@ -32,7 +32,7 @@ export const updateSubSubCategoryName = (subSubCategory) => async (dispatch) => 
 }
 
 export const deleteSubSubCategory = (subSubCategory) => async (dispatch) => {
-    let res = await api.delete("/sub-sub-categories/delete-sub-sub-category", subSubCategory)
+    let res = await api.patch("/sub-sub-categories/delete-sub-sub-category", subSubCategory)
     dispatch({
         type: Delete_Sub_Sub_Category,
         payload: subSubCategory

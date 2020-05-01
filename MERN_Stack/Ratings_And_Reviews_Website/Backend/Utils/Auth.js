@@ -91,12 +91,13 @@ const userLogin = async (userData, res) => {
                 return res.status(200).json({
                     ...result,
                     message: `Welcome you're now logged in`,
-                    success: true
+                    success: true,
+                    admin
                 })
             } else {
             return  res.status(403).json({
                 message: `Incorrect Password`,
-                success: false
+                success: false,
             })
         }
     }
@@ -134,7 +135,8 @@ const userLogin = async (userData, res) => {
             return res.status(200).json({
                 ...result,
                 message: `Welcome you're now logged in`,
-                success: true
+                success: true,
+                user
             })
         } else {
         return res.status(403).json({

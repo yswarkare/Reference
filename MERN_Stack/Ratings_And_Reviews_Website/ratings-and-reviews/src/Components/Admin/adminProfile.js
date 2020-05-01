@@ -1,16 +1,39 @@
 import React, { Component } from "react";
-
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+import { Container, Row, Col } from "reactstrap";
+import { getAdminInfo } from "../../Redux/Actions/adminActions";
 
 class AdminProfile extends Component {
+    
+    componentDidMount = () => {
+        this.props.getAdminInfo()
+    }
 
-
-    render(){
+    render(){   
         return(
             <div className="admin-profile">
-                This Is Admin Profile
+                <Container>
+                    <Row>
+                        <Col></Col>
+                    </Row>
+                </Container>
             </div>
         )
     }
 }
 
-export default AdminProfile;
+AdminProfile.propTypes = {
+    getAdminInfo: PropTypes.func.isRequired,
+    user: PropTypes.object.isRequired,
+    loginStatus: PropTypes.object.isRequired
+}
+
+const mapStateToProps = (state) => {
+    return {
+        user: state.users.user,
+        loginStatus: state.users.loginStatus,
+    }
+}
+
+export default connect(mapStateToProps, { getAdminInfo })(AdminProfile);

@@ -33,7 +33,7 @@ export const updateCategoryName = (category) => async (dispatch) => {
 }
 
 export const deleteCategory = (category) => async (dispatch) => {
-    let res = await api.delete("/categories/delete-category", category);
+    let res = await api.patch("/categories/delete-category", category);
     dispatch({
         type: Delete_Category,
         payload: category

@@ -39,7 +39,7 @@ let userState = {
         emailId : false,
         password : false,
     },
-    getUserId: "",
+    userCopy: {},
     users: [],
     usersCopy: [],
     firstPassword: null,

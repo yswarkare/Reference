@@ -38,9 +38,9 @@ class CategoriesList extends Component {
                         <Col>Delete</Col>
                     </Row>
                     {
-                        this.props.subCategories.subCategories.map((category, index)=>{
+                        this.props.subCategories.subCategories.map((subCategory, index)=>{
                             return(
-                                <SubCategory subCategory={category} index={index} key={index}></SubCategory>
+                                <SubCategory subCategory={subCategory} index={index} key={index}></SubCategory>
                             )
                         })
                     }
@@ -54,9 +54,9 @@ class CategoriesList extends Component {
                             <Col>Delete</Col>
                         </Row>
                     {
-                        this.props.subSubCategories.subSubCategories.map((category, index)=>{
+                        this.props.subSubCategories.subSubCategories.map((subSubCategory, index)=>{
                             return(
-                                <SubSubCategory subSubCategory={category} index={index} key={index}></SubSubCategory>
+                                <SubSubCategory subSubCategory={subSubCategory} index={index} key={index}></SubSubCategory>
                             )
                         })
                     }
