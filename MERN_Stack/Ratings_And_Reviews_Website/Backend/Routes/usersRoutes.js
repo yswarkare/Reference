@@ -108,4 +108,13 @@ router.get("/is-user-logged-in", userAuth, async (req, res) => {
     }
 })
 
+router.get("/get-user-info", userAuth, async (req, res) => {
+    try {
+        let user = await Users.findOne({_id: req.user._id})
+        return res.json({user, message: "Got User Info Successfully", success: true});
+    } catch (err) {
+        return res.json({message: "Failed To Get User Info", success: false, error: err});
+    }
+})
+
 module.exports = router;

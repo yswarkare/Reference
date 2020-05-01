@@ -13,7 +13,6 @@ const userSchema = new Schema({
     reviews: [{ type: Schema.Types.ObjectId, ref: "Reviews" }],
     likedReviews: [{ type: Schema.Types.ObjectId, ref: "Reviews" }],
     dislikedReviews: [{ type: Schema.Types.ObjectId, ref: "Reviews" }],
-    token: { type: String }
 });
 
 const Users = mongoose.model("Users", userSchema);

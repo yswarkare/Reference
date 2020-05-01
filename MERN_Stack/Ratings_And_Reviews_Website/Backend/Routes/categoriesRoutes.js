@@ -16,7 +16,7 @@ router.get("/", async (req, res) => {
 })
 
 router.post("/", userAuth, async (req, res) => {
-    if ( await validateAdmin(req.body.user) === true){
+    if ( await validateAdmin(req.user) === true){
         const newCategory = new Categories({
             categoryName : req.body.category.categoryName
         });
@@ -27,7 +27,7 @@ router.post("/", userAuth, async (req, res) => {
 })
 
 router.put("/:id", userAuth, async (req, res) => {
-    if (validateAdmin(req.body.user) === true){
+    if (validateAdmin(req.user) === true){
         await Categories.findOneAndUpdate({_id: req.params.id}, {
             categoryName : req.body.category.categoryName
         }).then(category => res.json(category)).catch(err => console.log(err))
@@ -37,7 +37,7 @@ router.put("/:id", userAuth, async (req, res) => {
 })
 
 router.delete("/:id", userAuth, async (req, res) => {
-    if (validateAdmin(req.body.user) === true){
+    if (validateAdmin(req.user) === true){
         await Categories.findOneAndRemove({_id: req.params.id})
         .then(category => res.json(category))
         .catch(err => console.log(err));
@@ -47,15 +47,16 @@ router.delete("/:id", userAuth, async (req, res) => {
 })
 
 router.patch("/update-category-name", userAuth, async (req, res) => {
+        console.log(req.body);
     try {
-        let update = await Categories.findOneAndUpdate({_id: req.body._id}, {categoryName: req.body.categoryName});
-        return res.json({message: "Category name updated successfully", success: true, update })
+        let updated = await Categories.findOneAndUpdate({_id: req.body._id}, {categoryName: req.body.categoryName});
+        return res.json({message: "Category name updated successfully", success: true, updated })
     } catch {
         return res.json({message: "Unable to update category name", success: false})
     }
 })
 
-router.delete("/delete-category", userAuth, async (req, res) => {
+router.patch("/delete-category", userAuth, async (req, res) => {
     try {
         let deleted = await Categories.findOneAndDelete({_id: req.body._id})
         return res.json({message: "Category deleted successfully", success: true, deleted})

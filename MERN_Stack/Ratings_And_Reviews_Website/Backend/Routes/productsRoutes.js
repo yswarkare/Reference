@@ -7,7 +7,7 @@ const { userAuth } = require("../Utils/Auth");
 // Admin Protected Routes
 
 router.get("/", async (req, res) => {
-    if (validateAdmin(req.body.user) === true){
+    if (validateAdmin(req.user) === true){
         await Products.find().populate("ratings").populate("reviews")
         .them(products =>  res.json(products))
         .catch(err => console.log(err));
@@ -17,7 +17,7 @@ router.get("/", async (req, res) => {
 })
 
 router.post("/", userAuth, async (req, res) => {
-    if (validateAdmin(req.body.user) === true){
+    if (validateAdmin(req.user) === true){
         const newProduct = new Products({
             productName : req.body.product.productName,
             brandName: req.body.product.brandName,
@@ -34,7 +34,7 @@ router.post("/", userAuth, async (req, res) => {
 })
 
 router.put("/:id", userAuth, async (req, res) => {
-    if (validateAdmin(req.body.user) === true){
+    if (validateAdmin(req.user) === true){
         await Products.findOneAndUpdate({_id: req.params.id}, {
             productName : req.body.product.productName,
             brandName: req.body.product.brandName,
@@ -51,7 +51,7 @@ router.put("/:id", userAuth, async (req, res) => {
 })
 
 router.delete("/:id", userAuth, async (req, res) => {
-    if (validateAdmin(req.body.user) === true){
+    if (validateAdmin(req.user) === true){
         await Products.findOneAndRemove({_id: req.params.id})
             .then(product => res.json(product))
             .catch(err => console.log(err));
@@ -62,7 +62,7 @@ router.delete("/:id", userAuth, async (req, res) => {
 
 router.patch("/add-image", userAuth, async (req, res) => {
     try {
-        if (validateAdmin(req.body.user) === true){
+        if (validateAdmin(req.user) === true){
             let product1 = await Products.findOne({_id: req.bdoy.product._id})
             product1.images.push[req.body.product.image]
             let product2 = await Products.findOneAndUpdate({_id: req.bdoy.product._id}, {images: product1.images})

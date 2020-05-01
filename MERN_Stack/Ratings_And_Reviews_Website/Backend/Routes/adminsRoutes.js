@@ -75,5 +75,13 @@ router.patch("/admin-logout", async (req, res) => {
     }
 })
 
+router.get("/get-admin-info", userAuth, async (req, res) => {
+    try {
+        let user = await Admins.findOne({_id: req.user._id})
+        return res.json({user, message: "Got Admin Info Successfully", success: true});
+    } catch (err) {
+        return res.json({message: "Failed To Get Admin Info", success: false, error: err});
+    }
+})
 
 module.exports = router;

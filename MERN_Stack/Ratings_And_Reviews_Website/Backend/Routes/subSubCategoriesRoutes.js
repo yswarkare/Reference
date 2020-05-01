@@ -29,7 +29,7 @@ router.post("/", userAuth , async (req, res) => {
 })
 
 router.put("/:id", userAuth , async (req, res) => {
-    if (validateAdmin(req.body.user) === true){
+    if (validateAdmin(req.user) === true){
         await SubSubCategories.findOneAndUpdate({_id: req.params.id}, {
             subSubCategoryName : req.body.subSubCategory.subSubCategoryName
         }).then(subSubCategory => res.json(subSubCategory)).catch(err => console.log(err))
@@ -39,7 +39,7 @@ router.put("/:id", userAuth , async (req, res) => {
 })
 
 router.delete("/:id", userAuth , async (req, res) => {
-    if (validateAdmin(req.body.user) === true){
+    if (validateAdmin(req.user) === true){
         await SubSubCategories.findOneAndRemove({_id: req.params.id})
             .then(subSubCategory => res.json(subSubCategory))
             .catch(err => console.log(err));
@@ -50,14 +50,14 @@ router.delete("/:id", userAuth , async (req, res) => {
 
 router.patch("/update-sub-sub-category-name", userAuth, async (req, res) => {
     try {
-        let update = await SubSubCategories.findOneAndUpdate({_id: req.body._id}, {subSubCategoryName: req.body.subSubCategoryName});
-        return res.json({message: "Category name updated successfully", success: true, update })
+        let updated = await SubSubCategories.findOneAndUpdate({_id: req.body._id}, {subSubCategoryName: req.body.subSubCategoryName});
+        return res.json({message: "Category name updated successfully", success: true, updated })
     } catch {
         return res.json({message: "Unable to update category name", success: false})
     }
 })
 
-router.delete("/delete-sub-sub-category", userAuth, async (req, res) => {
+router.patch("/delete-sub-sub-category", userAuth, async (req, res) => {
     try {
         let deleted = await SubSubCategories.findOneAndDelete({_id: req.body._id})
         return res.json({message: "Sub-Sub-Category deleted successfully", success: true, deleted})

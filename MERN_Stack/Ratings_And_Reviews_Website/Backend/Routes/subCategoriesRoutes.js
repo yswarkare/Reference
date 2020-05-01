@@ -28,7 +28,7 @@ router.post("/", userAuth, async (req, res) => {
 })
 
 router.put("/:id", userAuth, async (req, res) => {
-    if (validateAdmin(req.body.user) === true){
+    if (validateAdmin(req.user) === true){
         await SubCategories.findOneAndUpdate({_id: req.params.id}, {
             subCategoryName : req.body.subCategory.subCategoryName
         }).then(subCategory => res.json(subCategory)).catch(err => console.log(err))
@@ -37,9 +37,9 @@ router.put("/:id", userAuth, async (req, res) => {
     }
 })
 
-router.delete("/:id", userAuth, async (req, res) => {
-    if (validateAdmin(req.body.user) === true){
-        await SubCategories.findOneAndRemove({_id: req.params.id})
+router.delete("/", userAuth, async (req, res) => {
+    if (validateAdmin(req.user) === true){
+        await SubCategories.findOneAndRemove({_id: req.body._id})
             .then(subCategory => res.json(subCategory))
             .catch(err => console.log(err));
     } else {
@@ -48,15 +48,17 @@ router.delete("/:id", userAuth, async (req, res) => {
 })
 
 router.patch("/update-sub-category-name", userAuth, async (req, res) => {
+    console.log(req.body)
     try {
-        let update = await SubCategories.findOneAndUpdate({_id: req.body._id}, {subCategoryName: req.body.subCategoryName});
-        return res.json({message: "Category name updated successfully", success: true, update })
+        let updated = await SubCategories.findOneAndUpdate({_id: req.body._id}, {subCategoryName: req.body.subCategoryName});
+        return res.json({message: "Category name updated successfully", success: true, updated })
     } catch {
         return res.json({message: "Unable to update category name", success: false})
     }
 })
 
-router.delete("/delete-sub-category", userAuth, async (req, res) => {
+router.patch("/delete-sub-category", userAuth, async (req, res) => {
+    console.log(req.body)
     try {
         let deleted = await SubCategories.findOneAndDelete({_id: req.body._id})
         return res.json({message: "Sub-Category deleted successfully", success: true, deleted})
