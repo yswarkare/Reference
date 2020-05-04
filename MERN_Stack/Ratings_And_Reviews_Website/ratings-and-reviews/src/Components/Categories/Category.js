@@ -7,7 +7,7 @@ import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from "@material-ui/icons/Delete"
 import UpdateIcon from "@material-ui/icons/Update"
 import { Row, Col, Input } from 'reactstrap';
-import { updateCategoryName, deleteCategory } from "../../Redux/Actions/categoriesActions";
+import { updateCategoryName, deleteCategory, editCategory } from "../../Redux/Actions/categoriesActions";
 
 
 class Category extends Component {
@@ -24,6 +24,8 @@ class Category extends Component {
     }
 
     onClickEditCategoryName = () => {
+        let index = this.props.index;
+        this.props.editCategory(index);
         this.setState({
             edit: true,
             categoryName: this.props.category.categoryName
@@ -97,7 +99,8 @@ class Category extends Component {
 
 Category.propTypes = {
     updateCategoryName: PropTypes.func.isRequired,
-    deleteCategory: PropTypes.func.isRequired
+    deleteCategory: PropTypes.func.isRequired,
+    editCategory: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = (state) => {
@@ -106,4 +109,4 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps, { updateCategoryName, deleteCategory })(Category);
+export default connect(mapStateToProps, { updateCategoryName, deleteCategory, editCategory })(Category);

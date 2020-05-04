@@ -1,4 +1,4 @@
-import { Set_Sub_Category_Name, Add_Sub_Category_Name, Get_All_Sub_Categories, Update_Sub_Category_Name, Delete_Sub_Category } from "./actionTypes";
+import { Set_Sub_Category_Name, Add_Sub_Category_Name, Get_All_Sub_Categories, Update_Sub_Category_Name, Delete_Sub_Category, Edit_Sub_Category } from "./actionTypes";
 import { api, Axios } from "./axiosDefaults";
 
 export const setSubCategory =(subCategoryName) => {
@@ -24,6 +24,13 @@ export const getAllSubCategories = (admin) => async (dispatch) => {
     });
 }
 
+export const editSubCategory = (index) => async (dispatch) => {
+    dispatch({
+        type: Edit_Sub_Category,
+        payload: index
+    })
+}
+
 export const updateSubCategoryName = (subCategory) => async (dispatch) => {
     let res = await api.patch("/sub-categories/update-sub-category-name", subCategory)
     dispatch({
@@ -37,7 +44,6 @@ export const deleteSubCategory = (subCategory) => async (dispatch) => {
     let res = await api.patch("/sub-categories/delete-sub-category", subCategory);
     dispatch({
         type: Delete_Sub_Category,
-        payload: subCategory
+        payload: res
     })
-    return res
 }

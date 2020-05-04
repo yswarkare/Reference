@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import WrappedProduct from "./product";
+import WrappedProduct from "./WrappedProduct";
 
 
 class Products extends Component {

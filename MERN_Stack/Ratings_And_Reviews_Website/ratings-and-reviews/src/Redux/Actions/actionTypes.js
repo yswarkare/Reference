@@ -18,6 +18,21 @@ export const Get_Login_Username_Or_Email_ID = "Get_Login_Username_Or_Email_ID";
 export const Get_Login_Password = "Get_Login_Password";
 export const Set_Login_Redirect = "Set_Login_Redirect";
 
+//* Profile Update actions
+export const Set_User_Update = "Set_User_Update"
+export const Set_Update_First_Name = "Set_Update_First_Name";
+export const Set_Update_Middle_Name = "Set_Update_Middle_Name";
+export const Set_Update_Last_Name = "Set_Update_Last_Name";
+export const Set_Update_Username = "Set_Update_Username";
+export const Set_Update_Email_Id = "Set_Update_Email_Id";
+export const Set_Update_Old_Password = "Set_Update_Old_Password";
+export const Set_Update_New_Password = "Set_Update_New_Password";
+export const Set_Update_Repeat_Password = "Set_Update_Repeat_Password";
+export const Update_User_Name = "Update_User_Name";
+export const Update_User_Username = "Update_User_Username";
+export const Update_User_Email_Id = "Update_User_Email_Id";
+export const Update_User_Password = "Update_User_Password";
+
 //| Categories Action Types
 
 // Categories
@@ -25,22 +40,27 @@ export const Get_All_Categories = "Get_All_Categories"
 export const Set_Category_Name = "Set_Category_Name";
 export const Add_Category_Name = "Add_Category_Name";
 export const Update_Category_Name = "Update_Category_Name";
-export const Delete_Category = "Delete_Category"
+export const Delete_Category = "Delete_Category";
+export const Edit_Category = "Edit_Category";
+
 // Sub-Categories
 export const Get_All_Sub_Categories = "Get_All_Sub_Categories"
 export const Set_Sub_Category_Name = "Set_Sub_Category_Name";
 export const Add_Sub_Category_Name = "Add_Sub_Category_Name";
 export const Update_Sub_Category_Name = "Update_Sub_Category_Name";
 export const Delete_Sub_Category = "Delete_Sub_Category";
+export const Edit_Sub_Category = "Edit_Sub_Category";
 // Sub-Sub-Categories
 export const Get_All_Sub_Sub_Categories = "Get_All_Sub_Sub_Categories"
 export const Set_Sub_Sub_Category_Name = "Set_Sub_Sub_Category_Name";
 export const Add_Sub_Sub_Category_Name = "Add_Sub_Sub_Category_Name";
 export const Update_Sub_Sub_Category_Name = "Update_Sub_Sub_Category_Name";
 export const Delete_Sub_Sub_Category = "Delete_Sub_Sub_Category";
+export const Edit_Sub_Sub_Category = "Edit_Sub_Sub_Category";
 
 //| Product Action types
 
+export const Get_All_Products = "Get_All_Products";
 export const Set_Product_Name = "Set_Product_Name";
 export const Set_Brand_Name = "Set_Brand_Name";
 export const Set_Product_Image = "Set_Product_Image";

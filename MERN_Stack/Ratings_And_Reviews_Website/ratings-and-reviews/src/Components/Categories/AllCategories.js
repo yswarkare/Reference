@@ -9,7 +9,7 @@ import { addSubSubCategory, setSubSubCategory, getAllSubSubCategories } from "..
 import CategoriesList from "./CategoriesList";
 
 
-class AddCategories extends Component {
+class AllCategories extends Component {
 
     componentDidMount = () => {
         let admin = {
@@ -65,23 +65,25 @@ class AddCategories extends Component {
         // console.log("Props in add categories => " + JSON.stringify(this.props) )
         return (
             <div className="add-categories-container">
-                <div className="add-categories">
-                    <TextField onChange={(e)=>{this.onChangeSetCategory(e.target.value)}} type="text" label="Category Name" variant="outlined" />
-                    <Button onClick={()=>{this.onClickAddCategory()}} variant="contained" color="primary">
-                        Add
-                    </Button>
-                </div>
-                <div className="sub-categories">
-                    <TextField onChange={(e)=>{this.onChangeSetSubCategory(e.target.value)}} type="text" label="Sub-Category Name" variant="outlined" />
-                    <Button onClick={()=>{this.onClickAddSubCategory()}} variant="contained" color="primary">
-                        Add
-                    </Button>
-                </div>
-                <div className="sub-sub-categories">
-                    <TextField onChange={(e)=>{this.onChangeSetSubSubCategory(e.target.value)}} type="text" label="Sub-Sub-Category Name" variant="outlined" />
-                    <Button onClick={()=>{this.onClickAddSubSubCategory()}} variant="contained" color="primary">
-                        Add
-                    </Button>
+                <div className="add-categories-input">
+                    <div className="add-categories">
+                        <TextField onChange={(e)=>{this.onChangeSetCategory(e.target.value)}} type="text" label="Category Name" variant="outlined" />
+                        <Button onClick={()=>{this.onClickAddCategory()}} variant="contained" color="primary">
+                            Add
+                        </Button>
+                    </div>
+                    <div className="sub-categories">
+                        <TextField onChange={(e)=>{this.onChangeSetSubCategory(e.target.value)}} type="text" label="Sub-Category Name" variant="outlined" />
+                        <Button onClick={()=>{this.onClickAddSubCategory()}} variant="contained" color="primary">
+                            Add
+                        </Button>
+                    </div>
+                    <div className="sub-sub-categories">
+                        <TextField onChange={(e)=>{this.onChangeSetSubSubCategory(e.target.value)}} type="text" label="Sub-Sub-Category Name" variant="outlined" />
+                        <Button onClick={()=>{this.onClickAddSubSubCategory()}} variant="contained" color="primary">
+                            Add
+                        </Button>
+                    </div>
                 </div>
                 <div className="categories-list-component" >
                     
@@ -93,7 +95,7 @@ class AddCategories extends Component {
     }
 }
 
-AddCategories.propTypes = {
+AllCategories.propTypes = {
     loginStatus: PropTypes.object.isRequired,
     user: PropTypes.object.isRequired,
     errors: PropTypes.object.isRequired,
@@ -135,4 +137,4 @@ export default connect(mapStateToProps,{
     getAllSubCategories,
     setSubSubCategory,
     addSubSubCategory,
-    getAllSubSubCategories })(AddCategories);
+    getAllSubSubCategories })(AllCategories);

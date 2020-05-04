@@ -1,4 +1,5 @@
 import { 
+    Get_All_Products,
     Set_Product_Name, 
     Set_Brand_Name,
     Set_Product_Image,
@@ -10,7 +11,16 @@ import {
     Edit_Product,
     Delete_Product,
     Update_Product } from "./actionTypes"
-import { api } from "./axiosDefaults"
+import { api, Axios } from "./axiosDefaults"
+
+
+export const getAllProducts = () => async (dispatch) => {
+    let res = await Axios.get("/products")
+    dispatch({
+        type: Get_All_Products,
+        payload: res
+    })
+}
 
 export const setProductName = (productName) => {
     return ({
@@ -62,9 +72,10 @@ export const setProductSubSubCategory = (subSubCategory) => {
 }
 
 export const addProduct = (product) => async (dispatch) => {
-    await api.post("/products", product)
+    let res = await api.post("/products", product)
     return await dispatch({
-        type: Add_Product
+        type: Add_Product,
+        payload: res
     });
 }
 
@@ -79,9 +90,8 @@ export const updateProduct = (product) => async (dispatch) => {
     let res = await api.patch("/products/update-product", product);
     dispatch({
         type: Update_Product,
-        payload: product
+        payload: res
     });
-    return res;
 }
 
 export const deleteProduct = (product) => async (dispatch) => {

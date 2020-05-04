@@ -1,5 +1,6 @@
 import productState from "../States/productState";
 import { 
+    Get_All_Products,
     Set_Product_Name, 
     Set_Brand_Name,
     Set_Product_Image,
@@ -16,6 +17,12 @@ let productReducer = ( state = productState, action ) => {
     let stateCopy = JSON.parse(JSON.stringify(state));
 
     switch (action.type) {
+
+        case Get_All_Products:
+            console.log(action.payload);
+            stateCopy.products = action.payload.data.products;
+            console.log(stateCopy);
+            return stateCopy;
 
         case Set_Product_Name:
             stateCopy.product.productName = action.payload;
@@ -46,13 +53,16 @@ let productReducer = ( state = productState, action ) => {
             return stateCopy
 
         case Add_Product:
-            stateCopy.products.push(stateCopy.product);
+            console.log(action.payload);
+            stateCopy.products.push(action.payload.data.product);
+            console.log(stateCopy)
             return stateCopy;
 
         case Edit_Product:
             let eIndex = action.payload;
             stateCopy.editIndex = action.payload;
-            stateCopy.editProduct = true
+            stateCopy.editProduct = true;
+            stateCopy.product._id = stateCopy.products[eIndex]._id;
             stateCopy.product.productName = stateCopy.products[eIndex].productName;
             stateCopy.product.brandName = stateCopy.products[eIndex].brandName;
             stateCopy.product.image = stateCopy.products[eIndex].image;
@@ -65,9 +75,10 @@ let productReducer = ( state = productState, action ) => {
             return stateCopy
 
         case Update_Product:
+            console.log(action.payload);
             let uIndex = stateCopy.editIndex;
             let pArray = stateCopy.products;
-            let uProduct = action.payload.product;
+            let uProduct = action.payload.data.updated;
             pArray[uIndex].productName = uProduct.productName;
             pArray[uIndex].brandName = uProduct.brandName;
             pArray[uIndex].image = uProduct.image;

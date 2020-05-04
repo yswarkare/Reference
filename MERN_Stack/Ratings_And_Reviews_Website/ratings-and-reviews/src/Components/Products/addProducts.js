@@ -5,7 +5,11 @@ import { Button, TextField, TextareaAutosize, Select, InputLabel, FormControl, T
 import { Container, Row, Col, Table } from "reactstrap";
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from "@material-ui/icons/Delete";
-import { setProductName,
+import { getAllCategories } from "../../Redux/Actions/categoriesActions";
+import { getAllSubCategories } from "../../Redux/Actions/subCategoriesActions";
+import { getAllSubSubCategories } from "../../Redux/Actions/subSubCategoriesActions";
+import { getAllProducts,
+    setProductName,
     setBrandName,
     setProductImage,
     setProductDescription,
@@ -19,6 +23,17 @@ import { setProductName,
 
 class AddProducts extends Component {
 
+
+    componentDidMount = () => {
+        this.props.getAllProducts()
+        let admin = {
+            emailId: this.props.loginStatus.emailId,
+            headers: this.props.headers
+        }
+        this.props.getAllCategories(admin);
+        this.props.getAllSubCategories(admin);
+        this.props.getAllSubSubCategories(admin)
+    }
 
     onChangeSetProductName = (productName) => {
         this.props.setProductName(productName)
@@ -73,7 +88,7 @@ class AddProducts extends Component {
 
     render(){
         return(
-            <div className="add-products-container">
+            <div className="add-products-container mt-3">
                 <Container className="add-product">
                     <Row>
                     <Col>
@@ -149,7 +164,7 @@ class AddProducts extends Component {
                         </Col>
                     </Row>
                 </Container>
-                <Container>
+                <Container className="mt-3">
                     <Table>
                         <thead>
                             <tr>
@@ -219,6 +234,10 @@ AddProducts.propTypes = {
     setProductCategory: PropTypes.func.isRequired,
     setProductSubCategory: PropTypes.func.isRequired,
     setProductSubSubCategory: PropTypes.func.isRequired,
+    getAllProducts: PropTypes.func.isRequired,
+    getAllCategories: PropTypes.func.isRequired,
+    getAllSubCategories: PropTypes.func.isRequired,
+    getAllSubSubCategories: PropTypes.func.isRequired,
     addProduct: PropTypes.func.isRequired,
     editProduct: PropTypes.func.isRequired,
     deleteProduct: PropTypes.func.isRequired,
@@ -228,7 +247,7 @@ AddProducts.propTypes = {
 const mapStateToProps = (state) => {
     return {
         user: state.users.user,
-        errors: state.users.inputErrors,
+        errors: state.users.errors,
         loginStatus: state.users.loginStatus,
         products: state.products,
         categories: state.categories,
@@ -237,7 +256,11 @@ const mapStateToProps = (state) => {
     };
 }
 
-export default connect(mapStateToProps, { setProductName,
+export default connect(mapStateToProps, { getAllProducts,
+    getAllCategories,
+    getAllSubCategories,
+    getAllSubSubCategories,
+    setProductName,
     setBrandName,
     setProductImage,
     setProductDescription,
