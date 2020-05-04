@@ -16,7 +16,20 @@ import {
     Get_Login_Password,
     Set_Login_Redirect,
     User_Logout,
-    Get_User_Info } from "../Actions/actionTypes.js";
+    Get_User_Info,
+    Set_User_Update,
+    Set_Update_First_Name,
+    Set_Update_Middle_Name,
+    Set_Update_Last_Name,
+    Set_Update_Username,
+    Set_Update_Email_Id,
+    Set_Update_Old_Password,
+    Set_Update_New_Password,
+    Set_Update_Repeat_Password,
+    Update_User_Name,
+    Update_User_Username,
+    Update_User_Email_Id,
+    Update_User_Password } from "../Actions/actionTypes.js";
 
 let userReducer = ( state = userState, action ) => {
     let stateCopy = JSON.parse(JSON.stringify(state));
@@ -125,12 +138,95 @@ let userReducer = ( state = userState, action ) => {
 
         case Get_User_Info:
             console.log(action.payload);
-            stateCopy.user = action.payload.data.user
+            // stateCopy.user = action.payload.data.user,
+            stateCopy.user._id = action.payload.data.user._id;
+            stateCopy.user.firstName = action.payload.data.user.firstName;
+            stateCopy.user.middleName = action.payload.data.user.middleName;
+            stateCopy.user.lastName = action.payload.data.user.lastName;
+            stateCopy.user.username = action.payload.data.user.username;
+            stateCopy.user.emailId = action.payload.data.user.emailId;
             console.log(stateCopy)
             return stateCopy;
 
+        case Set_User_Update:
+            stateCopy.userUpdate.firstName = stateCopy.user.firstName;
+            stateCopy.userUpdate.middleName = stateCopy.user.middleName;
+            stateCopy.userUpdate.lastName = stateCopy.user.lastName;
+            stateCopy.userUpdate.username = stateCopy.user.username;
+            stateCopy.userUpdate.emailId = stateCopy.user.emailId;
+            console.log(stateCopy)
+            return stateCopy;
+
+        case Set_Update_First_Name:
+            stateCopy.userUpdate.firstName = action.payload
+            console.log(stateCopy)
+            return stateCopy;
+
+        case Set_Update_Middle_Name:
+            stateCopy.userUpdate.middleName = action.payload
+            console.log(stateCopy)
+            return stateCopy;
+
+        case Set_Update_Last_Name:
+            stateCopy.userUpdate.lastName = action.payload
+            console.log(stateCopy)
+            return stateCopy;
+
+        case Set_Update_Username:
+            stateCopy.userUpdate.username = action.payload
+            console.log(stateCopy)
+            return stateCopy;
+
+        case Set_Update_Email_Id:
+            stateCopy.userUpdate.emailId = action.payload
+            console.log(stateCopy)
+            return stateCopy;
+
+        case Set_Update_Old_Password:
+            stateCopy.userUpdate.oldPassword = action.payload
+            console.log(stateCopy)
+            return stateCopy;
+
+        case Set_Update_New_Password:
+            stateCopy.userUpdate.newPassword = action.payload
+            console.log(stateCopy)
+            return stateCopy;
+
+        case Set_Update_Repeat_Password:
+            stateCopy.userUpdate.repeatPassword = action.payload
+            console.log(stateCopy)
+            return stateCopy;
+
+        case Update_User_Name:
+            console.log(action.payload)
+            stateCopy.errors.emailId.message = action.payload.data.message;
+            stateCopy.errors.emailId.success = action.payload.data.success;
+            console.log(stateCopy);
+            return stateCopy;
+
+        case Update_User_Username:
+            console.log(action.payload)
+            stateCopy.errors.emailId.message = action.payload.data.message;
+            stateCopy.errors.emailId.success = action.payload.data.success;
+            console.log(stateCopy);
+            return stateCopy;
+
+        case Update_User_Email_Id:
+            console.log(action.payload)
+            stateCopy.errors.emailId.message = action.payload.data.message;
+            stateCopy.errors.emailId.success = action.payload.data.success;
+            console.log(stateCopy);
+            return stateCopy;
+
+        case Update_User_Password:
+            console.log(action.payload)
+            stateCopy.errors.emailId.message = action.payload.data.message;
+            stateCopy.errors.emailId.success = action.payload.data.success;
+            console.log(stateCopy);
+            return stateCopy;
+
         default:
-        return stateCopy
+            return stateCopy
     }
 }
 

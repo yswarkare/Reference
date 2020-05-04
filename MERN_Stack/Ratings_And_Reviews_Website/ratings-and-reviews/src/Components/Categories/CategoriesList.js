@@ -3,7 +3,6 @@ import { connect } from "react-redux"
 import PropTypes from "prop-types"
 import { Fragment } from "react"
 import { Container, Row, Col } from 'reactstrap';
-import Divider from '@material-ui/core/Divider';
 import Category from "./Category"
 import SubCategory from "./SubCategory"
 import SubSubCategory from "./SubSubCategory"
@@ -29,7 +28,6 @@ class CategoriesList extends Component {
                         })
                     }
                 </Container>
-                <Divider></Divider>
                 <Container className="categories-table">
                     <Row id="categories-table">
                         <Col>#</Col>
@@ -45,7 +43,6 @@ class CategoriesList extends Component {
                         })
                     }
                 </Container>
-                <Divider></Divider>
                 <Container className="categories-table">
                         <Row id="categories-table">
                             <Col>#</Col>

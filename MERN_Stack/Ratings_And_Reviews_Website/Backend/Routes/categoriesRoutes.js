@@ -16,12 +16,13 @@ router.get("/", async (req, res) => {
 })
 
 router.post("/", userAuth, async (req, res) => {
-    if ( await validateAdmin(req.user) === true){
+    try {
         const newCategory = new Categories({
             categoryName : req.body.category.categoryName
         });
-        await newCategory.save().then(category => res.json(category)).catch(err => console.log(err))
-    } else {
+        let category = await newCategory.save()
+        return res.json({message: "Category added successfully", success: true, category})
+    } catch {
         return res.json({message: "User is Unauthorized", success: false})
     }
 })
@@ -49,8 +50,9 @@ router.delete("/:id", userAuth, async (req, res) => {
 router.patch("/update-category-name", userAuth, async (req, res) => {
         console.log(req.body);
     try {
-        let updated = await Categories.findOneAndUpdate({_id: req.body._id}, {categoryName: req.body.categoryName});
-        return res.json({message: "Category name updated successfully", success: true, updated })
+        let cagtegory = await Categories.findOneAndUpdate({_id: req.body._id}, {categoryName: req.body.categoryName});
+        let updated = await Categories.findOne({_id: req.body._id})
+        return res.json({message: "Category name updated successfully", success: true, category, updated })
     } catch {
         return res.json({message: "Unable to update category name", success: false})
     }

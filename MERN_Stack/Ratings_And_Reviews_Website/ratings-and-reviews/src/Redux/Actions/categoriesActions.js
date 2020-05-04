@@ -1,4 +1,4 @@
-import { Set_Category_Name, Add_Category_Name, Get_All_Categories, Update_Category_Name, Delete_Category} from "./actionTypes";
+import { Set_Category_Name, Add_Category_Name, Get_All_Categories, Update_Category_Name, Delete_Category, Edit_Category} from "./actionTypes";
 import { api, Axios } from "./axiosDefaults";
 
 export const setCategory =(categoryName) => {
@@ -9,9 +9,10 @@ export const setCategory =(categoryName) => {
 }
 
 export const addCategory = (category) => async (dispatch) => {
-    await api.post(`/categories`, category)
+    let res = await api.post(`/categories`, category)
     dispatch({
-        type: Add_Category_Name
+        type: Add_Category_Name,
+        payload: res
     })
 }
 
@@ -23,20 +24,25 @@ export const getAllCategories = (admin) => async (dispatch) => {
     });
 };
 
+export const editCategory = (index) => async (dispatch) => {
+    dispatch({
+        type: Edit_Category,
+        payload: index
+    })
+}
+
 export const updateCategoryName = (category) => async (dispatch) => {
     let res = await api.patch("/categories/update-category-name", category);
     dispatch({
         type: Update_Category_Name,
-        payload: category
+        payload: res
     })
-    return res
 }
 
 export const deleteCategory = (category) => async (dispatch) => {
     let res = await api.patch("/categories/delete-category", category);
     dispatch({
         type: Delete_Category,
-        payload: category
+        payload: res
     })
-    return res
 }

@@ -10,7 +10,7 @@ import AdminDashboard from "./Admin/adminDashboard";
 import AdminProfile from "./Admin/adminProfile";
 import Products from "./Products/products";
 import UserAccount from "./User/userAccount";
-import AddCategories from "./Categories/addCategories";
+import AllCategories from "./Categories/AllCategories";
 import AddProducts from "./Products/addProducts";
 
 class Wrapper extends Component {
@@ -30,7 +30,7 @@ class Wrapper extends Component {
                         <Route exact path="/user-login"><UserLogin></UserLogin></Route>
                         <Route exact path="/user-registration"><UserRegistration></UserRegistration></Route>
                         <Route exact path="/user-account"><UserAccount></UserAccount></Route>
-                        <Route exact path="/add-categories"><AddCategories></AddCategories></Route>
+                        <Route exact path="/all-categories"><AllCategories></AllCategories></Route>
                         <Route exact path="/add-products"><AddProducts></AddProducts></Route>
                     </Switch>
                 </div>

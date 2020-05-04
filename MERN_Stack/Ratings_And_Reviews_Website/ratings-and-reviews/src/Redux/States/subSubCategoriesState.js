@@ -15,7 +15,8 @@ let subSubCategoriesState = {
         subSubCategoryName: "Mobile USB Cable",
         products: [],
     },],
-    subSubCategoriesCopy: []
+    subSubCategoriesCopy: [],
+    editIndex: ""
 }
 
 export default subSubCategoriesState;

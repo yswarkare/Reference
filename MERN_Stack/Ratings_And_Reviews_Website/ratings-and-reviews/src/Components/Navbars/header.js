@@ -7,6 +7,7 @@ import { Navbar, Nav, NavItem, Row, Col } from "reactstrap";
 import UserNavbar from "./userNavbar";
 import AdminNavbar from "./adminNavbar";
 import { isUserLoggedIn, setUserLogout } from "../../Redux/Actions/userActions";
+import { setUserUpdate, getUserInfo } from "../../Redux/Actions/userProfileActions";
 // import UserIcon from "../User/userIcon";
 
 class Header extends Component {
@@ -16,7 +17,9 @@ class Header extends Component {
             user: this.props.user,
             userIsAdmin: this.props.loginStatus.userIsAdmin,
         }
-        this.props.isUserLoggedIn(user);
+        // this.props.getUserInfo(user.userIsAdmin)
+        this.props.isUserLoggedIn();
+        // this.props.setUserUpdate()
         if (this.props.loginStatus.loggedIn === true){
             this.props.setTokenInUser(user)
         }
@@ -93,18 +96,20 @@ Header.propTypes = {
     subSubCategories: PropTypes.object.isRequired,
     isUserLoggedIn: PropTypes.func.isRequired,
     setUserLogout:  PropTypes.func.isRequired,
+    setUserUpdate:  PropTypes.func.isRequired,
+    getUserInfo:  PropTypes.func.isRequired,
 }
 
 const mapStateToProps = (state) => {
     return {
         user: state.users.user,
-        errors: state.users.inputErrors,
+        errors: state.users.errors,
         loginStatus: state.users.loginStatus,
         categories: state.categories,
         subCategories: state.subCategories,
         subSubCategories: state.subSubCategories,
-        headers: state.users.headers
+        headers: state.users.headers,
     };
 }
 
-export default connect(mapStateToProps,{ isUserLoggedIn, setUserLogout })(Header);
+export default connect(mapStateToProps,{ isUserLoggedIn, setUserLogout, setUserUpdate, getUserInfo })(Header);

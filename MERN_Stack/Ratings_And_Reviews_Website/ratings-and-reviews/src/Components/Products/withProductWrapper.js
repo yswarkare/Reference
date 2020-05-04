@@ -8,7 +8,7 @@ const withProductWrapper = WrappedProduct => {
 
         render () {
             return (
-                <div className="product-container">
+                <div className="products-wrapper">
                     {this.props.products.map((product, index)=>{
                         return(<WrappedProduct product={product} key={index}></WrappedProduct>)
                     })}

@@ -98,9 +98,9 @@ export const userLogin = (loginDetails) => async dispatch => {
     
 }
 
-export const isUserLoggedIn = (user) => async (dispatch) => {
+export const isUserLoggedIn = () => async (dispatch) => {
     try{
-        const res = await api.get(`/users/is-user-logged-in`, user)
+        const res = await api.get(`/users/is-user-logged-in`)
         return await dispatch({
             type: Is_User_Logged_In,
             payload: res

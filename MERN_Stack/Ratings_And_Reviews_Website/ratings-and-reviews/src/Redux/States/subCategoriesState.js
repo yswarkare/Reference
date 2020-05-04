@@ -19,7 +19,8 @@ let subCategoriesState = {
         products: [],
         subSubCategories: []
     },],
-    subCategoriesCopy: []
+    subCategoriesCopy: [],
+    editIndex: ""
 }
 
 export default subCategoriesState;

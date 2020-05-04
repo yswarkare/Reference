@@ -12,13 +12,13 @@ class AdminNavbar extends Component {
                         <Link to="/admin-dashboard">Dashboard</Link>
                     </NavItem>
                     <NavItem>
-                        <Link to="/add-categories">Categories</Link>
+                        <Link to="/all-categories">Categories</Link>
                     </NavItem>
                     <NavItem>
                         <Link to="/add-products">Products</Link>
                     </NavItem>
                     <NavItem>
-                        <Link to="/admin-profile">Profile</Link>
+                        <Link to="/user-profile">Profile</Link>
                     </NavItem>
                 </Nav>
             </div>

@@ -21,7 +21,8 @@ router.post("/", userAuth, async (req, res) => {
         const newSubCategory = new SubCategories({
             subCategoryName : req.body.subCategory.subCategoryName
         });
-        await newSubCategory.save().then(subCategory => res.json({subCategory})).catch(err => console.log(err))
+        let subCategory = await newSubCategory.save()
+        return res.json({message: "Sub-Category added successfully", success: true, subCategory});
     } catch {
         return res.json({message: "Unable To Add Sub-Category", success: false})
     }
@@ -50,8 +51,9 @@ router.delete("/", userAuth, async (req, res) => {
 router.patch("/update-sub-category-name", userAuth, async (req, res) => {
     console.log(req.body)
     try {
-        let updated = await SubCategories.findOneAndUpdate({_id: req.body._id}, {subCategoryName: req.body.subCategoryName});
-        return res.json({message: "Category name updated successfully", success: true, updated })
+        let subCategory = await SubCategories.findOneAndUpdate({_id: req.body._id}, {subCategoryName: req.body.subCategoryName});
+        let updated = await SubCategories.findOne({_id: req.body._id})
+        return res.json({message: "Category name updated successfully", success: true, subCategory, updated })
     } catch {
         return res.json({message: "Unable to update category name", success: false})
     }

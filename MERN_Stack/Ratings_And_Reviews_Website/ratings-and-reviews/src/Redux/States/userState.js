@@ -1,5 +1,5 @@
 let userState = {
-    user : {
+    user: {
         _id: "",
         firstName: "",
         middleName: "",
@@ -31,15 +31,26 @@ let userState = {
         "Authorization": "",
         "Content-Type": "application/json"
     },
-    inputErrors:{
+    userUpdate: {
         firstName: "",
         middleName: "",
         lastName: "",
         username: "",
-        emailId : false,
-        password : false,
+        emailId : "",
+        oldPassword: "",
+        newPassword : "",
+        repeatPassword: ""
     },
-    userCopy: {},
+    errors: {
+        firstName: { message: "", success: null },
+        middleName: { message: "", success: null },
+        lastName: { message: "", success: null },
+        username: { message: "", success: null },
+        emailId : { message: "", success: null },
+        oldPassword: { message: "", success: null },
+        newPassword : { message: "", success: null },
+        repeatPassword: { message: "", success: null },
+    },
     users: [],
     usersCopy: [],
     firstPassword: null,
