@@ -7,6 +7,7 @@ import EditIcon from '@material-ui/icons/Edit';
 import UpdateIcon from "@material-ui/icons/Update"
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
+import UserNavbar from "../Navbars/userNavbar";
 import { isUserLoggedIn } from "../../Redux/Actions/userActions";
 import { 
     getUserInfo,
@@ -159,6 +160,7 @@ class UserProfile extends Component {
     render(){
         return(
             <Container className="user-profile mt-2">
+            {this.props.loginStatus.userIsAdmin === false && this.props.loginStatus.loggedIn === true && <UserNavbar></UserNavbar>}
                 <Row className="user-profile-heading m-3 w-75">
                     <Col><span>Welcome {this.props.user.username}! This is your profile page</span></Col>
                 </Row>
@@ -386,6 +388,7 @@ UserProfile.propTypes = {
     user: PropTypes.object.isRequired,
     userUpdate: PropTypes.object.isRequired,
     errors: PropTypes.object.isRequired,
+    loginStatus: PropTypes.object.isRequired,
     userIsAdmin: PropTypes.bool.isRequired,
     getUserInfo: PropTypes.func.isRequired,
     setUserUpdate: PropTypes.func.isRequired,
@@ -409,7 +412,8 @@ const mapStateToProps = (state) => {
         user: state.users.user,
         userUpdate: state.users.userUpdate,
         userIsAdmin: state.users.loginStatus.userIsAdmin,
-        errors: state.users.errors
+        errors: state.users.errors,
+        loginStatus: state.users.loginStatus
     }
 }
 

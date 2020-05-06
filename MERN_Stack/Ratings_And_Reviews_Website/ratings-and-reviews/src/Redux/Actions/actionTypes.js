@@ -71,7 +71,8 @@ export const Set_Product_Sub_Sub_Category = "Set_Product_Sub_Sub_Category";
 export const Add_Product = "Add_Product";
 export const Edit_Product = "Edit_Product";
 export const Delete_Product = "Delete_Product";
-export const Update_Product = "Update_Product"
+export const Update_Product = "Update_Product";
+export const Send_Product_Id = "Send_Product_Id";
 
 //| Ratings Action Types
 

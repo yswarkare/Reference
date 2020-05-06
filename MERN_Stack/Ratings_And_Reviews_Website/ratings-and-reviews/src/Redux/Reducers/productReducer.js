@@ -11,7 +11,8 @@ import {
     Add_Product,
     Edit_Product,
     Delete_Product,
-    Update_Product } from "../Actions/actionTypes.js"
+    Update_Product,
+    Send_Product_Id } from "../Actions/actionTypes.js"
 
 let productReducer = ( state = productState, action ) => {
     let stateCopy = JSON.parse(JSON.stringify(state));
@@ -94,6 +95,17 @@ let productReducer = ( state = productState, action ) => {
         case Delete_Product:
             let dIndex = action.payload.product.index;
             stateCopy.products.splice(1, dIndex);
+            console.log(stateCopy)
+            return stateCopy
+
+        case Send_Product_Id:
+            let id = action.payload;
+            let products = stateCopy.products
+            for (let i = 0; i < products.length; i++) {
+                if (products[i]._id === id) {
+                    stateCopy.productObject = products[i]
+                }
+            }
             console.log(stateCopy)
             return stateCopy
 

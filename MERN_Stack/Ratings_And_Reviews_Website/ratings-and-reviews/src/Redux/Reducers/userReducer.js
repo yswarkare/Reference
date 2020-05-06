@@ -85,7 +85,7 @@ let userReducer = ( state = userState, action ) => {
             state.loginStatus.loggedIn = action.payload.data.success;
             state.loginStatus.userIsAdmin = action.payload.data.userIsAdmin;
             if (action.payload.data.success === true && action.payload.data.userIsAdmin === false) {
-                state.loginStatus.loginRedirect = "/user-dashboard"
+                state.loginStatus.loginRedirect = "/user-account"
             } else if (action.payload.data.success === true && state.loginStatus.userIsAdmin === true) {
                 state.loginStatus.loginRedirect = "/admin-dashboard"
             } else {

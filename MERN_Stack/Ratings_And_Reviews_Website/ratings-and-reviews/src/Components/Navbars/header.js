@@ -3,12 +3,15 @@ import { connect } from "react-redux";
 import PropTypes from 'prop-types';
 import { Link } from "react-router-dom";
 import SearchBox from "../searchBox";
-import { Navbar, Nav, NavItem, Row, Col } from "reactstrap";
-import UserNavbar from "./userNavbar";
+import { Navbar, Nav, NavItem } from "reactstrap";
 import AdminNavbar from "./adminNavbar";
 import { isUserLoggedIn, setUserLogout } from "../../Redux/Actions/userActions";
 import { setUserUpdate, getUserInfo } from "../../Redux/Actions/userProfileActions";
-// import UserIcon from "../User/userIcon";
+import { getAllProducts } from "../../Redux/Actions/productActions";
+import { getAllCategories } from "../../Redux/Actions/categoriesActions";
+import { getAllSubCategories } from "../../Redux/Actions/subCategoriesActions";
+import { getAllSubSubCategories } from "../../Redux/Actions/subSubCategoriesActions";
+
 
 class Header extends Component {
 
@@ -17,9 +20,15 @@ class Header extends Component {
             user: this.props.user,
             userIsAdmin: this.props.loginStatus.userIsAdmin,
         }
-        // this.props.getUserInfo(user.userIsAdmin)
+        let admin = {
+            emailId: this.props.loginStatus.emailId,
+            headers: this.props.headers
+        }
+        this.props.getAllCategories(admin);
+        this.props.getAllSubCategories(admin);
+        this.props.getAllSubSubCategories(admin);
+        this.props.getAllProducts()
         this.props.isUserLoggedIn();
-        // this.props.setUserUpdate()
         if (this.props.loginStatus.loggedIn === true){
             this.props.setTokenInUser(user)
         }
@@ -41,45 +50,49 @@ class Header extends Component {
                 <Link to="/"><h1>Ratings and Reviews</h1></Link>
                 <Navbar>
                     <Nav>
-                    <Row className="header-navbar">
-                    <Col>
-                    <NavItem>
-                        <Link to="/">Home</Link>
-                    </NavItem>
-                    </Col>
-                    <Col>
+                    <div className="header-navbar">
+                    <div className="header-Home">
+                        <NavItem>
+                            <Link to="/">Home</Link>
+                        </NavItem>
+                    </div>
+                    <div>
                         <NavItem>
                             <Link to="/search-box">
                                 <SearchBox></SearchBox>
                             </Link>
                         </NavItem>
-                    </Col>
-                    <Col className="user-login-logout-container">
+                    </div>
                     <div className="user-login-logout">
                         {this.props.loginStatus.loggedIn === false && 
-                            <Col className="login-link">
+                            <div className="login-link">
                             <NavItem>
                             <Link to="/user-login">Login</Link>
                             </NavItem>
-                            </Col>}
+                            </div>}
                         {this.props.loginStatus.loggedIn === false && 
-                            <Col className="register-link">
+                            <div className="register-link">
                             <NavItem>
                             <Link to="/user-registration">Register</Link>
                             </NavItem>
-                            </Col>}
+                            </div>}
                         {this.props.loginStatus.loggedIn === true && 
-                            <Col className="logout-link">
+                            <div className="user-account-link">
+                            <NavItem>
+                            <Link to="/user-account">User</Link>
+                            </NavItem>
+                            </div>}
+                        {this.props.loginStatus.loggedIn === true && 
+                            <div className="logout-link">
                             <NavItem>
                             <Link onClick={()=>{this.onClickSetUserLogout()}} to="/">Logout</Link>
                             </NavItem>
-                            </Col>}
-                        </div>
-                        </Col>
-                    </Row>
+                            </div>}
+                    </div>
+                    </div>
                     </Nav>
                 </Navbar>
-                {this.props.loginStatus.userIsAdmin === false && this.props.loginStatus.loggedIn === true && <UserNavbar></UserNavbar>}
+                
                 {this.props.loginStatus.userIsAdmin === true && <AdminNavbar></AdminNavbar>}
             </div>
         )
@@ -95,9 +108,13 @@ Header.propTypes = {
     headers: PropTypes.object.isRequired,
     subSubCategories: PropTypes.object.isRequired,
     isUserLoggedIn: PropTypes.func.isRequired,
-    setUserLogout:  PropTypes.func.isRequired,
-    setUserUpdate:  PropTypes.func.isRequired,
-    getUserInfo:  PropTypes.func.isRequired,
+    setUserLogout: PropTypes.func.isRequired,
+    setUserUpdate: PropTypes.func.isRequired,
+    getUserInfo: PropTypes.func.isRequired,
+    getAllProducts: PropTypes.func.isRequired,
+    getAllCategories: PropTypes.func.isRequired,
+    getAllSubCategories: PropTypes.func.isRequired,
+    getAllSubSubCategories: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = (state) => {
@@ -112,4 +129,11 @@ const mapStateToProps = (state) => {
     };
 }
 
-export default connect(mapStateToProps,{ isUserLoggedIn, setUserLogout, setUserUpdate, getUserInfo })(Header);
+export default connect(mapStateToProps,{ isUserLoggedIn,
+    setUserLogout,
+    setUserUpdate,
+    getUserInfo,
+    getAllProducts,
+    getAllCategories,
+    getAllSubCategories,
+    getAllSubSubCategories })(Header);

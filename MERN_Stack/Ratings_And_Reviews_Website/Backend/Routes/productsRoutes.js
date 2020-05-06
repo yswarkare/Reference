@@ -102,41 +102,4 @@ router.delete("/delete-product", userAuth, async (req, res) => {
     }
 })
 
-// UnProtected Routes
-
-// router.get("/", async (req, res) => {
-//     await Products.find().populate("ratings").populate("reviews")
-//     .them(products =>  res.json(products))
-//     .catch(err => console.log(err));
-// })
-
-// router.post("/", async (req, res) => {
-//     const newProduct = new Products({
-//         productName : req.body.product.productName,
-//         brandName: req.body.product.brandName,
-//         productDescription : req.body.product.productDescription,
-//         category: req.body.product.category,
-//         subCategory : req.body.product.subCategory,
-//         subSubCategory : req.body.product.subSubCategory
-//     }).populate("category").populate("subCategory").populate("subSubCategory");
-//     await newProduct.save().then(product => res.json(product)).catch(err => console.log(err))
-// })
-
-// router.put("/:id", async (req, res) => {
-//     await Products.findOneAndUpdate({_id: req.params.id}, {
-//         productName : req.body.product.productName,
-//         brandName: req.body.product.brandName,
-//         productDescription : req.body.product.productDescription,
-//         category: req.body.product.category,
-//         subCategory : req.body.product.subCategory,
-//         subSubCategory : req.body.product.subSubCategory
-//     }).populate("category").populate("subCategory").populate("subSubCategory").then(product => res.json(product)).catch(err => console.log(err))
-// })
-
-// router.delete("/:id", async (req, res) => {
-//     await Products.findOneAndRemove({_id: req.params.id})
-//         .then(product => res.json(product))
-//         .catch(err => console.log(err));
-// })
-
 module.exports = router;

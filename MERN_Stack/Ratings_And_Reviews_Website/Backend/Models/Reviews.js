@@ -9,7 +9,7 @@ const reviewsSchema = new Schema({
 	date: { type: Date, required: true, default: Date.now },
 	product: {type: Schema.Types.ObjectId, ref: "Products"},
 	user: {type: Schema.Types.ObjectId, ref: "Users"},
-});
+}, {timestamps: true});
 
 const Reviews = mongoose.model("Reviews", reviewsSchema);
 
