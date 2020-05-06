@@ -8,7 +8,7 @@ const { userAuth } = require("../Utils/Auth");
 
 router.get("/", async (req, res) => {
     try {
-        let products = await Products.find().populate("ratings").populate("reviews")
+        let products = await Products.find()
         return res.json({products, message: "Got list of all products", success: true})
     } catch {
         return res.json({message: "Failed to get list of all products", success: false})
