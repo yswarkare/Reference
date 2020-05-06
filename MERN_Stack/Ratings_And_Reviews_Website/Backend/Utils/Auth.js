@@ -39,11 +39,9 @@ const userRegistration = async (userData, res) => {
 
 
     const newUser = new Users({
-        fullName : {
-            firstName: userData.firstName,
-            middleName: userData.middleName,
-            lastName: userData.lastName
-        },
+        firstName: userData.firstName,
+        middleName: userData.middleName,
+        lastName: userData.lastName,
         username: usernameLowercase,
         emailId : emailIdLowercase,
         password : hashedPassword

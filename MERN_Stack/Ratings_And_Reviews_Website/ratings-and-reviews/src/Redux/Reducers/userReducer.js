@@ -55,10 +55,10 @@ let userReducer = ( state = userState, action ) => {
         case Set_User_Email_Id:
             let email = validator.isEmail(action.payload);
             if(email === true){
-                stateCopy.inputErrors.emailId = false;
+                stateCopy.errors.emailId.success = false;
                 stateCopy.user.emailId = action.payload
             } else {
-                stateCopy.inputErrors.emailId = true;
+                stateCopy.errors.emailId.success = true;
             }
             return stateCopy
 
@@ -69,9 +69,9 @@ let userReducer = ( state = userState, action ) => {
         case Set_Second_Password:
             if (stateCopy.firstPassword === action.payload){
                 stateCopy.user.password = action.payload
-                stateCopy.inputErrors.password = false
+                stateCopy.errors.password = false
             } else {
-                stateCopy.inputErrors.password = true
+                stateCopy.errors.password = true
             }
             return stateCopy
 

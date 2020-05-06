@@ -64,12 +64,10 @@ export const setRepeatPassword = (repeatPassword) =>{
 }
 
 export const registerUser = (user) => async dispatch => {
-    await Axios.post(`/users/user-registration`,user)
-    .then((res)=> {
-        dispatch({
-            type: Register_User,
-            payload: res
-        }).catch((err) => {return err})  
+    let res = await Axios.post(`/users/user-registration`,user)
+    dispatch({
+        type: Register_User,
+        payload: res
     })
 }
 
