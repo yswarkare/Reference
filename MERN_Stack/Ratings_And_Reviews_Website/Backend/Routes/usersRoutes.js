@@ -61,6 +61,7 @@ router.delete("/:id", userAuth, async (req, res) => {
 
 // User Registration
 router.post("/user-registration", async (req, res) => {
+    console.log(req.body);
     await userRegistration(req.body, res)
 })
 

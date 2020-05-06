@@ -10,7 +10,8 @@ import {
     Add_Product,
     Edit_Product,
     Delete_Product,
-    Update_Product } from "./actionTypes"
+    Update_Product,
+    Send_Product_Id } from "./actionTypes"
 import { api, Axios } from "./axiosDefaults"
 
 
@@ -73,7 +74,7 @@ export const setProductSubSubCategory = (subSubCategory) => {
 
 export const addProduct = (product) => async (dispatch) => {
     let res = await api.post("/products", product)
-    return await dispatch({
+    dispatch({
         type: Add_Product,
         payload: res
     });
@@ -101,4 +102,11 @@ export const deleteProduct = (product) => async (dispatch) => {
         payload: product
     });
     return res;
+}
+
+export const sendProductId = (_id) => async (dispatch) => {
+    dispatch({
+        type: Send_Product_Id,
+        payload: _id
+    })
 }

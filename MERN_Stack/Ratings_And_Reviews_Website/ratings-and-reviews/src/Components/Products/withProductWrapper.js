@@ -1,16 +1,21 @@
 import React, { Component } from "react";
-// import { connect } from "react-redux";
 
 
 const withProductWrapper = WrappedProduct => {
 
     class withProductWrapper extends Component {
 
+        
+
         render () {
             return (
                 <div className="products-wrapper">
                     {this.props.products.map((product, index)=>{
-                        return(<WrappedProduct product={product} key={index}></WrappedProduct>)
+                        return(
+                            
+                            <WrappedProduct product={product} key={index}></WrappedProduct>
+                            
+                        )
                     })}
                 </div>
             )

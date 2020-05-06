@@ -89,7 +89,7 @@ class AddProducts extends Component {
     render(){
         return(
             <div className="add-products-container mt-3">
-                <Container className="add-product">
+                <Container className="add-product mt-3">
                     <Row>
                     <Col>
                     <TextField onChange={(e)=>{this.onChangeSetProductName(e.target.value)}} value={this.props.products.product.productName} type="text" label="Product Name" variant="outlined" />

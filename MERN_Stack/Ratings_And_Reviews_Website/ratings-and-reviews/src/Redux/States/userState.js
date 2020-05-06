@@ -47,6 +47,7 @@ let userState = {
         lastName: { message: "", success: null },
         username: { message: "", success: null },
         emailId : { message: "", success: null },
+        password: { message: "", success: null },
         oldPassword: { message: "", success: null },
         newPassword : { message: "", success: null },
         repeatPassword: { message: "", success: null },
