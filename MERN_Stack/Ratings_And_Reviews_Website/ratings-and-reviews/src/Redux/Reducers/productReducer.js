@@ -93,8 +93,16 @@ let productReducer = ( state = productState, action ) => {
             return stateCopy
 
         case Delete_Product:
-            let dIndex = action.payload.product.index;
-            stateCopy.products.splice(1, dIndex);
+            console.log(action.payload);
+            let pdArray = stateCopy.products;
+            let dIndex
+            for (let i = 0; i < pdArray.length; i++){
+                if (pdArray[i]._id === action.payload.data.product._id){
+                    dIndex = i
+                }
+            }
+            pdArray.splice(dIndex, 1)
+            stateCopy.products = pdArray;
             console.log(stateCopy)
             return stateCopy
 

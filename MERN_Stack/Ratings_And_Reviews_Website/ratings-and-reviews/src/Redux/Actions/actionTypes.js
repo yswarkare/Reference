@@ -76,12 +76,17 @@ export const Send_Product_Id = "Send_Product_Id";
 
 //| Ratings Action Types
 
-export const Get_Rating = "Get_Rating";
-export const Set_Rating = "Set_Rating";
-export const Post_Rating = "Post_Rating";
-export const Update_Rating= "Update_Rating"
+export const Get_User_Rating = "Get_User_Rating";
+export const Set_User_Rating = "Set_User_Rating";
+export const Post_User_Rating = "Post_User_Rating";
+export const Update_User_Rating= "Update_User_Rating"
 
 //| Reviews Action Types
+
+export const Get_User_Review = "Get_User_Review";
+export const Post_User_Review = "Post_User_Review";
+export const Update_User_Review = "Update_User_Review";
+export const Delete_User_Review = "Delete_User_Review";
 
 //| Admin Action Types
 

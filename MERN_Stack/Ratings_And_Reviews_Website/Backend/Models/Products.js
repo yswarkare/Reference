@@ -10,7 +10,7 @@ const productsSchema = new Schema({
     subCategory : {type: Schema.Types.ObjectId, ref: "SubCategories"},
     subSubCategory : {type: Schema.Types.ObjectId, ref: "SubSubCategories"},
     totalRatings: { type: Number, trim: true, default: 0 },
-    avgRating: { type: Number, trim: true, default: 0 },
+    avgRating: { type: Schema.Types.Decimal128, trim: true, default: 0 },
     ratings: {
         1: { type: Number, trim: true, default: 0 },
         2: { type: Number, trim: true, default: 0 },

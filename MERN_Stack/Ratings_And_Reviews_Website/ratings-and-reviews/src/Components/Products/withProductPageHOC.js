@@ -5,7 +5,6 @@ import { sendProductId } from "../../Redux/Actions/productActions";
 
 
 const withProductPageHOC = (WrappedProductPage) => {
-
     
     class withProductPageHOC extends Component {
 
@@ -43,7 +42,7 @@ const withProductPageHOC = (WrappedProductPage) => {
         }
     }
     
-    return connect(mapStateToProps, {sendProductId})(withProductPageHOC);
+    return connect(mapStateToProps, { sendProductId })(withProductPageHOC);
 }
 
 export default withProductPageHOC;

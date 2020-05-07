@@ -82,6 +82,9 @@ let userReducer = ( state = userState, action ) => {
         case Is_User_Logged_In:
             console.log(action.payload)
             console.log("Cookie "+Cookies.get("userToken"))
+            state.user._id = action.payload.data.user._id;
+            state.user.username = action.payload.data.user.username;
+            state.user.emailId = action.payload.data.user.emailId;
             state.loginStatus.loggedIn = action.payload.data.success;
             state.loginStatus.userIsAdmin = action.payload.data.userIsAdmin;
             if (action.payload.data.success === true && action.payload.data.userIsAdmin === false) {
@@ -91,6 +94,7 @@ let userReducer = ( state = userState, action ) => {
             } else {
                 state.loginStatus.loginRedirect = "/"
             }
+            console.log(state)
             return state;
 
         case Get_Login_Username_Or_Email_ID:

@@ -1,33 +1,34 @@
-import { Get_Rating, Set_Rating, Post_Rating, Update_Rating } from "./actionTypes";
+import { Get_User_Rating, Set_User_Rating, Post_User_Rating, Update_User_Rating } from "./actionTypes";
 import { api, Axios } from "./axiosDefaults";
 
-export const getRating = () => async (dispatch) => {
-    let res = api.get("/ratings/get-rating")
+export const getUserRating = (rating) => async (dispatch) => {
+    console.log(rating)
+    let res = await api.patch("/ratings/get-user-rating", rating)
     dispatch({
-        type: Get_Rating,
+        type: Get_User_Rating,
         payload: res
     })
 }
 
-export const setRating = (rating) => async (dispatch) => {
+export const setUserRating = (rating) => async (dispatch) => {
     dispatch({
-        type: Set_Rating,
+        type: Set_User_Rating,
         payload: rating
     })
 }
 
-export const postRating = (rating) => async (dispatch) => {
-    let res = api.post("/ratings/post-rating", rating)
+export const postUserRating = (rating) => async (dispatch) => {
+    let res = await api.post("/ratings/post-user-rating", rating)
     dispatch({
-        type: Post_Rating,
+        type: Post_User_Rating,
         payload: res
     })
 }
 
-export const updateRating = () => async (dispatch) => {
-    let res = api.patch("/ratings/get-rating")
+export const updateUserRating = () => async (dispatch) => {
+    let res = await api.patch("/ratings/get-rating")
     dispatch({
-        type: Update_Rating,
+        type: Update_User_Rating,
         payload: res
     })
 }
