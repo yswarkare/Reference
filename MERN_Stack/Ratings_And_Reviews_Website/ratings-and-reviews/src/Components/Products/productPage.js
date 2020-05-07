@@ -4,6 +4,7 @@ import GiveRating from "../Ratings/GiveRating";
 import ShowRating from "../Ratings/ShowRating";
 class ProductPage extends Component {
 
+
     render () {
         
         return (
@@ -30,7 +31,7 @@ class ProductPage extends Component {
                             <ShowRating product={this.props.product} ></ShowRating>
                         </div>
                         <div className="give-rating">
-                            { this.props.loginStatus.loggedIn === true && <GiveRating product={this.props.product} user={this.props.user}></GiveRating>}
+                            { this.props.loginStatus.loggedIn === true && <GiveRating></GiveRating>}
                         </div>
                     </div>
                     <div className="product-reviews">

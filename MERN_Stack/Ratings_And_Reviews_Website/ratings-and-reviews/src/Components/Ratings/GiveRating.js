@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import Rating from '@material-ui/lab/Rating';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
-import { getRating, setRating, postRating, updateRating } from "../../Redux/Actions/ratingsActions"
+import { getUserRating, setUserRating, postUserRating, updateUserRating } from "../../Redux/Actions/ratingsActions"
 
 
 
@@ -27,14 +27,22 @@ class GiveRating extends Component {
     }
   }
 
-  onChangeSetRatingValue = (value) => {
+  componentDidMount = () => {
+    let rating = {
+      product: this.props.product._id,
+      user: this.props.user._id
+    }
+    this.props.getUserRating(rating)
+  }
+
+  onChangeSetUserRatingValue = (value) => {
     // console.log("value => "+value)
     let rating = {
       rating: value,
       product: this.props.product._id,
       user: this.props.user._id
     }
-    this.props.postRating(rating);
+    this.props.postUserRating(rating);
     this.setState({
       ratingValue: value
     })
@@ -55,9 +63,9 @@ class GiveRating extends Component {
           <Rating
             name="simple-feedback"
             size="large"
-            value={this.state.ratingValue}
+            value={this.props.rating.rating}
             precision ={0.5}
-            onChange={(e)=>{this.onChangeSetRatingValue(e.target.value)}}
+            onChange={(e)=>{this.onChangeSetUserRatingValue(e.target.value)}}
             onChangeActive={(e, hover)=>{this.onChangeSetHover(e, hover)}}/>
         </Box>
         {this.state.ratingValue !== null && <Box ml={2}>{this.state.labels[this.state.hover !== -1 ? this.state.hover : this.state.ratingValue]}</Box>}
@@ -68,16 +76,21 @@ class GiveRating extends Component {
 
 
 GiveRating.propTypes = {
-  getRating: PropTypes.func.isRequired,
-  setRating: PropTypes.func.isRequired,
-  postRating: PropTypes.func.isRequired,
-  updateRating: PropTypes.func.isRequired,
+  getUserRating: PropTypes.func.isRequired,
+  setUserRating: PropTypes.func.isRequired,
+  postUserRating: PropTypes.func.isRequired,
+  updateUserRating: PropTypes.func.isRequired,
+  rating: PropTypes.object.isRequired,
+  product: PropTypes.object.isRequired,
+  user: PropTypes.object.isRequired,
 };
 
-const mapStateToProps = () => {
+const mapStateToProps = (state) => {
   return {
-
+    rating: state.ratings.rating,
+    product: state.products.productObject,
+    user: state.users.user
   }
 }
 
-export default connect(mapStateToProps, { getRating, setRating, postRating, updateRating })(GiveRating);
+export default connect(mapStateToProps, { getUserRating, setUserRating, postUserRating, updateUserRating })(GiveRating);

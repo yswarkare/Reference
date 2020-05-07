@@ -93,9 +93,10 @@ router.patch("/update-product", userAuth, async (req, res) => {
     }
 })
 
-router.delete("/delete-product", userAuth, async (req, res) => {
+router.patch("/delete-product", userAuth, async (req, res) => {
+    console.log(req.body);
     try {
-        let product = await Products.findOneAndDelete({_id: req.body._id})
+        let product = await Products.findOneAndDelete({_id: req.body.product._id})
         return res.json({message: "Product deleted successfully", success: true, product})
     } catch {
         return res.json({message: "Unable to delete product", success: false});

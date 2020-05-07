@@ -96,10 +96,10 @@ export const updateProduct = (product) => async (dispatch) => {
 }
 
 export const deleteProduct = (product) => async (dispatch) => {
-    let res = await api.delete("/products/delete-product", product)
+    let res = await api.patch("/products/delete-product", product)
     dispatch({
         type: Delete_Product,
-        payload: product
+        payload: res
     });
     return res;
 }

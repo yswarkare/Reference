@@ -98,13 +98,14 @@ router.patch("/user-logout", async (req, res) => {
 router.get("/is-user-logged-in", userAuth, async (req, res) => {
     try {
         // console.log("Response => ", req.user);
+        let user = req.user
         let userIsAdmin
         if( await validateAdmin(req.user) === true){
             userIsAdmin = true;
         } else {
             userIsAdmin = false
         }
-        return res.json({userIsAdmin, success: true})
+        return res.json({userIsAdmin, success: true, user})
     } catch (err){
         return res.json({userIsAdmin: false, success: false, error: err})
     }
