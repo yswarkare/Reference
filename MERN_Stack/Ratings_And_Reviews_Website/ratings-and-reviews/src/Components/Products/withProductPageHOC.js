@@ -18,7 +18,7 @@ const withProductPageHOC = (WrappedProductPage) => {
             
             return (
                 <div>
-                    <WrappedProductPage product={this.props.product}></WrappedProductPage>
+                    <WrappedProductPage product={this.props.product} user={this.props.user} loginStatus={this.props.loginStatus}></WrappedProductPage>
                 </div>
             );
         }
@@ -28,6 +28,8 @@ const withProductPageHOC = (WrappedProductPage) => {
     withProductPageHOC.propTypes = {
         products: PropTypes.object.isRequired,
         product: PropTypes.object.isRequired,
+        user: PropTypes.object.isRequired,
+        loginStatus:  PropTypes.object.isRequired,
         match: PropTypes.object.isRequired,
         sendProductId: PropTypes.func.isRequired,
     };
@@ -35,7 +37,9 @@ const withProductPageHOC = (WrappedProductPage) => {
     const mapStateToProps = (state) => {
         return {
             product: state.products.productObject,
-            products: state.products.products
+            products: state.products.products,
+            user: state.users.user,
+            loginStatus: state.users.loginStatus
         }
     }
     

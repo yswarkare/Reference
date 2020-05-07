@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
 import Rating from '@material-ui/lab/Rating';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
+import { getRating, setRating, postRating, updateRating } from "../../Redux/Actions/ratingsActions"
 
 
 
@@ -26,6 +29,12 @@ class GiveRating extends Component {
 
   onChangeSetRatingValue = (value) => {
     // console.log("value => "+value)
+    let rating = {
+      rating: value,
+      product: this.props.product._id,
+      user: this.props.user._id
+    }
+    this.props.postRating(rating);
     this.setState({
       ratingValue: value
     })
@@ -59,8 +68,16 @@ class GiveRating extends Component {
 
 
 GiveRating.propTypes = {
-
+  getRating: PropTypes.func.isRequired,
+  setRating: PropTypes.func.isRequired,
+  postRating: PropTypes.func.isRequired,
+  updateRating: PropTypes.func.isRequired,
 };
 
+const mapStateToProps = () => {
+  return {
 
-export default GiveRating;
+  }
+}
+
+export default connect(mapStateToProps, { getRating, setRating, postRating, updateRating })(GiveRating);

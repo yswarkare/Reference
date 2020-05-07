@@ -11,7 +11,6 @@ class ShowRating extends Component {
   state = {
     ratingValue: "2.5",
     hover: "",
-    ratings: this.props.product.ratings,
     labels: {
       0.5: 'Useless',
       1: 'Useless+',
@@ -46,66 +45,66 @@ class ShowRating extends Component {
         <div className="ratings-table-rows">
           <div className="ratings-table-columns">
             <div><span>5</span></div>
-            <div><LinearProgress variant="determinate" value={(this.state.ratings[10])}></LinearProgress></div>
-            <div><span>{(this.state.ratings[10])}</span></div>
+            <div><LinearProgress variant="determinate" value={(this.props.product.ratings[10])}></LinearProgress></div>
+            <div><span>{this.props.product.ratings[10]}</span></div>
           </div>
           <div className="ratings-table-columns">
             <div><span>4.5</span></div>
-            <div><LinearProgress variant="determinate" value="50"></LinearProgress></div>
-            <div><span>50</span></div>
+            <div><LinearProgress variant="determinate" value={this.props.product.ratings[9]}></LinearProgress></div>
+            <div><span>{this.props.product.ratings[9]}</span></div>
           </div>
           <div className="ratings-table-columns">
             <div><span>4</span></div>
-            <div><LinearProgress variant="determinate" value="50"></LinearProgress></div>
-            <div><span>50</span></div>
+            <div><LinearProgress variant="determinate" value={this.props.product.ratings[8]}></LinearProgress></div>
+            <div><span>{this.props.product.ratings[8]}</span></div>
           </div>
           <div className="ratings-table-columns">
             <div><span>3.5</span></div>
-            <div><LinearProgress variant="determinate" value="50"></LinearProgress></div>
-            <div><span>50</span></div>
+            <div><LinearProgress variant="determinate" value={this.props.product.ratings[7]}></LinearProgress></div>
+            <div><span>{this.props.product.ratings[7]}</span></div>
           </div>
           <div className="ratings-table-columns">
             <div><span>3</span></div>
-            <div><LinearProgress variant="determinate" value="50"></LinearProgress></div>
-            <div><span>50</span></div>
+            <div><LinearProgress variant="determinate" value={this.props.product.ratings[6]}></LinearProgress></div>
+            <div><span>{this.props.product.ratings[6]}</span></div>
           </div>
           <div className="ratings-table-columns">
             <div><span>2.5</span></div>
-            <div><LinearProgress variant="determinate" value="50"></LinearProgress></div>
-            <div><span>50</span></div>
+            <div><LinearProgress variant="determinate" value={this.props.product.ratings[5]}></LinearProgress></div>
+            <div><span>{this.props.product.ratings[5]}</span></div>
           </div>
           <div className="ratings-table-columns">
             <div><span>2</span></div>
-            <div><LinearProgress variant="determinate" value="50"></LinearProgress></div>
-            <div><span>50</span></div>
+            <div><LinearProgress variant="determinate" value={this.props.product.ratings[4]}></LinearProgress></div>
+            <div><span>{this.props.product.ratings[4]}</span></div>
           </div>
           <div className="ratings-table-columns">
             <div><span>1.5</span></div>
-            <div><LinearProgress variant="determinate" value="50"></LinearProgress></div>
-            <div><span>50</span></div>
+            <div><LinearProgress variant="determinate" value={this.props.product.ratings[3]}></LinearProgress></div>
+            <div><span>{this.props.product.ratings[3]}</span></div>
           </div>
           <div className="ratings-table-columns">
             <div><span>1</span></div>
-            <div><LinearProgress variant="determinate" value="50"></LinearProgress></div>
-            <div><span>50</span></div>
+            <div><LinearProgress variant="determinate" value={this.props.product.ratings[2]}></LinearProgress></div>
+            <div><span>{this.props.product.ratings[2]}</span></div>
           </div>
           <div className="ratings-table-columns">
             <div><span>0.5</span></div>
-            <div><LinearProgress variant="determinate" value="50"></LinearProgress></div>
-            <div><span>50</span></div>
+            <div><LinearProgress variant="determinate" value={this.props.product.ratings[1]}></LinearProgress></div>
+            <div><span>{this.props.product.ratings[1]}</span></div>
           </div>
         </div>
         <div className="rating-stars">
         <Box component="fieldset" mb={3} borderColor="transparent">
-        <Typography component="legend">Product Rating</Typography>
+        <Typography component="legend">Total Ratings {this.props.product.totalRatings}</Typography>
             <Rating
             readOnly
               name="simple-feedback"
               size="large"
-              value={this.state.ratingValue}
+              value={this.props.product.avgRating}
               precision ={0.5}/>
           </Box>
-          {this.state.ratingValue !== null && <Box ml={2}>{this.state.labels[this.state.ratingValue]}</Box>}
+          {this.state.ratingValue !== null && <Typography ml={2}>{this.state.labels[this.props.product.avgRating]}</Typography>}
         </div>
       </div>
     );
