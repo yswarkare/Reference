@@ -112,7 +112,7 @@ const userLogin = async (userData, res) => {
     if(userData.emailId){
         user = await Users.findOne({emailId: userData.emailId})
     }
-        // console.log("User in Logging route"+ user)
+        console.log("User in Logging route"+ user)
         let hashPassword = user.password;
         let isMatch = await bcrypt.compare(userData.password, hashPassword);
         if(isMatch === true){

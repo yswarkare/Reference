@@ -99,12 +99,6 @@ const getUserByEmailOrUsername = async (userData) => {
     }
 }
 
-// const checkIsItUsernameOrEmail = async (userData) => {
-//     if (validator.isEmail(userData.usernameOrEmailId) === true){
-//         return 
-//     }
-// }
-
 module.exports = {
     validateAdmin,
     validateUser,
@@ -112,5 +106,4 @@ module.exports = {
     validateUsername,
     getUserByEmailOrUsername,
     getAdminByEmailOrUsername,
-    // checkIsItUsernameOrEmail
 }

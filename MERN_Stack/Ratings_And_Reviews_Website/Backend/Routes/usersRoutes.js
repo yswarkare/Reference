@@ -66,6 +66,7 @@ router.post("/user-registration", async (req, res) => {
 })
 
 router.post("/user-login", async (req, res) => {
+    console.log(req.body);
     await userLogin(req.body, res)
 })
 
@@ -110,6 +111,7 @@ router.get("/is-user-logged-in", userAuth, async (req, res) => {
 })
 
 router.get("/get-user-info", userAuth, async (req, res) => {
+    console.log(req.body);
     try {
         let user = await Users.findOne({_id: req.user._id})
         return res.json({user, message: "Got User Info Successfully", success: true});

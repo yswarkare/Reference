@@ -12,8 +12,10 @@ const checkUserId = async (jwt_payload) => {
     let admin1 = await Admins.findOne({_id: jwt_payload._id});
     let user1 = await Users.findOne({_id: jwt_payload._id});
     if (user1){
+        // console.log(user1);
         return user1;
     } else if (admin1){
+        // console.log(admin1);
         return admin1
     } else {
         return null;

@@ -27,10 +27,10 @@ class ProductPage extends Component {
                 <div className="product-ratings-and-reviews">
                     <div className="rating-container">
                         <div className="product-raging">
-                            <ShowRating product={this.props.product}></ShowRating>
+                            <ShowRating product={this.props.product} ></ShowRating>
                         </div>
                         <div className="give-rating">
-                            <GiveRating></GiveRating>
+                            { this.props.loginStatus.loggedIn === true && <GiveRating product={this.props.product} user={this.props.user}></GiveRating>}
                         </div>
                     </div>
                     <div className="product-reviews">
