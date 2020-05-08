@@ -77,12 +77,14 @@ export const Send_Product_Id = "Send_Product_Id";
 //| Ratings Action Types
 
 export const Get_User_Rating = "Get_User_Rating";
+export const Edit_User_Review = "Edit_User_Review";
 export const Set_User_Rating = "Set_User_Rating";
 export const Post_User_Rating = "Post_User_Rating";
 export const Update_User_Rating= "Update_User_Rating"
 
 //| Reviews Action Types
 
+export const Set_User_Review = "Set_User_Review";
 export const Get_User_Review = "Get_User_Review";
 export const Post_User_Review = "Post_User_Review";
 export const Update_User_Review = "Update_User_Review";

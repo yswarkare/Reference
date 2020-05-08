@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import withProductPageHOC from "./withProductPageHOC";
 import GiveRating from "../Ratings/GiveRating";
 import ShowRating from "../Ratings/ShowRating";
+import UserReview from "../Reviews/UserReview";
+
 class ProductPage extends Component {
 
 
@@ -35,6 +37,14 @@ class ProductPage extends Component {
                         </div>
                     </div>
                     <div className="product-reviews">
+                        <div className="write-product-review">
+                            {
+                                this.props.loginStatus.loggedIn === true &&
+                                <UserReview></UserReview>
+                            }
+                        </div>
+                        <div className="product-reviews-list">
+                        </div>
                     </div>
                 </div>
             </div>

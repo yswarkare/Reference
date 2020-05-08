@@ -108,14 +108,15 @@ let productReducer = ( state = productState, action ) => {
 
         case Send_Product_Id:
             let id = action.payload;
-            let products = stateCopy.products
+            let products = state.products
             for (let i = 0; i < products.length; i++) {
                 if (products[i]._id === id) {
-                    stateCopy.productObject = products[i]
+                    state.productObject = products[i]
                 }
             }
-            console.log(stateCopy)
-            return stateCopy
+            state.productObject.avgRating = state.productObject.avgRating.$numberDecimal
+            console.log(state)
+            return state
 
         default:
             return stateCopy;

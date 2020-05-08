@@ -101,7 +101,7 @@ class ShowRating extends Component {
             readOnly
               name="simple-feedback"
               size="large"
-              value={this.props.product.avgRating}
+              value={parseFloat(this.props.product.avgRating)}
               precision ={0.5}/>
           </Box>
           {this.state.ratingValue !== null && <Typography ml={2}>{this.state.labels[this.props.product.avgRating]}</Typography>}
