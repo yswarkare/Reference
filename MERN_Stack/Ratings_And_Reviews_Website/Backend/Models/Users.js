@@ -9,10 +9,10 @@ const userSchema = new Schema({
     username: { type: String, required: true, lowercase: true, trim: true },
     emailId : { type: String, required: true, lowercase: true, trim: true },
     password : { type: String, required: true, trim: true },
-    ratings: [{ type: Schema.Types.ObjectId, ref: "Ratings" }],
-    reviews: [{ type: Schema.Types.ObjectId, ref: "Reviews" }],
-    likedReviews: [{ type: Schema.Types.ObjectId, ref: "Reviews" }],
-    dislikedReviews: [{ type: Schema.Types.ObjectId, ref: "Reviews" }],
+    ratings: [{ type: Schema.Types.ObjectId, ref: "ratings" }],
+    reviews: [{ type: Schema.Types.ObjectId, ref: "reviews" }],
+    likedReviews: [{ type: Schema.Types.ObjectId, ref: "reviews" }],
+    dislikedReviews: [{ type: Schema.Types.ObjectId, ref: "reviews" }],
 });
 
 const Users = mongoose.model("Users", userSchema);

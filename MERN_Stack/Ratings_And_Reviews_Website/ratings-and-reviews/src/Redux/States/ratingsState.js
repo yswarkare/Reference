@@ -6,6 +6,8 @@ let ratingsState = {
     },
     ratings: [],
     ratingsCopy: [],
+    userRatingExists: false,
+    editRating: false,
     ratingErrors: {
         rating: {message: "", success: null},
         product: {message: "", success: null},

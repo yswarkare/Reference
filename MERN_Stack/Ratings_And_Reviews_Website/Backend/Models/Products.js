@@ -6,9 +6,9 @@ const productsSchema = new Schema({
     productName : { type: String, required: true, trim: true },
     brandName: { type: String, required: true, trim: true },
     productDescription : { type: String, required: true, trim: true },
-    category: {type: Schema.Types.ObjectId, ref: "Categories"},
-    subCategory : {type: Schema.Types.ObjectId, ref: "SubCategories"},
-    subSubCategory : {type: Schema.Types.ObjectId, ref: "SubSubCategories"},
+    category: {type: Schema.Types.ObjectId, ref: "categories"},
+    subCategory : {type: Schema.Types.ObjectId, ref: "subcategories"},
+    subSubCategory : {type: Schema.Types.ObjectId, ref: "subsubcategories"},
     totalRatings: { type: Number, trim: true, default: 0 },
     avgRating: { type: Schema.Types.Decimal128, trim: true, default: 0 },
     ratings: {
@@ -23,7 +23,7 @@ const productsSchema = new Schema({
         9: { type: Number, trim: true, default: 0 },
         10: { type: Number, trim: true, default: 0 },
     },
-    reviews: [{type: Schema.Types.ObjectId, ref: "Reviews"}],
+    reviews: [{type: Schema.Types.ObjectId, ref: "reviews"}],
     images: [{type: String, trim: true}],
     image: {type: String, trim: true}
 });

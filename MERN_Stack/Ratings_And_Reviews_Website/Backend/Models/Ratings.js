@@ -4,8 +4,8 @@ const Schema = mongoose.Schema;
 
 const ratingsSchema = new Schema({
 	rating: { type: Schema.Types.Decimal128, required: true, trim: true },
-	product: {type: Schema.Types.ObjectId, ref: "Products"},
-	user: {type: Schema.Types.ObjectId, ref: "Users"},
+	product: {type: Schema.Types.ObjectId, ref: "products"},
+	user: {type: Schema.Types.ObjectId, ref: "users"},
 }, {timestamps: true});
 
 const Ratings = mongoose.model("Ratings", ratingsSchema);

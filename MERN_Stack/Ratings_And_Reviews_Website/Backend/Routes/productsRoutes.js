@@ -27,7 +27,7 @@ router.post("/", userAuth, async (req, res) => {
             subSubCategory : req.body.product.subSubCategory,
             image : req.body.product.image,
             images: req.body.product.images
-        }).populate("category").populate("subCategory").populate("subSubCategory");
+        }).populate("categories").populate("subcategories").populate("subsubcategories");
         let product = await newProduct.save()
         return res.json({message: "Product added successfully", success: true, product})
     } catch {

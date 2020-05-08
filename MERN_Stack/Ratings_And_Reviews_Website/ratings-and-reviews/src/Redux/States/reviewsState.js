@@ -1,5 +1,6 @@
 let reviewsState = {
     review: {
+        _id: "",
         review: "",
         likes: "",
         dislikes: "",
@@ -8,7 +9,9 @@ let reviewsState = {
         user: "",
     },
     reviews: [],
-    reviewsCopy: []
+    reviewsCopy: [],
+    reviewExists: false,
+    editReview: false,
 }
 
 export default reviewsState;
