@@ -11,6 +11,6 @@ const reviewsSchema = new Schema({
 	user: {type: Schema.Types.ObjectId, ref: "users"},
 }, {timestamps: true});
 
-const Reviews = mongoose.model("Reviews", reviewsSchema);
+const Reviews = mongoose.model("reviews", reviewsSchema);
 
 module.exports = Reviews;

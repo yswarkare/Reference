@@ -8,10 +8,10 @@ const { userAuth } = require("../Utils/Auth")
 
 router.get("/", async (req, res) => {
     try {
-        let categories = await Categories.find()
-        return res.json({categories})
+        let categories = await Categories.find().populate("subCategories").populate("subSubCategories")
+        return res.json({message: "All Categories", success: true, categories})
     } catch (err) {
-        return res.json({err});
+        return res.json({message: "Failed to get categories list", success: false, err});
     }
 })
 
@@ -50,9 +50,9 @@ router.delete("/:id", userAuth, async (req, res) => {
 router.patch("/update-category-name", userAuth, async (req, res) => {
         console.log(req.body);
     try {
-        let cagtegory = await Categories.findOneAndUpdate({_id: req.body._id}, {categoryName: req.body.categoryName});
+        await Categories.findOneAndUpdate({_id: req.body._id}, {categoryName: req.body.categoryName});
         let updated = await Categories.findOne({_id: req.body._id})
-        return res.json({message: "Category name updated successfully", success: true, category, updated })
+        return res.json({message: "Category name updated successfully", success: true, updated })
     } catch {
         return res.json({message: "Unable to update category name", success: false})
     }

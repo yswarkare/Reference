@@ -1,6 +1,9 @@
 const express = require("express");
 const router = express.Router();
-const Products = require("../Models/Products"); 
+const Products = require("../Models/Products");
+const Categoreies = require("../Models/Categories");
+const SubCategories = require("../Models/SubCategories");
+const SubSubCategories = require("../Models/SubSubCategories");
 const { validateAdmin } = require("../Utils/Validations");
 const { userAuth } = require("../Utils/Auth");
 
@@ -27,8 +30,24 @@ router.post("/", userAuth, async (req, res) => {
             subSubCategory : req.body.product.subSubCategory,
             image : req.body.product.image,
             images: req.body.product.images
-        }).populate("categories").populate("subcategories").populate("subsubcategories");
-        let product = await newProduct.save()
+        })
+        let product = await newProduct.save().populate("category").populate("subCategory").populate("subSubCategory");
+        // Add id in categories
+        let category1 = Categoreies.findOne({_id: req.body.product.category});
+        let pArr1 = category1.products
+        pArr1.push(product._id)
+        await Categoreies.findOneAndUpdate({_id: req.body.product.category}, {products: pArr1});
+        // Add Id in sub-categories
+        let subCategory1 = SubCategories.findOne({_id: req.body.product.subCategory})
+        let pArr2 = subCategory1.products
+        pArr2.push(product._id)
+        await SubCategories.findOneAndUpdate({_id: req.body.product.subCategory}, {products: pArr2})
+        // Add Id in sub-sub-categories
+        let subSubCategory1 = SubSubCategories.findOne({_id: req.body.product.subSubCategory})
+        let pArr3 = subSubCategory1.products
+        pArr3.push(product._id)
+        await SubSubCategories.findOneAndUpdate({_id: req.body.product.subSubCategory}, {products: pArr3})
+        
         return res.json({message: "Product added successfully", success: true, product})
     } catch {
         return res.json({message: "User is Unauthorized", success: false})

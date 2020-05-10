@@ -1,5 +1,5 @@
 import { Get_User_Rating, Set_User_Rating, Post_User_Rating, Update_User_Rating } from "./actionTypes";
-import { api, Axios } from "./axiosDefaults";
+import { api } from "./axiosDefaults";
 
 export const getUserRating = (rating) => async (dispatch) => {
     console.log(rating)

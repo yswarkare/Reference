@@ -8,6 +8,6 @@ const ratingsSchema = new Schema({
 	user: {type: Schema.Types.ObjectId, ref: "users"},
 }, {timestamps: true});
 
-const Ratings = mongoose.model("Ratings", ratingsSchema);
+const Ratings = mongoose.model("ratings", ratingsSchema);
 
 module.exports = Ratings;

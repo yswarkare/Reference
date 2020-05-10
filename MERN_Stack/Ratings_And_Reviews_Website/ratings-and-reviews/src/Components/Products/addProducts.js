@@ -51,11 +51,25 @@ class AddProducts extends Component {
         this.props.setProductDescription(productDescription)
     }
 
-    onChangeSetProductCategory = (category) => {
+    onChangeSetProductCategory = (categoryId) => {
+        let cArr = this.props.categories.categories;
+        let category
+        for (let i = 0; i < cArr.length; i++){
+            if (cArr[i]._id === categoryId) {
+                category = cArr[i]
+            }
+        }
         this.props.setProductCategory(category)
     }
 
-    onChangeSetProductSubCategory = (subCategory) => {
+    onChangeSetProductSubCategory = (subCategoryId) => {
+        let sCArr = this.props.subCategories.subCategories;
+        let subCategory
+        for (let i = 0; i < sCArr.length; i++){
+            if (sCArr[i]._id === subCategoryId){
+                subCategory = sCArr[i]
+            }
+        }
         this.props.setProductSubCategory(subCategory)
     }
 
@@ -108,43 +122,49 @@ class AddProducts extends Component {
                     </Row>
                     <Row>
                     <Col>
-                    <FormControl>
-                        <InputLabel>&nbsp;&nbsp;Category</InputLabel>
-                        <Select type="text" native onChange={(e)=>{this.onChangeSetProductCategory(e.target.value)}} value={this.props.products.product.category} variant="outlined" >
-                            <option></option>
-                        {this.props.categories.categories.map((category, index)=>{
-                            return (
-                                <option key={index} value={category._id}>{category.categoryName}</option>
-                            )
-                        })}
-                        </Select>
-                    </FormControl>
+                        <FormControl>
+                            <InputLabel>&nbsp;&nbsp;Category</InputLabel>
+                            <Select type="text" native onChange={(e)=>{this.onChangeSetProductCategory(e.target.value)}} value={this.props.products.product.category} variant="outlined" >
+                                <option></option>
+                            {this.props.categories.categories.map((category, index)=>{
+                                return (
+                                    <option key={index} value={category._id}>{category.categoryName}</option>
+                                )
+                            })}
+                            </Select>
+                        </FormControl>
                     </Col>
                     <Col>
-                    <FormControl>
-                        <InputLabel>&nbsp;&nbsp;Sub-Category</InputLabel>
-                        <Select type="text" native onChange={(e)=>{this.onChangeSetProductSubCategory(e.target.value)}} value={this.props.products.product.subCategory} variant="outlined" >
-                        <option aria-label="Sub Category" value="" />
-                        {this.props.subCategories.subCategories.map((subCategory, index)=>{
-                            return (
-                                <option key={index} value={subCategory._id}>{subCategory.subCategoryName}</option>
-                            )
-                        })}
-                        </Select>
-                    </FormControl>
+                    {
+                        this.props.filters_1.filterSubCategories === true &&
+                        <FormControl>
+                            <InputLabel>&nbsp;&nbsp;Sub-Category</InputLabel>
+                            <Select type="text" native onChange={(e)=>{this.onChangeSetProductSubCategory(e.target.value)}} value={this.props.products.product.subCategory} variant="outlined" >
+                            <option aria-label="Sub Category" value="" />
+                            {this.props.filters_1.filteredSubCategories.map((subCategory, index)=>{
+                                return (
+                                    <option key={index} value={subCategory._id}>{subCategory.subCategoryName}</option>
+                                )
+                            })}
+                            </Select>
+                        </FormControl>
+                    }
                     </Col>
                     <Col>
-                    <FormControl>
-                        <InputLabel>&nbsp;&nbsp;Sub-Sub-Category</InputLabel>
-                        <Select type="text" native onChange={(e)=>{this.onChangeSetProductSubSubCategory(e.target.value)}} value={this.props.products.product.subSubCategory} variant="outlined" >
-                        <option aria-label="Sub Sub Category" value="" />
-                        {this.props.subSubCategories.subSubCategories.map((subSubCategory, index)=>{
-                            return (
-                                <option key={index} value={subSubCategory._id}>{subSubCategory.subSubCategoryName}</option>
-                            )
-                        })}
-                        </Select>
-                    </FormControl>
+                    {
+                        this.props.filters_1.filterSubSubCategories === true &&
+                        <FormControl>
+                            <InputLabel>&nbsp;&nbsp;Sub-Sub-Category</InputLabel>
+                            <Select type="text" native onChange={(e)=>{this.onChangeSetProductSubSubCategory(e.target.value)}} value={this.props.products.product.subSubCategory} variant="outlined" >
+                            <option aria-label="Sub Sub Category" value="" />
+                            {this.props.filters_1.filteredSubSubCategories.map((subSubCategory, index)=>{
+                                return (
+                                    <option key={index} value={subSubCategory._id}>{subSubCategory.subSubCategoryName}</option>
+                                )
+                            })}
+                            </Select>
+                        </FormControl>
+                    }
                     </Col>
                     </Row>
                     <Row>
@@ -227,6 +247,7 @@ AddProducts.propTypes = {
     categories: PropTypes.object.isRequired,
     subCategories: PropTypes.object.isRequired,
     subSubCategories: PropTypes.object.isRequired,
+    filters_1: PropTypes.object.isRequired,
     setProductName: PropTypes.func.isRequired,
     setBrandName: PropTypes.func.isRequired,
     setProductImage: PropTypes.func.isRequired,
@@ -252,7 +273,8 @@ const mapStateToProps = (state) => {
         products: state.products,
         categories: state.categories,
         subCategories: state.subCategories,
-        subSubCategories: state.subSubCategories
+        subSubCategories: state.subSubCategories,
+        filters_1: state.products.filters_1,
     };
 }
 

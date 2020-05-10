@@ -1,9 +1,11 @@
+
 let categoriesState = {
     category: {
         _id: "",
         categoryName: "",
         products: [],
-        subCategories: []
+        subCategories: [],
+        subSubCategories: [],
     },
     categories: [{
         categoryName: "Home Appliances",
@@ -15,7 +17,8 @@ let categoriesState = {
         subCategories: []
     }],
     categoriesCopy: [],
-    editIndex: ""
+    editIndex: "",
+    editCategory: false
 }
 
 export default categoriesState;

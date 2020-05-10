@@ -27,35 +27,52 @@ let productReducer = ( state = productState, action ) => {
 
         case Set_Product_Name:
             stateCopy.product.productName = action.payload;
+            console.log(stateCopy)
             return stateCopy
 
         case Set_Brand_Name:
             stateCopy.product.brandName = action.payload;
+            console.log(stateCopy)
             return stateCopy
 
         case Set_Product_Image:
             stateCopy.product.image = action.payload;
+            console.log(stateCopy)
             return stateCopy
 
         case Set_Product_Description:
             stateCopy.product.productDescription = action.payload;
+            console.log(stateCopy)
             return stateCopy
             
         case Set_Product_Category:
-            stateCopy.product.category = action.payload;
+            console.log(action.payload)
+            stateCopy.product.category = action.payload._id;
+            stateCopy.filters_1.filterSubCategories = true;
+            stateCopy.filters_1.categoryToFilter = action.payload;
+            stateCopy.filters_1.filteredSubCategories = action.payload.subCategories;
+            console.log(stateCopy)
             return stateCopy
             
         case Set_Product_Sub_Category:
-            stateCopy.product.subCategory = action.payload;
+            console.log(action.payload);
+            stateCopy.product.subCategory = action.payload._id;
+            stateCopy.filters_1.filterSubSubCategories = true;
+            stateCopy.filters_1.subCategoryToFilter = action.payload;
+            stateCopy.filters_1.filteredSubSubCategories = action.payload.subSubCategories;
+            console.log(stateCopy)
             return stateCopy
 
         case Set_Product_Sub_Sub_Category:
             stateCopy.product.subSubCategory = action.payload;
+            console.log(stateCopy)
             return stateCopy
 
         case Add_Product:
             console.log(action.payload);
             stateCopy.products.push(action.payload.data.product);
+            stateCopy.filters_1.filterSubCategories = false;
+            stateCopy.filters_1.filterSubSubCategories = false;
             console.log(stateCopy)
             return stateCopy;
 

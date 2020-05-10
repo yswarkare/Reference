@@ -2,102 +2,101 @@ import React, { Component } from 'react'
 import { Fragment } from "react"
 import { connect } from "react-redux";
 import PropTypes from 'prop-types'
-import { Tooltip, IconButton } from '@material-ui/core';
+import { Tooltip, IconButton, Button, TextField } from '@material-ui/core';
 import EditIcon from '@material-ui/icons/Edit';
-import DeleteIcon from "@material-ui/icons/Delete"
-import UpdateIcon from "@material-ui/icons/Update"
-import { Row, Col, Input } from 'reactstrap';
-import { updateCategoryName, deleteCategory, editCategory } from "../../Redux/Actions/categoriesActions";
+import DeleteIcon from "@material-ui/icons/Delete";
+import { Container, Row, Col } from 'reactstrap';
+import { addCategory, setCategory, getAllCategories, updateCategoryName, deleteCategory, editCategory } from "../../Redux/Actions/categoriesActions";
 
 
 class Category extends Component {
 
-    state = {
-        edit: false,
-        categoryName: ""
+    onChangeSetCategory = (categoryName) => {
+        this.props.setCategory(categoryName);
     }
 
-    onChangeSetCategoryName = (categoryName) => {
-        this.setState({
-            categoryName: categoryName
-        })
-    }
-
-    onClickEditCategoryName = () => {
-        let index = this.props.index;
-        this.props.editCategory(index);
-        this.setState({
-            edit: true,
-            categoryName: this.props.category.categoryName
-        })
-    }
-
-    onClickUpdateCategoryName = () => {
+    onClickAddCategory = () => {
         let category = {
-            _id: this.props.category._id,
-            categoryName: this.state.categoryName,
-            index: this.props.index
+            category: this.props.categories.category
         }
+        this.props.addCategory(category)
+    }
+
+    onClickEditCategoryName = (index) => {
+        this.props.editCategory(index);
+    }
+
+    onClickUpdateCategory = () => {
+        let category = this.props.categories.category
         this.props.updateCategoryName(category);
-        this.setState({
-            edit: false
-        })
     }
 
     onClickDeleteCategory = () => {
-        let category = {
-            _id: this.props.category._id,
-            categoryName: this.state.categoryName,
-            index: this.props.index
-        }
+        let category = this.props.categories.category
         this.props.deleteCategory(category);
     }
 
     render() {
         return (
             <Fragment>
-                <Row id="categories-table-body">
-                    <Col scope="row">{this.props.index}</Col>
+                <div className="add-categories">
+                    <TextField onChange={(e)=>{this.onChangeSetCategory(e.target.value)}} value={this.props.category.categoryName} type="text" label="Category Name" variant="outlined" />
                     {
-                        this.state.edit === false && 
-                        <Col>{this.props.category.categoryName}</Col>
+                        this.props.categories.editCategory === false &&
+                        <Button onClick={()=>{this.onClickAddCategory()}} variant="contained" color="primary">
+                            Add
+                        </Button>
                     }
+                    { 
+                        this.props.categories.editCategory === true &&
+                        <Button onClick={()=>{this.onClickUpdateCategory()}} variant="contained" color="primary">
+                            Update
+                        </Button>
+                    }
+                </div>
+                <Container className="categories-table">
+                    <Row id="categories-table">
+                        <Col>#</Col>
+                        <Col>Category Name</Col>
+                        <Col>Edit</Col>
+                        <Col>Delete</Col>
+                    </Row>
                     {
-                        this.state.edit === true &&
-                        <Input onChange={(e)=>{this.onChangeSetCategoryName(e.target.value)}} value={this.state.categoryName} type="text"/>
+                        this.props.categories.categories.map((category, index)=>{
+                            return(
+                                <Row id="categories-table-body" key={index}>
+                                    <Col scope="row">{index}</Col>
+                                    <Col>{category.categoryName}</Col>
+                                    <Col>
+                                        <Tooltip title="Edit">
+                                            <IconButton onClick={()=>{this.onClickEditCategoryName(index)}}>
+                                                <EditIcon></EditIcon>
+                                            </IconButton>
+                                        </Tooltip>
+                                    </Col>
+                                    <Col>
+                                        <Tooltip title="Delete">
+                                            <IconButton onClick={()=>{this.onClickDeleteCategory()}}>
+                                                <DeleteIcon></DeleteIcon>
+                                            </IconButton>
+                                        </Tooltip>
+                                    </Col>
+                                </Row>
+                            )
+                        })
                     }
-                    <Col>
-                    {
-                        this.state.edit === false && 
-                        <Tooltip title="Edit">
-                            <IconButton onClick={()=>{this.onClickEditCategoryName()}}>
-                                <EditIcon></EditIcon>
-                            </IconButton>
-                        </Tooltip>
-                    }
-                    {
-                        this.state.edit === true &&
-                        <Tooltip title="Update">
-                            <IconButton onClick={()=>{this.onClickUpdateCategoryName()}}>
-                                <UpdateIcon></UpdateIcon>
-                            </IconButton>
-                        </Tooltip>
-                    }
-                    </Col>
-                    <Col>
-                        <Tooltip title="Delete">
-                            <IconButton onClick={()=>{this.onClickDeleteCategory()}}>
-                                <DeleteIcon></DeleteIcon>
-                            </IconButton>
-                        </Tooltip>
-                    </Col>
-                </Row>
+                </Container>
+                
             </Fragment>
         )
     }
 }
 
 Category.propTypes = {
+    categories: PropTypes.object.isRequired,
+    category: PropTypes.object.isRequired,
+    setCategory: PropTypes.func.isRequired,
+    addCategory: PropTypes.func.isRequired,
     updateCategoryName: PropTypes.func.isRequired,
     deleteCategory: PropTypes.func.isRequired,
     editCategory: PropTypes.func.isRequired,
@@ -105,8 +104,9 @@ Category.propTypes = {
 
 const mapStateToProps = (state) => {
     return {
-        
+        categories: state.categories,
+        category: state.categories.category
     }
 }
 
-export default connect(mapStateToProps, { updateCategoryName, deleteCategory, editCategory })(Category);
+export default connect(mapStateToProps, { addCategory, setCategory, getAllCategories, updateCategoryName, deleteCategory, editCategory })(Category);
