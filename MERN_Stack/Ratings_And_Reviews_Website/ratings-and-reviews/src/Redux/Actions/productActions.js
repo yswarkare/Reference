@@ -1,5 +1,6 @@
 import { 
     Get_All_Products,
+    Get_Product,
     Set_Product_Name, 
     Set_Brand_Name,
     Set_Product_Image,
@@ -21,6 +22,15 @@ export const getAllProducts = () => async (dispatch) => {
         type: Get_All_Products,
         payload: res
     })
+}
+
+export const getProduct = (product) => async (dispatch) => {
+    let res = await Axios.patch("/products/get-product", product)
+    dispatch({
+        type: Get_Product,
+        payload: res
+    })
+
 }
 
 export const setProductName = (productName) => {
@@ -105,6 +115,7 @@ export const deleteProduct = (product) => async (dispatch) => {
 }
 
 export const sendProductId = (_id) => async (dispatch) => {
+    console.log(_id)
     dispatch({
         type: Send_Product_Id,
         payload: _id

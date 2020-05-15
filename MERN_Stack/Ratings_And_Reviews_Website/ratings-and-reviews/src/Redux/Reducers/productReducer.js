@@ -1,7 +1,8 @@
 import productState from "../States/productState";
 import { 
     Get_All_Products,
-    Set_Product_Name, 
+    Get_Product,
+    Set_Product_Name,
     Set_Brand_Name,
     Set_Product_Image,
     Set_Product_Description, 
@@ -24,6 +25,13 @@ let productReducer = ( state = productState, action ) => {
             stateCopy.products = action.payload.data.products;
             console.log(stateCopy);
             return stateCopy;
+
+        case Get_Product:
+            console.log(action.payload);
+            state.product = action.payload.data.product;
+            state.product.avgRating = action.payload.data.product.avgRating.$numberDecimal;
+            console.log(state)
+            return state
 
         case Set_Product_Name:
             stateCopy.product.productName = action.payload;
@@ -95,16 +103,7 @@ let productReducer = ( state = productState, action ) => {
         case Update_Product:
             console.log(action.payload);
             let uIndex = stateCopy.editIndex;
-            let pArray = stateCopy.products;
-            let uProduct = action.payload.data.updated;
-            pArray[uIndex].productName = uProduct.productName;
-            pArray[uIndex].brandName = uProduct.brandName;
-            pArray[uIndex].image = uProduct.image;
-            pArray[uIndex].productDescription = uProduct.productDescription;
-            pArray[uIndex].category = uProduct.category;
-            pArray[uIndex].subCategory = uProduct.subCategory;
-            pArray[uIndex].subSubCategory = uProduct.subSubCategory;
-            stateCopy.products = pArray;
+            stateCopy.products[uIndex] = action.payload.data.updated
             stateCopy.editProduct = false;
             console.log(stateCopy)
             return stateCopy
@@ -125,13 +124,14 @@ let productReducer = ( state = productState, action ) => {
 
         case Send_Product_Id:
             let id = action.payload;
+            state.product._id = id;
             let products = state.products
             for (let i = 0; i < products.length; i++) {
                 if (products[i]._id === id) {
-                    state.productObject = products[i]
+                    state.product = products[i]
                 }
             }
-            state.productObject.avgRating = state.productObject.avgRating.$numberDecimal
+            state.product.avgRating = state.product.avgRating.$numberDecimal
             console.log(state)
             return state
 

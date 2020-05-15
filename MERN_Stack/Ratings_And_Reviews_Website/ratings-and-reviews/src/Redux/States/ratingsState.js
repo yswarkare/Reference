@@ -1,5 +1,6 @@
 let ratingsState = {
     rating: {
+        _id: "",
         rating: "0",
         product: "",
         user: "",
