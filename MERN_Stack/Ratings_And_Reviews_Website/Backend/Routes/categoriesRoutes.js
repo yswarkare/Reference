@@ -1,6 +1,8 @@
 const express = require("express");
 const router = express.Router();
-const Categories = require("../Models/Categories"); 
+const Categories = require("../Models/Categories");
+const SubCategories = require("../Models/SubCategories");
+const SubSubCategories = require("../Models/SubSubCategories");
 const { validateAdmin } = require("../Utils/Validations");
 const { userAuth } = require("../Utils/Auth")
 
@@ -27,26 +29,6 @@ router.post("/", userAuth, async (req, res) => {
     }
 })
 
-router.put("/:id", userAuth, async (req, res) => {
-    if (validateAdmin(req.user) === true){
-        await Categories.findOneAndUpdate({_id: req.params.id}, {
-            categoryName : req.body.category.categoryName
-        }).then(category => res.json(category)).catch(err => console.log(err))
-    } else {
-        return res.json({message: "User is Unauthorized", success: false})
-    }
-})
-
-router.delete("/:id", userAuth, async (req, res) => {
-    if (validateAdmin(req.user) === true){
-        await Categories.findOneAndRemove({_id: req.params.id})
-        .then(category => res.json(category))
-        .catch(err => console.log(err));
-    } else {
-        return res.json({message: "User is Unauthorized", success: false})
-    }
-})
-
 router.patch("/update-category-name", userAuth, async (req, res) => {
         console.log(req.body);
     try {
@@ -60,8 +42,25 @@ router.patch("/update-category-name", userAuth, async (req, res) => {
 
 router.patch("/delete-category", userAuth, async (req, res) => {
     try {
+        try {            
+            let subCArr = await SubCategories.find({category: req.body._id})
+            for (let i = 0; i <= subCArr.length; i++) {
+                await SubCategories.findOneAndDelete({_id: subCArr[i]._id})
+            }
+        } catch (error) {
+            console.log(error);
+        }
+        try {            
+            let sSCArr = await SubSubCategories.find({category: req.body._id})
+            for (let i = 0; i <= sSCArr.length; i++) {
+                await SubSubCategories.findOneAndDelete({_id: sSCArr[i]._id})
+            }
+        } catch (error) {
+            console.log(error);
+        }
         let deleted = await Categories.findOneAndDelete({_id: req.body._id})
         return res.json({message: "Category deleted successfully", success: true, deleted})
+
     } catch {
         return res.json({message:"Unable to delete category", success: false})
     }
