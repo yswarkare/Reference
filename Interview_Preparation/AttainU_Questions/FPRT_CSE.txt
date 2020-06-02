@@ -1,0 +1,25 @@
+What is Multithreading and asynchronous programming? 
+What is the difference between a thread and a process?
+Explain the Producer-Consumer problem?  
+What is deadlock and four necessary conditions for deadlock?  
+Explain the implementation of Virtual memory?  
+What is Cache?  
+Where does cache lie in an Operating System?  
+Difference between Cache and HashMap. 
+What are the properties of RDBMS? 
+What are ACID properties? 
+Difference between Vertical and Horizontal Scaling. 
+What is sharding? 
+What is the CAP theorem? 
+What is normalization and denormalization and why do we need it? 
+Difference between inner and outer join? 
+What is the difference between TCP and UDP? Explain their use. 
+What is the difference between http and https? 
+What are ports? Name some default port of your favourite database. 
+Explain DNS. 
+Explain firewall. 
+Explain CAP theorem 
+What is Sharding, When it is used
+What is a load balancer?  How it is useful
+What is Encryption and hashing? 
+What is oauth2? 
