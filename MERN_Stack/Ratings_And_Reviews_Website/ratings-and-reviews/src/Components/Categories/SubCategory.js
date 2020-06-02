@@ -8,10 +8,18 @@ import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
 import { FormControl, InputLabel, Select, TextField, Button } from "@material-ui/core";
 import { Container, Row, Col } from 'reactstrap';
-import { addSubCategory, editSubCategory, setSubCategory, setCategoryId, updateSubCategoryName, deleteSubCategory } from "../../Redux/Actions/subCategoriesActions";
+import { getAllCategories } from "../../Redux/Actions/categoriesActions";
+import { getAllSubSubCategories } from "../../Redux/Actions/subSubCategoriesActions";
+import { getAllSubCategories, addSubCategory, editSubCategory, setSubCategory, setCategoryId, updateSubCategoryName, deleteSubCategory } from "../../Redux/Actions/subCategoriesActions";
 
 
 class Category extends Component {
+
+    componentDidMount = () => {
+        this.props.getAllCategories();
+        this.props.getAllSubCategories();
+        this.props.getAllSubSubCategories()
+    }
 
     onChangeSetSubCategory =(subCategoryName) => {
         this.props.setSubCategory(subCategoryName)
@@ -83,14 +91,14 @@ class Category extends Component {
                                     <Col>{subCategory.category.categoryName}</Col>
                                     <Col>
                                         <Tooltip title="Edit">
-                                            <IconButton onClick={()=>{this.onClickEditSubCategoryName(index)}}>
+                                            <IconButton color="primary" onClick={()=>{this.onClickEditSubCategoryName(index)}}>
                                                 <EditIcon></EditIcon>
                                             </IconButton>
                                         </Tooltip>
                                     </Col>
                                     <Col>
                                         <Tooltip title="Delete">
-                                            <IconButton onClick={()=>{this.onClickDeleteSubCategory(subCategory, index)}}>
+                                            <IconButton color="secondary" onClick={()=>{this.onClickDeleteSubCategory(subCategory, index)}}>
                                                 <DeleteIcon></DeleteIcon>
                                             </IconButton>
                                         </Tooltip>
@@ -109,6 +117,9 @@ Category.propTypes = {
     categories: PropTypes.object.isRequired,
     subCategories: PropTypes.object.isRequired,
     subCategory: PropTypes.object.isRequired,
+    getAllCategories: PropTypes.func.isRequired,
+    getAllSubCategories: PropTypes.func.isRequired,
+    getAllSubSubCategories: PropTypes.func.isRequired,
     setSubCategory: PropTypes.func.isRequired,
     setCategoryId: PropTypes.func.isRequired,
     editSubCategory: PropTypes.func.isRequired,
@@ -125,4 +136,13 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps, { addSubCategory, editSubCategory, setSubCategory, setCategoryId, updateSubCategoryName, deleteSubCategory })(Category);
+export default connect(mapStateToProps, { 
+    getAllCategories,
+    getAllSubCategories,
+    getAllSubSubCategories,
+    addSubCategory,
+    editSubCategory,
+    setSubCategory,
+    setCategoryId,
+    updateSubCategoryName,
+    deleteSubCategory })(Category);

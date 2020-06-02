@@ -1,8 +1,8 @@
 import { Set_Category_Name, Add_Category_Name, Get_All_Categories, Update_Category_Name, Delete_Category, Edit_Category} from "./actionTypes";
 import { api, Axios } from "./axiosDefaults";
 
-export const getAllCategories = (admin) => async (dispatch) => {
-    let res = await Axios.get(`/categories`, admin)
+export const getAllCategories = () => async (dispatch) => {
+    let res = await Axios.get(`/categories`)
     dispatch({
         type: Get_All_Categories,
         payload: res
@@ -39,10 +39,11 @@ export const updateCategoryName = (category) => async (dispatch) => {
     })
 }
 
-export const deleteCategory = (category) => async (dispatch) => {
+export const deleteCategory = (category, index) => async (dispatch) => {
     let res = await api.patch("/categories/delete-category", category);
     dispatch({
         type: Delete_Category,
-        payload: res
+        payload: res,
+        dIndex: index
     })
 }

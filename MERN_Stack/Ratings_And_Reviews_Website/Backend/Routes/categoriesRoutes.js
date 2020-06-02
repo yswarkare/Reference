@@ -1,8 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const Categories = require("../Models/Categories");
-const SubCategories = require("../Models/SubCategories");
-const SubSubCategories = require("../Models/SubSubCategories");
+const Categories = require("../Models/Categories"); 
 const { validateAdmin } = require("../Utils/Validations");
 const { userAuth } = require("../Utils/Auth")
 
@@ -41,6 +39,7 @@ router.patch("/update-category-name", userAuth, async (req, res) => {
 })
 
 router.patch("/delete-category", userAuth, async (req, res) => {
+    console.log(req.body);
     try {
         try {            
             let subCArr = await SubCategories.find({category: req.body._id})
