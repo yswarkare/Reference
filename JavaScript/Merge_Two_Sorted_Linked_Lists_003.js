@@ -88,7 +88,7 @@ If you don’t want to create new nodes, then you can use the supplied LinkedLis
 */
 
 
-private static ListNode mergeSortedLinkedLists(ListNode l1, ListNode l2) {
+private static ListNode mergeSortedLinkedLists = (ListNode l1, ListNode l2) => {
     ListNode result = null;
     ListNode head = null;
 

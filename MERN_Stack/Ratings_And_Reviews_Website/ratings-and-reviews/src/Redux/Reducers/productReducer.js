@@ -1,7 +1,8 @@
 import productState from "../States/productState";
 import { 
     Get_All_Products,
-    Set_Product_Name, 
+    Get_Product,
+    Set_Product_Name,
     Set_Brand_Name,
     Set_Product_Image,
     Set_Product_Description, 
@@ -25,37 +26,61 @@ let productReducer = ( state = productState, action ) => {
             console.log(stateCopy);
             return stateCopy;
 
+        case Get_Product:
+            console.log(action.payload);
+            state.product = action.payload.data.product;
+            state.product.avgRating = action.payload.data.product.avgRating.$numberDecimal;
+            console.log(state)
+            return state
+
         case Set_Product_Name:
             stateCopy.product.productName = action.payload;
+            console.log(stateCopy)
             return stateCopy
 
         case Set_Brand_Name:
             stateCopy.product.brandName = action.payload;
+            console.log(stateCopy)
             return stateCopy
 
         case Set_Product_Image:
             stateCopy.product.image = action.payload;
+            console.log(stateCopy)
             return stateCopy
 
         case Set_Product_Description:
             stateCopy.product.productDescription = action.payload;
+            console.log(stateCopy)
             return stateCopy
             
         case Set_Product_Category:
-            stateCopy.product.category = action.payload;
+            console.log(action.payload)
+            stateCopy.product.category = action.payload._id;
+            stateCopy.filters_1.filterSubCategories = true;
+            stateCopy.filters_1.categoryToFilter = action.payload;
+            stateCopy.filters_1.filteredSubCategories = action.payload.subCategories;
+            console.log(stateCopy)
             return stateCopy
             
         case Set_Product_Sub_Category:
-            stateCopy.product.subCategory = action.payload;
+            console.log(action.payload);
+            stateCopy.product.subCategory = action.payload._id;
+            stateCopy.filters_1.filterSubSubCategories = true;
+            stateCopy.filters_1.subCategoryToFilter = action.payload;
+            stateCopy.filters_1.filteredSubSubCategories = action.payload.subSubCategories;
+            console.log(stateCopy)
             return stateCopy
 
         case Set_Product_Sub_Sub_Category:
             stateCopy.product.subSubCategory = action.payload;
+            console.log(stateCopy)
             return stateCopy
 
         case Add_Product:
             console.log(action.payload);
             stateCopy.products.push(action.payload.data.product);
+            stateCopy.filters_1.filterSubCategories = false;
+            stateCopy.filters_1.filterSubSubCategories = false;
             console.log(stateCopy)
             return stateCopy;
 
@@ -78,16 +103,7 @@ let productReducer = ( state = productState, action ) => {
         case Update_Product:
             console.log(action.payload);
             let uIndex = stateCopy.editIndex;
-            let pArray = stateCopy.products;
-            let uProduct = action.payload.data.updated;
-            pArray[uIndex].productName = uProduct.productName;
-            pArray[uIndex].brandName = uProduct.brandName;
-            pArray[uIndex].image = uProduct.image;
-            pArray[uIndex].productDescription = uProduct.productDescription;
-            pArray[uIndex].category = uProduct.category;
-            pArray[uIndex].subCategory = uProduct.subCategory;
-            pArray[uIndex].subSubCategory = uProduct.subSubCategory;
-            stateCopy.products = pArray;
+            stateCopy.products[uIndex] = action.payload.data.updated
             stateCopy.editProduct = false;
             console.log(stateCopy)
             return stateCopy
@@ -108,13 +124,14 @@ let productReducer = ( state = productState, action ) => {
 
         case Send_Product_Id:
             let id = action.payload;
+            state.product._id = id;
             let products = state.products
             for (let i = 0; i < products.length; i++) {
                 if (products[i]._id === id) {
-                    state.productObject = products[i]
+                    state.product = products[i]
                 }
             }
-            state.productObject.avgRating = state.productObject.avgRating.$numberDecimal
+            state.product.avgRating = state.product.avgRating.$numberDecimal
             console.log(state)
             return state
 

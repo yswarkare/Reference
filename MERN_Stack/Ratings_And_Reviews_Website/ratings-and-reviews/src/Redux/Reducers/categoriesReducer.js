@@ -12,7 +12,9 @@ let categoriesReducer = ( state = categoriesState, action ) => {
             return stateCopy;
 
         case Get_All_Categories:
-            stateCopy.categories = action.payload.data.categories;
+            if (action.payload.data.success === true){
+                stateCopy.categories = action.payload.data.categories;
+            }
             console.log(stateCopy)
             return stateCopy
             
@@ -23,21 +25,33 @@ let categoriesReducer = ( state = categoriesState, action ) => {
             return stateCopy;
 
         case Edit_Category:
-            console.log(action.payload);
-            stateCopy.editIndex = action.payload;
+            let eIndex = action.payload
+            stateCopy.editIndex = action.payload 
+            stateCopy.editCategory = true;
+            stateCopy.category.categoryName = stateCopy.categories[eIndex].categoryName;
+            stateCopy.category._id = stateCopy.categories[eIndex]._id;
             console.log(stateCopy);
             return stateCopy;
     
 
         case Update_Category_Name:
             console.log(action.payload);
-            let eIndex = stateCopy.editIndex;
-            stateCopy.categories[eIndex].categoryName = action.payload.data.category.categoryName;
+            let uIndex = stateCopy.editIndex;
+            stateCopy.categories[uIndex].categoryName = action.payload.data.updated.categoryName;
+            stateCopy.editCategory = false;
             console.log(stateCopy);
             return stateCopy;
 
         case Delete_Category:
             console.log(action.payload);
+            let dId = action.payload.data.deleted._id
+            let cArray = stateCopy.categories
+            for (let i = 0; i < cArray.length; i++){
+                if (cArray[i]._id === dId){
+                    cArray.splice(i, 1);
+                }
+            }
+            stateCopy.categories = cArray;
             console.log(stateCopy);
             return stateCopy
 

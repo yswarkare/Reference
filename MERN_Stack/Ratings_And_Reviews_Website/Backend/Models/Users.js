@@ -15,6 +15,6 @@ const userSchema = new Schema({
     dislikedReviews: [{ type: Schema.Types.ObjectId, ref: "reviews" }],
 });
 
-const Users = mongoose.model("Users", userSchema);
+const Users = mongoose.model("users", userSchema);
 
 module.exports = Users;

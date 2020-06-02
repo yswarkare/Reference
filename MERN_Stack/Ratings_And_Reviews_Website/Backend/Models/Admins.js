@@ -15,6 +15,6 @@ const adminSchema = new Schema({
         dislikedReviews: [{ type: Schema.Types.ObjectId, ref: "reviews" }],
 });
 
-const Admins = mongoose.model("Admins", adminSchema);
+const Admins = mongoose.model("admins", adminSchema);
 
 module.exports = Admins;

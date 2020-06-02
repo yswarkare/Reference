@@ -23,11 +23,20 @@ const productsSchema = new Schema({
         9: { type: Number, trim: true, default: 0 },
         10: { type: Number, trim: true, default: 0 },
     },
+    allRatings: [{type: Schema.Types.ObjectId, ref: "ratings"}],
     reviews: [{type: Schema.Types.ObjectId, ref: "reviews"}],
     images: [{type: String, trim: true}],
-    image: {type: String, trim: true}
+    image: {type: String, trim: true},
+    links: {
+        amezon: { type: String, trim: true },
+        flipkart: { type: String, trim: true },
+        snapdeal: { type: String, trim: true },
+        shopclues: { type: String, trim: true },
+        myntra: { type: String, trim: true },
+        jabong: { type: String, trim: true },
+    }
 });
 
-const Products = mongoose.model("Products", productsSchema);
+const Products = mongoose.model("products", productsSchema);
 
 module.exports = Products;

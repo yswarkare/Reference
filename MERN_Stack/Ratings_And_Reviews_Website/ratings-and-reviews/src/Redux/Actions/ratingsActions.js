@@ -1,5 +1,5 @@
 import { Get_User_Rating, Set_User_Rating, Post_User_Rating, Update_User_Rating } from "./actionTypes";
-import { api, Axios } from "./axiosDefaults";
+import { api } from "./axiosDefaults";
 
 export const getUserRating = (rating) => async (dispatch) => {
     console.log(rating)
@@ -25,8 +25,8 @@ export const postUserRating = (rating) => async (dispatch) => {
     })
 }
 
-export const updateUserRating = () => async (dispatch) => {
-    let res = await api.patch("/ratings/get-rating")
+export const updateUserRating = (rating) => async (dispatch) => {
+    let res = await api.patch("/ratings/update-user-rating", rating)
     dispatch({
         type: Update_User_Rating,
         payload: res

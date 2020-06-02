@@ -1,11 +1,16 @@
 import React, { Component } from "react";
+// import PropTypes from "prop-types";
 import withProductPageHOC from "./withProductPageHOC";
 import GiveRating from "../Ratings/GiveRating";
 import ShowRating from "../Ratings/ShowRating";
 import UserReview from "../Reviews/UserReview";
+import ProductReviewsList from "../Reviews/ProductReviewsList";
 
 class ProductPage extends Component {
 
+    componentDidMount = () => {
+        // this.props.getAllProducts()
+    }
 
     render () {
         
@@ -19,9 +24,9 @@ class ProductPage extends Component {
                         <div className="product-name"><span>{this.props.product.productName}</span></div>
                             <div className="product-brand-name"><span>{this.props.product.brandName}</span></div>
                             <div className="product-categories">
-                                <div className="product-category"><span>{this.props.product.category}</span></div>
-                                <div className="product-sub-category"><span>{this.props.product.subCategory}</span></div>
-                                <div className="product-sub-sub-category"><span>{this.props.product.subSubCategory}</span></div>
+                                <div className="product-category"><span>{this.props.product.category.categoryName}</span></div>
+                                <div className="product-sub-category"><span>{this.props.product.subCategory.subCategoryName}</span></div>
+                                <div className="product-sub-sub-category"><span>{this.props.product.subSubCategory.subSubCategoryName}</span></div>
                             </div>
                         <div className="product-description"><span>{this.props.product.description}</span></div>
                     </div>
@@ -44,12 +49,17 @@ class ProductPage extends Component {
                             }
                         </div>
                         <div className="product-reviews-list">
+                            <ProductReviewsList></ProductReviewsList>
                         </div>
                     </div>
                 </div>
             </div>
         )
     }
+}
+
+ProductPage.propTypes = {
+    
 }
 
 const WrappedProductPage = withProductPageHOC(ProductPage);

@@ -1,15 +1,49 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import PropTypes from 'prop-types';
-import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
-import { addCategory, setCategory, getAllCategories } from "../../Redux/Actions/categoriesActions";
-import { addSubCategory, setSubCategory, getAllSubCategories } from "../../Redux/Actions/subCategoriesActions";
-import { addSubSubCategory, setSubSubCategory, getAllSubSubCategories } from "../../Redux/Actions/subSubCategoriesActions";
-import CategoriesList from "./CategoriesList";
+import { getAllCategories } from "../../Redux/Actions/categoriesActions";
+import { getAllSubCategories } from "../../Redux/Actions/subCategoriesActions";
+import { getAllSubSubCategories } from "../../Redux/Actions/subSubCategoriesActions";
+import Category from "./Category";
+import SubCategory from "./SubCategory";
+import SubSubCategory from "./SubSubCategory";
 
 
 class AllCategories extends Component {
+
+    state = {
+        showTab: "categories",
+        class1: "list-group-item list-group-item-action",
+        class2: "list-group-item list-group-item-action",
+        class3: "list-group-item list-group-item-action",
+    }
+
+    switchTab = (tab) => {
+        let active = "list-group-item list-group-item-action active";
+        let inactive = "list-group-item list-group-item-action";
+        if (tab === 1){
+            this.setState({
+                showTab: "categories",
+                class1: active,
+                class2: inactive,
+                class3: inactive
+            }, console.log(this.state.showTab))
+        } else if (tab === 2) {
+            this.setState({
+                showTab: "sub-categories",
+                class1: inactive,
+                class2: active,
+                class3: inactive
+            }, console.log(this.state.showTab))
+        } else if (tab === 3){
+            this.setState({
+                showTab: "sub-sub-categories",
+                class1: inactive,
+                class2: inactive,
+                class3: active
+            }, console.log(this.state.showTab))
+        }
+    }
 
     componentDidMount = () => {
         let admin = {
@@ -21,74 +55,30 @@ class AllCategories extends Component {
         this.props.getAllSubSubCategories(admin)
     }
 
-    onChangeSetCategory = (categoryName) => {
-        this.props.setCategory(categoryName);
-    }
-
-    onClickAddCategory = () => {
-        let category = {
-            category: this.props.categories.category,
-            user: this.props.user,
-            headers: this.props.headers
-        }
-        this.props.addCategory(category)
-    }
-
-    onChangeSetSubCategory =(subCategoryName) => {
-        this.props.setSubCategory(subCategoryName)
-    }
-
-    onClickAddSubCategory =() => {
-        let subCategory = {
-            subCategory: this.props.subCategories.subCategory,
-            user: this.props.user,
-            headers: this.props.headers
-        }
-        this.props.addSubCategory(subCategory)
-    }
-
-    onChangeSetSubSubCategory =(subSubCategoryName) => {
-        this.props.setSubSubCategory(subSubCategoryName)
-    }
-
-    onClickAddSubSubCategory =() => {
-        let subSubCategory = {
-            subSubCategory: this.props.subSubCategories.subSubCategory,
-            user: this.props.user,
-            headers: this.props.headers
-        }
-        this.props.addSubSubCategory(subSubCategory)
-    }
-
-
     render() {
         // console.log("Props in add categories => " + JSON.stringify(this.props) )
         return (
             <div className="add-categories-container">
-                <div className="add-categories-input">
-                    <div className="add-categories">
-                        <TextField onChange={(e)=>{this.onChangeSetCategory(e.target.value)}} type="text" label="Category Name" variant="outlined" />
-                        <Button onClick={()=>{this.onClickAddCategory()}} variant="contained" color="primary">
-                            Add
-                        </Button>
-                    </div>
-                    <div className="sub-categories">
-                        <TextField onChange={(e)=>{this.onChangeSetSubCategory(e.target.value)}} type="text" label="Sub-Category Name" variant="outlined" />
-                        <Button onClick={()=>{this.onClickAddSubCategory()}} variant="contained" color="primary">
-                            Add
-                        </Button>
-                    </div>
-                    <div className="sub-sub-categories">
-                        <TextField onChange={(e)=>{this.onChangeSetSubSubCategory(e.target.value)}} type="text" label="Sub-Sub-Category Name" variant="outlined" />
-                        <Button onClick={()=>{this.onClickAddSubSubCategory()}} variant="contained" color="primary">
-                            Add
-                        </Button>
-                    </div>
+                <div className="categories-tab-panel">
+                    <ul className="categories-tab-panel-list list-group-horizontal">
+                        <li onClick={()=>{this.switchTab(1)}} className="list-group-item list-group-item-action" key="1">Categories</li>
+                        <li onClick={()=>{this.switchTab(2)}} className="list-group-item list-group-item-action" key="2">Sub-Categories</li>
+                        <li onClick={()=>{this.switchTab(3)}} className="list-group-item list-group-item-action" key="3">Sub-Sub-Categories</li>
+                    </ul>
                 </div>
                 <div className="categories-list-component" >
-                    
-                    <CategoriesList ></CategoriesList>
-                    
+                    {
+                        this.state.showTab === "categories" && 
+                        <Category></Category>
+                    }
+                    {
+                        this.state.showTab === "sub-categories" &&
+                        <SubCategory></SubCategory>
+                    }
+                    {
+                        this.state.showTab === "sub-sub-categories" &&
+                        <SubSubCategory></SubSubCategory>
+                    }
                 </div>
             </div>
         )
@@ -103,38 +93,24 @@ AllCategories.propTypes = {
     subCategories: PropTypes.object.isRequired,
     subSubCategories: PropTypes.object.isRequired,
     headers: PropTypes.object.isRequired,
-    getUserId: PropTypes.string.isRequired,
-    setCategory: PropTypes.func.isRequired,
-    addCategory: PropTypes.func.isRequired,
     getAllCategories: PropTypes.func.isRequired,
-    setSubCategory: PropTypes.func.isRequired,
-    addSubCategory: PropTypes.func.isRequired,
     getAllSubCategories: PropTypes.func.isRequired,
-    setSubSubCategory: PropTypes.func.isRequired,
-    addSubSubCategory: PropTypes.func.isRequired,
     getAllSubSubCategories: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = (state) => {
     return {
         user: state.users.user,
-        errors: state.users.inputErrors,
+        errors: state.users.errors,
         loginStatus: state.users.loginStatus,
         categories: state.categories,
         subCategories: state.subCategories,
         subSubCategories: state.subSubCategories,
-        getUserId: state.users.getUserId,
         headers: state.users.headers
     };
 }
 
 export default connect(mapStateToProps,{ 
-    setCategory, 
-    addCategory,
     getAllCategories,
-    setSubCategory, 
-    addSubCategory,
     getAllSubCategories,
-    setSubSubCategory,
-    addSubSubCategory,
     getAllSubSubCategories })(AllCategories);
