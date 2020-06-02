@@ -46,15 +46,16 @@ const userRegistration = async (userData, res) => {
         emailId : emailIdLowercase,
         password : hashedPassword
     });
-    await newUser.save().then(()=> {return res.status(201).json({
+    try {
+        await newUser.save()
+        return res.status(201).json({
             message: `Congratulations! You're Successfully Registered now you could login`,
             success: true
-        })}).catch((err)=>{
-            console.log(err);
-            return res.status(500).json({
-                message: `Unable to Create Account`,
-                success: false
-        })})
+        })
+    } catch (err) {
+        console.log(err)
+        return res.status(500).json({ message: `Unable to Create Account`, success: false })
+    }
 }
 
 
