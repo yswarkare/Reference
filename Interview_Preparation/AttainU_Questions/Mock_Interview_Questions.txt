@@ -1,3 +1,35 @@
+day 1
+
+Explain "hoisting".
+What are the differences between variables created using let, var or const?
+Can you give an example for destructuring an object or an array?
+Can you give an example of generating a string with ES6 Template Literals?
+How do you compare Object and Map?
+What is scope in javascript?
+What are global variables?
+What are the differences between undeclared and undefined variables?
+How do you assign default values to variables?
+What are the benefits of keeping declarations at the top?
+What are the benefits of initializing variables?
+What is a spread operator?
+
+day 2
+
+* What's the difference between a variable that is: null, undefined or undeclared?
+* What is a closure, and how/why would you use one?
+* What's a typical use case for anonymous functions?
+* Explain the difference between: function Person(){}, var person = Person(), and var person = new Person()?
+* Explain Function.prototype.bind
+* Explain the difference between synchronous and asynchronous functions.
+* What are the differences between ES6 class and ES5 function constructors?
+* Can you offer a use case for the new arrow => function syntax? How does this new syntax differ from other functions?
+* What advantage is there for using the arrow syntax for a method in a constructor?
+* What is the definition of a higher-order function?
+* What happens if you write constructor more than once in a class?
+* How do you get the prototype of an object?
+* Is all objects have prototypes?
+* What is prototype chain?
+* What are closures?
 
 day 4
 

@@ -1,0 +1,42 @@
+Marks - 50 Marks
+Timings - 10:20 AM to 1:20 PM
+
+01. Difference between fork() and exec() ?- 5 marks
+
+	fork() is a system call used for creating a new process, which is known as the child process. This child process runs concurrently along with the calling process which is referred to as the parent process.
+	The new process created by fork system call is identical to parent process almost in all respect. After the fork system call both the child and parent processes will be executed simultaneously.
+
+	exec() system calls always replace the executed program with a process. At the point when a procedure calls exec, all codes and information in the process are lost and exchanged with the executable of the new program.
+
+02. What is context Switching? - 5 marks
+
+	A context switch is a procedure that a computer's CPU (central processing unit) follows to change from one task (or process) to another while ensuring that the tasks do not conflict. Context Switching involves storing the context or state of a process so that it can be reloaded when required and execution can be resumed from the same point as earlier. This is a feature of a multitasking operating system and allows a single CPU to be shared by multiple processes. A context switch can also occur as the result of an interrupt, such as when a task needs to access disk storage, freeing up CPU time for other tasks. Some operating systems also require a context switch to move between user mode and kernel mode tasks.
+
+03. What are the valid deadlock prevention schemes?- 5 marks
+
+04. What is the Seven Layer Reference OSI Model and what are its uses?- 5 marks
+05. What are Content Delivery Networks?- 5 marks
+06. What are normalization and denormalization and why do we need it? - 5 marks
+07. What are the different types of JOIN in DBMS? - 5 marks
+08. What is the difference b/w private IP and Public IP? - 5 marks
+09. Difference between semaphore and mutex?- 5 marks
+10. Difference between TCP and UDP? - 5 marks (edited) 
+
+10. Design a Paste bin - 32 marks ( removed )
+
+Use cases 
+We'll scope the problem to handle only the following use cases
+1) The user enters a block of text and gets a randomly generated link Expiration 
+2) The default setting does not expire 
+3) Can optionally set a timed expiration User enters a paste's URL and views the contents 
+4) User is anonymous 
+5) Service deletes expired pastes 
+6) Service has high availability 
+
+Out of scope 
+1) User registers for an account 
+	User verifies email 
+2) User logs into a registered account 
+	User edits the document 
+3) User can set visibility 
+4) User can set the short link

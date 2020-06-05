@@ -1,0 +1,42 @@
+01. What is Multithreading and asynchronous programming?
+
+	Multithreading is a widespread programming and execution model that allows multiple threads to exist within the context of one process. These threads share the process's resources, but are able to execute independently. The threaded programming model provides developers with a useful abstraction of concurrent execution. Multithreading can also be applied to one process to enable parallel execution on a multiprocessing system.
+
+	Asynchronous programming is a form of parallel programming that allows a unit of work to run separately from the primary application thread. When the work is complete, it notifies the main thread.
+
+02. What is the difference between a thread and a process?
+
+	A process is an execution of a program but a thread is a single execution sequence within the process. A process can contain multiple threads.
+	Process takes more time to terminate and it is isolated means it does not share memory with any other process.
+	Thread takes less time to terminate as compared to process and like process threads do not isolate.
+
+	Process: Process means any program is in execution. Process control block controls the operation of any process. Process control block contains the information about processes for example: Process priority, process id, process state, CPU, register etc. A process can creates other processes which are known as Child Processes. Process takes more time to terminate and it is isolated means it does not share memory with any other process.
+
+	Thread: Thread is the segment of a process means a process can have multiple threads and these multiple threads are contained within a process. A thread have 3 states: running, ready, and blocked. Thread takes less time to terminate as compared to process and like process threads do not isolate.
+
+03. Explain the Producer-Consumer problem?
+
+	
+
+What is deadlock and four necessary conditions for deadlock?
+Explain the implementation of Virtual memory?
+What is Cache?
+Difference between Cache and HashMap.
+Where does cache lie in an Operating System?
+What are the properties of RDBMS?
+What are ACID properties?
+Difference between Vertical and Horizontal Scaling.
+What is sharding?
+What is the CAP theorem?
+What is normalization and denormalization and why do we need it?
+Difference between inner and outer join?
+What is the difference between TCP and UDP? Explain their use.
+What is the difference between http and https?
+What are ports? Name some default port of your favourite database.
+Explain DNS.
+Explain firewall.
+Explain CAP theorem
+What is Sharding, When it is used
+What is a load balancer?  How it is useful
+What is Encryption and hashing?
+What is oauth2?
