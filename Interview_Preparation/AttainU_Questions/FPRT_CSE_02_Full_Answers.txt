@@ -1,0 +1,39 @@
+Marks - 50 Marks
+Timings - 10:20 AM to 1:20 PM
+
+01. Difference between fork() and exec() ?- 2 marks
+
+02. What is context Switching? - 2 marks
+
+03. What are the valid deadlock prevention schemes?- 2 marks
+
+04. What is the Seven Layer Reference OSI Model and what are its uses?- 2 marks
+
+05. What are Content Delivery Networks?- 2 marks
+
+06. What are normalization and denormalization and why do we need it? - 2 marks
+
+07. What are the different types of JOIN in DBMS? - 2 marks
+
+08. What is the difference b/w private IP and Public IP? - 2 marks
+
+09. Difference between semaphore and mutex?- 2 marks
+
+10. Design a Paste bin - 32 marks ( removed )
+
+Use cases 
+We'll scope the problem to handle only the following use cases
+1) The user enters a block of text and gets a randomly generated link Expiration 
+2) The default setting does not expire 
+3) Can optionally set a timed expiration User enters a paste's URL and views the contents 
+4) User is anonymous 
+5) Service deletes expired pastes 
+6) Service has high availability 
+
+Out of scope 
+1) User registers for an account 
+	User verifies email 
+2) User logs into a registered account 
+	User edits the document 
+3) User can set visibility 
+4) User can set the short link

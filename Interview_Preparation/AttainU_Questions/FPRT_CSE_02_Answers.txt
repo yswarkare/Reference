@@ -1,0 +1,79 @@
+01. Difference between fork() and exec() ?- 5 marks
+
+    fork() creates a new process by duplicating the calling process, The new process, referred to as child, is an exact duplicate of the calling process, referred to as parent process.
+    exec() family of functions replaces the current process image with a new process image. It loads the program into the current process space and runs it from the entry point
+    Difference Between fork and exec
+    Definition
+    fork is an operation in a UNIX operating system that allows a process to create a copy of itself. But, exec is an operation in a UNIX operating system that creates a process by replacing the previous process. Thus, this explains the main difference between fork and exec.
+    Parent process
+    After calling fork(), there is parent process and child process. On the other hand,  after calling exec(), there is only a child process, and there is no parent process. Hence, this is another difference between fork and exec.
+    Result
+    Moreover, fork creates a child process which is similar to the parent process, while exec creates a child process and replace it with the parent process.
+    Address Space
+    Furthermore, one other difference between fork and exec is in their address space. In fork(), the parent and the child processes are in different address spaces whereas, in exec(), the child address space replaces the parent address space.
+    Conclusion
+    In brief, there are various system calls available in the UNIX operating system, and two of them are fork and exec. The main difference between fork and exec is that fork creates a new process while preserving the parent process while exec creates a new process without preserving the parent process.
+
+02. What is context Switching? - 5 marks
+
+    Context Switching involves storing the context or state of a process so that it can be reloaded when required and execution can be resumed from the same point as earlier. This is a feature of a multitasking operating system and allows a single CPU to be shared by multiple processes
+    Context Switching Triggers
+    There are three major triggers for context switching. These are given as follows:
+    Multitasking: In a multitasking environment, a process is switched out of the CPU so another process can be run. The state of the old process is saved and the state of the new process is loaded. On a pre-emptive system, processes may be switched out by the scheduler.
+    Interrupt Handling: The hardware switches a part of the context when an interrupt occurs. This happens automatically. Only some of the context is changed to minimize the time required to handle the interrupt.
+    User and Kernel Mode Switching: A context switch may take place when a transition between the user mode and kernel mode is required in the operating system.
+
+03. What are the valid deadlock prevention schemes?- 5 marks
+    Deadlock prevention mechanism have two schemes :
+    Wait-Die Scheme –
+    In this scheme, If a transaction request for a resource that is locked by other transaction, then the DBMS simply checks the timestamp of both transactions and allows the older transaction to wait until the resource is available for execution.
+    Suppose, there are two transactions T1 and T2 and Let timestamp of any transaction T be TS (T). Now, If there is a lock on T2 by some other transaction and T1 is requesting for resources held by T2, then DBMS performs following actions:
+    Checks if TS (T1) < TS (T2) – if T1 is the older transaction and T2 has held some resource, then it allows T1 to wait until resource is available for execution. That means if a younger transaction has locked some resource and older transaction is waiting for it, then older transaction is allowed wait for it till it is available. If T1 is older transaction and has held some resource with it and if T2 is waiting for it, then T2 is killed and restarted latter with random delay but with the same timestamp. i.e. if the older transaction has held some resource and younger transaction waits for the resource, then younger transaction is killed and restarted with very minute delay with same timestamp.
+    This scheme allows the older transaction to wait but kills the younger one.
+    Wound Wait Scheme –
+    In this scheme, if an older transaction requests for a resource held by younger transaction, then older transaction forces younger transaction to kill the transaction and release the resource. The younger transaction is restarted with minute delay but with same timestamp. If the younger transaction is requesting a resource which is held by older one, then younger transaction is asked to wait till older releases it.
+
+04. What is the Seven Layer Reference OSI Model and what are its uses?- 5 marks
+
+    There are the seven OSI layers. Each layer has different functions. A list of seven layers are given below:
+    Physical Layer
+    Data-Link Layer
+    Network Layer
+    Transport Layer
+    Session Layer
+    Presentation Layer
+    Application Layer
+    Physical layer
+    The main functionality of the physical layer is to transmit the individual bits from one node to another node.
+    It is the lowest layer of the OSI model.
+    It establishes, maintains and deactivates the physical connection.
+    It specifies the mechanical, electrical and procedural network interface specifications.
+    Data-Link Layer
+    This layer is responsible for the error-free transfer of data frames.
+    It defines the format of the data on the network.
+    It provides a reliable and efficient communication between two or more devices.
+    It is mainly responsible for the unique identification of each device that resides on a local network.
+    Network Layer
+    It is a layer 3 that manages device addressing, tracks the location of devices on the network.
+    It determines the best path to move data from source to the destination based on the network conditions, the priority of service, and other factors.
+    The Data link layer is responsible for routing and forwarding the packets.
+    Routers are the layer 3 devices, they are specified in this layer and used to provide the routing services within an internetwork.
+    The protocols used to route the network traffic are known as Network layer protocols. Examples of protocols are IP and Ipv6.
+    Transport Layer
+    The Transport layer is a Layer 4 ensures that messages are transmitted in the order in which they are sent and there is no duplication of data.
+    The main responsibility of the transport layer is to transfer the data completely.
+    It receives the data from the upper layer and converts them into smaller units known as segments.
+    This layer can be termed as an end-to-end layer as it provides a point-to-point connection between source and destination to deliver the data reliably.
+    Session Layer
+    It is a layer 3 in the OSI model.
+    The Session layer is used to establish, maintain and synchronizes the interaction between communicating devices.
+    Presentation Layer
+    A Presentation layer is mainly concerned with the syntax and semantics of the information exchanged between the two systems.
+    It acts as a data translator for a network.
+    This layer is a part of the operating system that converts the data from one presentation format to another format.
+    The Presentation layer is also known as the syntax layer.
+    Application Layer
+    An application layer serves as a window for users and application processes to access network service.
+    It handles issues such as network transparency, resource allocation, etc.
+    An application layer is not an application, but it performs the application layer functions.
+    This layer provides the network services to the end-users.
