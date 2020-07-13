@@ -19,6 +19,8 @@ class WriteBlogPost extends Component {
         let blogPost = {
             blogPost: this.props.blogPosts.blogPost
         }
+        console.log("write blogPost")
+        console.log(blogPost)
         this.props.makeBlogPost(blogPost)
     }
 

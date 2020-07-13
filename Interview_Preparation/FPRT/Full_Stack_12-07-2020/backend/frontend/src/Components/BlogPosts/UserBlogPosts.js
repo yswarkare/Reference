@@ -13,8 +13,10 @@ class UserBlogPosts extends Component {
     render() {
         return (
             <div>
-                { this.props.blogPosts.userBlogPosts.map((index, blogPost) => {
-                    <div className="user-blog-posts">
+                { this.props.blogPosts.userBlogPosts.map((blogPost, index) => {
+                    console.log(blogPost)
+                    return (
+                    <div className="user-blog-posts" key={index}>
                         <div className="user-blog-post-header">
                             <div></div>
                             <div></div>
@@ -37,7 +39,7 @@ class UserBlogPosts extends Component {
                             </Button>
                         }
                         </div>
-                    </div>
+                    </div>)
                 }) }
             </div>
         );

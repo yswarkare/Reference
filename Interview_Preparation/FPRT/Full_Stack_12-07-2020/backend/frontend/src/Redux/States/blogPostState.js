@@ -11,7 +11,15 @@ let blogPostState = {
     blogPosts: [],
     blogPostCopy: [],
     userBlogPostExists: false,
-    userBlogPosts: [],
+    userBlogPosts: [{
+        _id: "",
+        blogPostText: "Dummy text",
+        user: "",
+        comments: [],
+        commentedUsers: [],
+        likes: "",
+        usersWhoLikedIt: []
+    }],
     editBlogPost: false,
     blogPostErrors: {
         blogPostText: {message: "", success: null},

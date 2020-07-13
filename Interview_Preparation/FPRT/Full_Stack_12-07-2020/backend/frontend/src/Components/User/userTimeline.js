@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from "react-redux";
 import PropTypes from 'prop-types';
 import WriteBlogPost from "../BlogPosts/WriteBlogPost";
+import UserBlogPosts from "../BlogPosts/UserBlogPosts";
 import UserNavbar from "../Navbars/userNavbar";
 
 class UserTimeline extends Component {
@@ -10,6 +11,7 @@ class UserTimeline extends Component {
             <div>
             { this.props.loginStatus.loggedIn === true && <UserNavbar></UserNavbar>}
                 <WriteBlogPost></WriteBlogPost>
+                <UserBlogPosts></UserBlogPosts>
             </div>
         );
     }
