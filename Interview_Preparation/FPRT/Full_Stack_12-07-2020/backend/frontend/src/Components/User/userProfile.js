@@ -41,9 +41,8 @@ class UserProfile extends Component {
     }
 
     componentDidMount = () => {
-        let userIsAdmin = this.props.userIsAdmin
         this.props.setUserUpdate()
-        this.props.getUserInfo(userIsAdmin);
+        this.props.getUserInfo();
     }
 
     onClickEditName = () => {
@@ -67,7 +66,6 @@ class UserProfile extends Component {
     onClickUpdateName = () => {
         let user = {
             user: this.props.userUpdate,
-            userIsAdmin: this.props.userIsAdmin
         }
         this.props.updateUserName(user)
         this.setState({
@@ -88,7 +86,6 @@ class UserProfile extends Component {
     onClickUpdateUsername = () => {
         let user = {
             user: this.props.userUpdate,
-            userIsAdmin: this.props.userIsAdmin
         }
         this.props.updateUserUsername(user)
         this.setState({
@@ -389,7 +386,6 @@ UserProfile.propTypes = {
     userUpdate: PropTypes.object.isRequired,
     errors: PropTypes.object.isRequired,
     loginStatus: PropTypes.object.isRequired,
-    userIsAdmin: PropTypes.bool.isRequired,
     getUserInfo: PropTypes.func.isRequired,
     setUserUpdate: PropTypes.func.isRequired,
     setUpdateFirstName: PropTypes.func.isRequired,
@@ -411,7 +407,6 @@ const mapStateToProps = (state) => {
     return {
         user: state.users.user,
         userUpdate: state.users.userUpdate,
-        userIsAdmin: state.users.loginStatus.userIsAdmin,
         errors: state.users.errors,
         loginStatus: state.users.loginStatus
     }
