@@ -2,12 +2,24 @@ import React, { Component } from 'react';
 import { connect } from "react-redux";
 import PropTypes from 'prop-types';
 import Button from '@material-ui/core/Button';
-import { getUserBlogPosts } from "../../Redux/Actions/blogPostActions"
+import { getUserBlogPosts, editUserBlogPost, updateUserBlogPost, deleteBlogPost } from "../../Redux/Actions/blogPostActions"
 
 class UserBlogPosts extends Component {
 
     componentDidMount = () => {
         this.props.getUserBlogPosts()
+    }
+
+    onClickEditBlogPost = () => {
+        this.props.deleteBlogPost()
+    }
+
+    onClickUpdateBlogPost = () => {
+        this.props.deleteBlogPost()
+    }
+
+    onClickDeleteBlogPost = () => {
+        this.props.deleteBlogPost()
     }
 
     render() {
@@ -28,13 +40,18 @@ class UserBlogPosts extends Component {
                         <div className="post-buttons">
                         {
                             this.props.blogPosts.editBlogPost === false &&
-                            <Button onClick={()=>{this.onClickEditBlogPost(index, blogPost)}} variant="contained" color="primary">
-                                Edit
-                            </Button>
+                            <div>
+                                <Button onClick={()=>{this.onClickEditBlogPost(index, blogPost)}} variant="contained" color="primary">
+                                    Edit
+                                </Button>
+                                <Button onClick={()=>{this.onClickDeleteBlogPost(index, blogPost)}} variant="contained" color="primary">
+                                    Delete
+                                </Button>
+                            </div>
                         }
                         {
                             this.props.blogPosts.editBlogPost === true &&
-                            <Button onClick={()=>{this.onClickEditBlogPost(index, blogPost)}} variant="contained" color="primary">
+                            <Button onClick={()=>{this.onClickUpdateBlogPost(index, blogPost)}} variant="contained" color="primary">
                                 Update
                             </Button>
                         }
@@ -61,4 +78,8 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps, { getUserBlogPosts })(UserBlogPosts)
+export default connect(mapStateToProps, { 
+    getUserBlogPosts,
+    editUserBlogPost,
+    updateUserBlogPost,
+    deleteBlogPost })(UserBlogPosts)

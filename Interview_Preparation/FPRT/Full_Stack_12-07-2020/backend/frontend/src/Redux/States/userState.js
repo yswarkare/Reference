@@ -7,6 +7,8 @@ let userState = {
         username: "",
         emailId : "",
         password : "",
+        followers: [],
+        following: [],
         token: "",
         comments: [],
         blogPosts: [],

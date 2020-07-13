@@ -17,10 +17,6 @@ export const makeBlogPost = (blogPost) => async (dispatch) => {
     })
 }
 
-export const getUserBlogPost = () => async (dispatch) => {
-
-}
-
 export const getUserBlogPosts = () => async (dispatch) => {
     let res = await api.get("/blog-posts/get-user-blog-posts");
     dispatch({
@@ -29,6 +25,22 @@ export const getUserBlogPosts = () => async (dispatch) => {
     })
 }
 
+export const editUserBlogPost = () => async (dispatch) => {
+    
+}
+
+export const updateUserBlogPost = () => async (dispatch) => {
+    
+}
+
+export const deleteBlogPost = () => async (dispatch) => {
+    
+}
+
 export const sendUserBlogPostId = () => async (dispatch) => {
     
+}
+
+export const getUserBlogPost = () => async (dispatch) => {
+
 }
