@@ -247,3 +247,17 @@ a {
   align-items: stretch;
   align-content: center;
 }
+
+.user-blog-posts {
+  display: grid;
+  grid-template-rows: auto;
+  grid-gap: 0.5rem;
+  padding: 0.5rem;
+  margin: 0.5rem;
+  align-items: stretch;
+  align-content: center;
+  border-style: solid;
+  border: 0.25 rem;
+  border-radius: 10px;
+  border-color: aquamarine;
+}

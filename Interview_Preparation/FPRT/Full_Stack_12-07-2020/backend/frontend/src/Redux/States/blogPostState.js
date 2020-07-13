@@ -11,6 +11,7 @@ let blogPostState = {
     blogPosts: [],
     blogPostCopy: [],
     userBlogPostExists: false,
+    userBlogPosts: [],
     editBlogPost: false,
     blogPostErrors: {
         blogPostText: {message: "", success: null},

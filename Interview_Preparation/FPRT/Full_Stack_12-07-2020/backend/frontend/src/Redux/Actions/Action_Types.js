@@ -1,11 +1,13 @@
 
 // BlogPost Action Types
 
+export const Get_User_BlogPosts = "Get_User_BlogPosts";
+export const Set_BlogPost_Text = "Set_BlogPost_Text";
+export const Make_BlogPost = "Make_BlogPost";
+
 export const Get_User_BlogPost = "Get_User_BlogPost";
 export const Get_BlogPost_Comments = "Get_BlogPost_Comments";
 export const Edit_User_BlogPost = "Edit_User_BlogPost";
-export const Set_BlogPost_Text = "Set_BlogPost_Text";
-export const Make_BlogPost = "Make_BlogPost";
 export const Update_User_BlogPost = "Update_User_BlogPost";
 export const Delete_User_BlogPost = "Delete_User_BlogPost";
 

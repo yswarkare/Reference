@@ -9,6 +9,7 @@ const userSchema = new Schema({
     username: { type: String, required: true, lowercase: true, trim: true },
     emailId : { type: String, required: true, lowercase: true, trim: true },
     password : { type: String, required: true, trim: true },
+    userBio: { type: String, trim: true },
     blogPosts: [{ type: Schema.Types.ObjectId, ref: "blogposts" }],
     comments: [{ type: Schema.Types.ObjectId, ref: "comments" }],
     likedBlogPosts: [{ type: Schema.Types.ObjectId, ref: "blogposts" }],
