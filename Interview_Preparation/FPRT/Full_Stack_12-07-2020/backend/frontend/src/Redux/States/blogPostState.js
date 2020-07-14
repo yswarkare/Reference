@@ -20,7 +20,7 @@ let blogPostState = {
         likes: "",
         usersWhoLikedIt: []
     }],
-    editBlogPost: false,
+    editUserBlogPost: false,
     blogPostErrors: {
         blogPostText: {message: "", success: null},
         comments: {message: "", success: null},

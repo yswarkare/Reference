@@ -6,7 +6,7 @@ const router = express.Router();
 
 router.get("/get-user-blog-posts", userAuth, async (req, res) => {
     try {
-        let userBlogPosts = await BlogPost.find({user: req.user._id})
+        let userBlogPosts = await BlogPost.find({user: req.user._id}).populate("user")
         return res.json({ success: true, message: "Got User BlogPosts Successfully", userBlogPosts})
     } catch (err) {
         return res.json({ success: false, message: "Failed to get user BlogPosts", error: `${err}`})

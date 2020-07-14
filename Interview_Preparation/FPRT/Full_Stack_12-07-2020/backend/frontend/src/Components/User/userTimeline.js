@@ -11,6 +11,7 @@ class UserTimeline extends Component {
             <div>
             { this.props.loginStatus.loggedIn === true && <UserNavbar></UserNavbar>}
                 <WriteBlogPost></WriteBlogPost>
+                <div className="p-3"><p>My BlogPosts</p></div>
                 <UserBlogPosts></UserBlogPosts>
             </div>
         );

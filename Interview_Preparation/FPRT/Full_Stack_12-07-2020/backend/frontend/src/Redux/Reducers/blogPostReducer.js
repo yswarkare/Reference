@@ -19,12 +19,14 @@ let blogPostReducer = ( state = blogPostState, action ) => {
                     state.userBlogPostExists = false;
                 } else {
                     state.userBlogPosts = action.payload.data.userBlogPosts;
-                    // let date = new Date(action.payload.data.review[0].date);
-                    // let createdAt = new Date(action.payload.data.review[0].createdAt);
-                    // let updatedAt = new Date(action.payload.data.review[0].updatedAt);
-                    // state.review.date = date.toLocaleString()
-                    // state.review.createdAt = createdAt.toLocaleString()
-                    // state.review.updatedAt = updatedAt.toLocaleString()
+                    let uBPosts = action.payload.data.userBlogPosts
+                    for (let i = 0; i < uBPosts.length; i++){
+                        let createdAt = new Date(uBPosts[i].createdAt);
+                        let updatedAt = new Date(uBPosts[i].updatedAt);
+                        uBPosts[i].createdAt = createdAt.toLocaleString()
+                        uBPosts[i].updatedAt = updatedAt.toLocaleString()
+                    }
+                    state.userBlogPosts = uBPosts;
                     state.userBlogPostExists = true;
                 }
             } else {
@@ -65,7 +67,7 @@ let blogPostReducer = ( state = blogPostState, action ) => {
 
         case Edit_User_BlogPost:
             console.log(action.payload);
-            state.editReview = true;
+            state.editUserBlogPost = true;
             console.log(state);
             return state;
 
@@ -92,15 +94,15 @@ let blogPostReducer = ( state = blogPostState, action ) => {
 
         case Update_User_BlogPost:
             console.log(action.payload);
-            state.review = action.payload.data.review;
-            let date3 = new Date(action.payload.data.review.date);
-            let createdAt3 = new Date(action.payload.data.review.createdAt);
-            let updatedAt3 = new Date(action.payload.data.review.updatedAt);
-            state.review.date = date3.toLocaleString()
-            state.review.createdAt = createdAt3.toLocaleString()
-            state.review.updatedAt = updatedAt3.toLocaleString()
-            state.editReview = false;
-            console.log("Username => "+state.review.user.username);
+            // state.review = action.payload.data.review;
+            // let date3 = new Date(action.payload.data.review.date);
+            // let createdAt3 = new Date(action.payload.data.review.createdAt);
+            // let updatedAt3 = new Date(action.payload.data.review.updatedAt);
+            // state.review.date = date3.toLocaleString()
+            // state.review.createdAt = createdAt3.toLocaleString()
+            // state.review.updatedAt = updatedAt3.toLocaleString()
+            state.editUserBlogPost = false;
+            // console.log("Username => "+state.review.user.username);
             console.log(state);
             return state;
 

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from "react-redux";
 import PropTypes from 'prop-types';
 import Button from '@material-ui/core/Button';
-import { getUserBlogPosts, editUserBlogPost, updateUserBlogPost, deleteBlogPost } from "../../Redux/Actions/blogPostActions"
+import { getUserBlogPosts, editUserBlogPost, updateUserBlogPost, deleteUserBlogPost } from "../../Redux/Actions/blogPostActions"
 
 class UserBlogPosts extends Component {
 
@@ -10,48 +10,48 @@ class UserBlogPosts extends Component {
         this.props.getUserBlogPosts()
     }
 
-    onClickEditBlogPost = () => {
-        this.props.deleteBlogPost()
+    onClickEditBlogPost = (blogPost, index) => {
+        this.props.editUserBlogPost(blogPost, index)
     }
 
-    onClickUpdateBlogPost = () => {
-        this.props.deleteBlogPost()
+    onClickUpdateBlogPost = (blogPost, index) => {
+        this.props.updateUserBlogPost(blogPost, index)
     }
 
-    onClickDeleteBlogPost = () => {
-        this.props.deleteBlogPost()
+    onClickDeleteBlogPost = (blogPost, index) => {
+        this.props.deleteUserBlogPost(blogPost, index)
     }
 
     render() {
         return (
             <div>
                 { this.props.blogPosts.userBlogPosts.map((blogPost, index) => {
-                    console.log(blogPost)
                     return (
                     <div className="user-blog-posts" key={index}>
                         <div className="user-blog-post-header">
-                            <div></div>
-                            <div></div>
-                            <div></div>
+                            <div>{blogPost.user.username}</div>
+                            <div>{blogPost.createdAt}</div>
+                            <div>{blogPost.updatedAt}</div>
                         </div>
-                        <div className="post-text">
+                        <div className="user-post-text">
                             <p>{blogPost.blogPostText}</p>
                         </div>
-                        <div className="post-buttons">
+                        <div>
                         {
-                            this.props.blogPosts.editBlogPost === false &&
-                            <div>
-                                <Button onClick={()=>{this.onClickEditBlogPost(index, blogPost)}} variant="contained" color="primary">
+                            this.props.blogPosts.editUserBlogPost === false &&
+                            <div className="user-post-buttons">
+                                <div><span>Comments</span></div>
+                                <Button onClick={()=>{this.onClickEditBlogPost(blogPost, index)}} variant="contained" color="primary">
                                     Edit
                                 </Button>
-                                <Button onClick={()=>{this.onClickDeleteBlogPost(index, blogPost)}} variant="contained" color="primary">
+                                <Button onClick={()=>{this.onClickDeleteBlogPost(blogPost, index)}} variant="contained" color="primary">
                                     Delete
                                 </Button>
                             </div>
                         }
                         {
-                            this.props.blogPosts.editBlogPost === true &&
-                            <Button onClick={()=>{this.onClickUpdateBlogPost(index, blogPost)}} variant="contained" color="primary">
+                            this.props.blogPosts.editUserBlogPost === true &&
+                            <Button onClick={()=>{this.onClickUpdateBlogPost(blogPost, index)}} variant="contained" color="primary">
                                 Update
                             </Button>
                         }
@@ -68,6 +68,10 @@ UserBlogPosts.propTypes = {
     users: PropTypes.object.isRequired,
     comments: PropTypes.object.isRequired,
     getUserBlogPosts: PropTypes.func.isRequired,
+    editUserBlogPost: PropTypes.func.isRequired,
+    updateUserBlogPost: PropTypes.func.isRequired,
+    deleteUserBlogPost: PropTypes.func.isRequired
+
 };
 
 const mapStateToProps = (state) => {
@@ -82,4 +86,4 @@ export default connect(mapStateToProps, {
     getUserBlogPosts,
     editUserBlogPost,
     updateUserBlogPost,
-    deleteBlogPost })(UserBlogPosts)
+    deleteUserBlogPost })(UserBlogPosts)
