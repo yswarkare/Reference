@@ -1,0 +1,168 @@
+FPRT Core CSE Exam 04-07-2020
+
+01. What is Cryptography and what are the Encryption Methods?
+    
+    Cryptography is the science of protecting information by transforming it into a secure format.
+    This process, called encryption, has been used for centuries to prevent handwritten messages from being read by unintended recipients.
+    Modern cryptography uses sophisticated mathematical equations (algorithms) and secret keys to encrypt and decrypt data. Today, cryptography is used to provide secrecy and integrity to our data, and both authentication and anonymity to our communications. It is a division of computer science that focuses on transforming data into formats that cannot be recognized by unauthorized users.
+    An example of basic cryptography is a encrypted message in which letters are replaced with other characters. To decode the encrypted contents, you would need a grid or table that defines how the letters are transposed.
+
+    There are several ways of classifying cryptographic algorithms, simply they could be categorized based on the number of keys that are employed for encryption and decryption, and further defined by their application and use, the three types of algorithms used are as follows
+
+    1. Secret Key Cryptography (SKC): 
+        Uses a single key for both encryption and decryption; also called symmetric encryption. Primarily used for privacy and confidentiality.
+
+    2. Public Key Cryptography (PKC): 
+        Uses one key for encryption and another for decryption; also called asymmetric encryption. Primarily used for authentication, non-repudiation, and key exchange.
+
+    3.Hash Functions: 
+        Uses a mathematical transformation to irreversibly "encrypt" information, providing a digital fingerprint. Primarily used for message integrity.
+
+02. On entering a URL in a browser, explain the detailed procedure in which the request is handled by the browser and the result is obtained for the given search query.
+
+    1. When we type URL in browser, it checks the cache for a DNS record to find the corresponding IP address of entered URL. DNS(Domain Name System) is a database that maintains the name of the website (URL) and the particular IP address it links to. Every single URL on the internet has a unique IP address assigned to it. The IP address belongs to the computer which hosts the server of the website we are requesting to access.
+    To find the DNS record, the browser checks four caches.
+        01. It checks the browser cache. The browser maintains a repository of DNS records for a fixed duration for websites you have previously visited. So, it is the first place to run a DNS query.
+        02. The browser checks the OS cache. If it is not in the browser cache, the browser will make a system call (i.e., gethostname on Windows) to your underlying computer OS to fetch the record since the OS also maintains a cache of DNS records.
+        03. It checks the router cache. If it’s not on your computer, the browser will communicate with the router that maintains its’ own cache of DNS records.
+        04. It checks the ISP cache. If all steps fail, the browser will move on to the ISP. Your ISP maintains its’ own DNS server, which includes a cache of DNS records, which the browser would check with the last hope of finding your requested URL.
+
+    2. If the requested URL is not in the cache, ISP’s DNS server initiates a DNS query to find the IP address of the server that hosts entered URL.
+        The purpose of a DNS query is to search multiple DNS servers on the internet until it finds the correct IP address for the website, the search will repeatedly continue from a DNS server to a DNS server until it either finds the IP address we need or returns an error response saying it was unable to find it. In this situation, it would call the ISP’s DNS server a DNS recursor whose responsibility is to find the proper IP address of the intended domain name by asking other DNS servers on the internet for an answer. The other DNS servers are called name servers since they perform a DNS search based on the domain architecture of the website domain name.
+
+    3. The browser initiates a TCP connection with the server.
+        Once the browser receives the correct IP address, it will build a connection with the server that matches the IP address to transfer information. Browsers use internet protocols to build such connections. There are several different internet protocols that can be used, but TCP is the most common protocol used for many types of HTTP requests.
+        To transfer data packets between your computer(client) and the server, it is important to have a TCP connection established. This connection is established using a process called the TCP/IP three-way handshake. This is a three-step process where the client and the server exchange SYN(synchronize) and ACK(acknowledge) messages to establish a connection.
+        01. The client machine sends a SYN packet to the server over the internet, asking if it is open for new connections.
+        02. If the server has open ports that can accept and initiate new connections, it’ll respond with an ACKnowledgment of the SYN packet using a SYN/ACK packet.
+        03. The client will receive the SYN/ACK packet from the server and will acknowledge it by sending an ACK packet.
+        Then a TCP connection is established for data transmission!
+
+    4. The browser sends an HTTP request to the webserver.
+        Once the TCP connection is established, it is time to start transferring data! The browser will send a GET request asking for maps.google.com web page. If you’re entering credentials or submitting a form, this could be a POST request. This request will also contain additional information such as browser identification (User-Agent header), types of requests that it will accept (Accept header), and connection headers asking it to keep the TCP connection alive for additional requests. It will also pass information taken from cookies the browser has in store for this domain.
+
+    5. The server handles the request and sends back a response.
+        The server contains a webserver (i.e., Apache, IIS) that receives the request from the browser and passes it to a request handler to read and generate a response. The request handler is a program (written in ASP.NET, PHP, Ruby, etc.) that reads the request, its’ headers, and cookies to check what is being requested and also update the information on the server if needed. Then it will assemble a response in a particular format (JSON, XML, HTML).
+
+    6. The server sends out an HTTP response.
+        The server response contains the web page you requested as well as the status code, compression type (Content-Encoding), how to cache the page (Cache-Control), any cookies to set, privacy information, etc.
+
+    7. The browser displays the HTML content (for HTML responses, which is the most common).
+        The browser displays the HTML content in phases. First, it will render the bare bone HTML skeleton. Then it will check the HTML tags and send out GET requests for additional elements on the web page, such as images, CSS stylesheets, JavaScript files, etc. These static files are cached by the browser, so it doesn’t have to fetch them again the next time we visit the page.
+
+03. How will you create persistent connections between the server and the client?
+    
+    Web clients often open connections to the same site. For example, most of the embedded images in a web page often come from the same web site, and a significant number of hyperlinks to other objects often point to the same site. Thus, an application that initiates an HTTP request to a server likely will make more requests to that server in the near future (to fetch the inline images, for example). This property is called site locality.
+    For this reason, HTTP/1.1 (and enhanced versions of HTTP/1.0) allows HTTP devices to keep TCP connections open after transactions complete and to reuse the preexisting connections for future HTTP requests. TCP connections that are kept open after transactions complete are called persistent connections. Nonpersistent connections are closed after each transaction. Persistent connections stay open across transactions, until either the client or the server decides to close them.
+    By reusing an idle, persistent connection that is already open to the target server, you can avoid the slow connection setup. In addition, the already open connection can avoid the slow-start congestion adaptation phase, allowing faster data transfers.
+
+04. What is Multithreading? What is the difference between a thread and a process?
+
+    Multithreading is a widespread programming and execution model that allows multiple threads to exist within the context of one process. These threads share the process's resources, but are able to execute independently. The threaded programming model provides developers with a useful abstraction of concurrent execution. Multithreading can also be applied to one process to enable parallel execution on a multiprocessing system.
+
+    A process is an execution of a program but a thread is a single execution sequence within the process. A process can contain multiple threads.
+	Process takes more time to terminate and it is isolated means it does not share memory with any other process.
+	Thread takes less time to terminate as compared to process and like process threads do not isolate.
+
+	Process: Process means any program is in execution. Process control block controls the operation of any process. Process control block contains the information about processes for example: Process priority, process id, process state, CPU, register etc. A process can creates other processes which are known as Child Processes. Process takes more time to terminate and it is isolated means it does not share memory with any other process.
+
+	Thread: Thread is the segment of a process means a process can have multiple threads and these multiple threads are contained within a process. A thread have 3 states: running, ready, and blocked. Thread takes less time to terminate as compared to process and like process threads do not isolate.
+
+05. Explain Indexing in DBMS.
+
+    Indexing is a data structure technique which allows you to quickly retrieve records from a database file. An Index is a small table having only two columns. The first column comprises a copy of the primary or candidate key of a table. Its second column contains a set of pointers for holding the address of the disk block where that specific key value stored.
+    Types of Indexing based on its indexing attributes are as follows.
+    
+    1. Primary Indexing :
+        Primary Index is an ordered file which is fixed length size with two fields. The first field is the same a primary key and second, filed is pointed to that specific data block. In the primary Index, there is always one to one relationship between the entries in the index table.
+        The primary Indexing is also further divided into two types.
+        
+        01. Dense Index :
+            In a dense index, a record is created for every search key valued in the database. This helps you to search faster but needs more space to store index records. In this Indexing, method records contain search key value and points to the real record on the disk.
+        
+        02. Sparse Index :
+            It is an index record that appears for only some of the values in the file. Sparse Index helps you to resolve the issues of dense Indexing. In this method of indexing technique, a range of index columns stores the same data block address, and when data needs to be retrieved, the block address will be fetched. However, sparse Index stores index records for only some search-key values. It needs less space, less maintenance overhead for insertion, and deletions but It is slower compared to the dense Index for locating records.
+    
+    2. Secondary Indexing :
+        The secondary Index can be generated by a field which has a unique value for each record, and it should be a candidate key. It is also known as a non-clustering index. This two-level database indexing technique is used to reduce the mapping size of the first level. For the first level, a large range of numbers is selected because of this; the mapping size always remains small.
+
+    3. Clustering Indexing :
+        In a clustered index, records themselves are stored in the Index and not pointers. Sometimes the Index is created on non-primary key columns which might not be unique for each record. In such a situation, you can group two or more columns to get the unique values and create an index which is called clustered Index. This also helps you to identify the record faster.
+
+    4. Multilevel Indexing :
+        Multilevel Indexing is created when a primary index does not fit in memory. In this type of indexing method, you can reduce the number of disk accesses to short any record and kept on a disk as a sequential file and create a sparse base on that file.
+        
+    5. B-Tree Indexing :
+        B-tree index is the widely used data structures for Indexing. It is a multilevel index format technique which is balanced binary search trees. All leaf nodes of the B tree signify actual data pointers. Moreover, all leaf nodes are interlinked with a link list, which allows a B tree to support both random and sequential access.
+
+
+06. What are normalization and denormalization and why do we need it?
+
+    1. Normalization :
+        Data normalization is a process in which data attributes within a data model are organized to increase the cohesion of entity types. The goal of data normalization is to reduce and even eliminate data redundancy, an important consideration for application developers because it is incredibly difficult to stores objects in a relational database that maintains the same information in several places.
+
+        Needs of Normalization :
+        01. A properly designed and well-functioning database should undergo data normalization in order to be used successfully. Data normalization gets rid of a number of anomalies that can make analysis of the data more complicated. Some of those anomalies can crop up from deleting data, inserting more information, or updating existing information. Once those errors are worked out and removed from the system, further benefits can be gained through other uses of the data and data analytics. It is usually through data normalization that the information within a database can be formatted in such a way that it can be visualized and analyzed.
+
+        02. A database that is bogged down by loads of unnecessary information, by normalization data analysis can happen more quickly and efficiently.
+
+        03. To Get database easier to change and update data within your database, since the redundancies and errors are absent after normalization
+
+    2. Denormalization :
+        Denormalization is a strategy used on a previously-normalized database to increase performance. The idea behind it is to add redundant data where we think it will help us the most. We can use extra attributes in an existing table, add new tables, or even create instances of existing tables. The usual goal is to decrease the running time of select queries by making data more accessible to the queries or by generating summarized reports in separate tables. This process can bring some new problems. A normalized database is the starting point for the denormalization process. It’s important to differentiate from the database that has not been normalized and the database that was normalized first and then denormalized later. The second one is okay; the first is often the result of bad database design or a lack of knowledge.
+
+        Needs of Denormalization :
+
+        01. Maintaining history: Data can change during time, and we need to store values that were valid when a record was created. What kind of changes do we mean? Well, a person’s first and last name can change; a client also can change their business name or any other data. Task details should contain values that were actual at the moment a task was generated. We wouldn’t be able to recreate past data correctly if this didn’t happen. We could solve this problem by adding a table containing the history of these changes. In that case, a select query returning the task and a valid client name would become more complicated. Maybe an extra table isn’t the best solution.
+
+        02. Improving query performance: Some of the queries may use multiple tables to access data that we frequently need. Think of a situation where we’d need to join 10 tables to return the client’s name and the products that were sold to them. Some tables along the path could also contain large amounts of data. In that case, maybe it would be wise to add a client_id attribute directly to the products_sold table.
+        
+        03. Speeding up reporting: We need certain statistics very frequently. Creating them from live data is quite time-consuming and can affect overall system performance. Let’s say that we want to track client sales over certain years for some or all clients. Generating such reports out of live data would “dig” almost throughout the whole database and slow it down a lot. And what happens if we use that statistic often?
+        
+        04. Computing commonly-needed values up front: We want to have some values ready-computed so we don’t have to generate them in real time.
+
+07. Difference between INNER and OUTER JOIN.
+
+    Inner Join and Outer Join both are the types of Join. Join compares and combines tuples from two relations or tables. Inner Join specifies the natural join i.e. if you write a Join clause without Inner keyword then it performs the natural join operation. The potential difference between Inner Join and Outer Join is that Inner Join returns only the matching tuples from both the table and the Outer Join returns all the tuples from both the compared tables.
+
+    1. Inner Join
+        01. Inner Join is also referred to as Natural Join. Inner Join compares two tables and combines the matching tuple in both the tables. It is also called as the default type of join, as Join clause is written without the inner keyword it perform the natural join. If the Join clause is written without Outer keyword then also inner join is performed.
+        
+        02. Inner Join outputs only the matching tuples from both the table.
+        
+        03. The Potential size of the database returned by Inner Join is comparatively smaller than Outer Join.
+        
+        04. It doesn't return anything when match is not found.
+
+        05. It is faster than outer join.
+
+    2. Outer Join
+        01. Unlike in Inner Join, only those tuples are output that has same attribute values in both the compared table; Outer Join outputs all the tuples of both the table. Outer Join is of three types Left Outer Join, Right Outer Join, and Full Outer Join.
+
+        02. Outer Join displays all the tuples from both the tables.
+
+        03. Outer join return comparatively larger database.
+
+        04. It return null in the column values, when match is not found.
+
+        05. It is slower than inner join because of the larger result set.
+
+
+08. What is Cache? Where does cache lie in an Operating System? Difference between Cache and HashMap. 
+
+    Cache : In computing, a cache is a high-speed data storage layer which stores a subset of data, typically transient in nature, so that future requests for that data are served up faster than is possible by accessing the data’s primary storage location. Caching allows you to efficiently reuse previously retrieved or computed data.
+
+    The operating system keeps cache in otherwise unused portions of the main memory (RAM), resulting in quicker access to the contents of cached data and overall performance improvements.
+
+    Difference between Cache and HashMap
+    1. Cache do not allow null keys or values. Attempts to use null will result in a java.lang.NullPointerException
+    2. Cache provide the ability to read values from a CacheLoader (read-through-caching) when a value being requested is not in a cache.
+    3. Cache provide the ability to write values to a CacheWriter (write-through-caching) when a value being created/updated/removed from a cache.
+    4. Cache provide the ability to observe cache entry changes.
+    5. Cache may capture and measure operational statistics.
+
+09. How will you analyze 'process out of memory exception' in your node js application? 
+
+    This error occurs when the memory allocated for the execution application is less than the required memory when run application.
+    
+10. If RAM size is 4GB, if 4 processes of size 2GB are launched! What happens? 

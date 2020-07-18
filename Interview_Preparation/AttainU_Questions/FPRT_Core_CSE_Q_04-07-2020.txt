@@ -1,0 +1,10 @@
+What is Cryptography and what are the Encryption Methods?
+On entering a URL in a browser, explain the detailed procedure in which the request is handled by the browser and the result is obtained for the given search query. 
+How will you create persistent connections between the server and the client? 
+What is Multithreading? What is the difference between a thread and a process?
+Explain Indexing in DBMS. 
+What are normalization and denormalization and why do we need it?
+Difference between INNER and OUTER JOIN.
+What is Cache? Where does cache lie in an Operating System? Difference between Cache and HashMap. 
+How will you analyze 'process out of memory exception' in your node js application? 
+If RAM size is 4GB, if 4 processes of size 2GB are launched! What happens? 
