@@ -39,17 +39,19 @@ export const editUserBlogPost = (blogPost, index) => async (dispatch) => {
 }
 
 export const updateUserBlogPost = (blogPost, index) => async (dispatch) => {
+    let res = await api.patch("/blog-posts/update-blog-post", blogPost)
     dispatch({
         type: Update_User_BlogPost,
-        payload: blogPost,
+        payload: res,
         index: index
     })
 }
 
 export const deleteUserBlogPost = (blogPost, index) => async (dispatch) => {
+    let res = await api.patch("/blog-posts/delete-blog-post", blogPost)
     dispatch({
         type: Delete_User_BlogPost,
-        payload: blogPost,
+        payload: res,
         index: index
     })
 }

@@ -65,12 +65,6 @@ let blogPostReducer = ( state = blogPostState, action ) => {
             console.log(state);
             return state;
 
-        case Edit_User_BlogPost:
-            console.log(action.payload);
-            state.editUserBlogPost = true;
-            console.log(state);
-            return state;
-
         case Set_BlogPost_Text:
             console.log(action.payload);
             state.blogPost.blogPostText = action.payload.blogPostText;
@@ -80,35 +74,48 @@ let blogPostReducer = ( state = blogPostState, action ) => {
 
         case Make_BlogPost:
             console.log(action.payload);
-            state.review = action.payload.data.review;
-            // let date2 = new Date(action.payload.data.review.date);
-            // let createdAt2 = new Date(action.payload.data.review.createdAt);
-            // let updatedAt2 = new Date(action.payload.data.review.updatedAt);
-            // state.review.date = date2.toLocaleString()
-            // state.review.createdAt = createdAt2.toLocaleString()
-            // state.review.updatedAt = updatedAt2.toLocaleString()
-            state.editReview = false;
-            state.reviewExists = true;
+            if (action.payload.data.success === true){
+                let newBlogPost = action.payload.data.blogPost;
+                console.log(newBlogPost.createdAt)
+                let createdAt2 = new Date(newBlogPost.createdAt);
+                let updatedAt2 = new Date(newBlogPost.updatedAt);
+                newBlogPost.createdAt = createdAt2.toLocaleString()
+                newBlogPost.updatedAt = updatedAt2.toLocaleString()
+                state.userBlogPosts.push(newBlogPost)
+                state.userBlogPostExists = true;
+                state.blogPost.blogPostText = ""
+            }
+            console.log(state);
+            return state;
+
+        case Edit_User_BlogPost:
+            console.log(action.payload);
+            state.editUserBlogPost = true;
             console.log(state);
             return state;
 
         case Update_User_BlogPost:
             console.log(action.payload);
-            // state.review = action.payload.data.review;
-            // let date3 = new Date(action.payload.data.review.date);
-            // let createdAt3 = new Date(action.payload.data.review.createdAt);
-            // let updatedAt3 = new Date(action.payload.data.review.updatedAt);
-            // state.review.date = date3.toLocaleString()
-            // state.review.createdAt = createdAt3.toLocaleString()
-            // state.review.updatedAt = updatedAt3.toLocaleString()
-            state.editUserBlogPost = false;
-            // console.log("Username => "+state.review.user.username);
+            if (action.payload.data.success === true) {
+                let uBPost4 = action.payload.data.blogPost;
+                let createdAt3 = new Date(uBPost4.createdAt);
+                let updatedAt3 = new Date(uBPost4.updatedAt);
+                uBPost4.createdAt = createdAt3.toLocaleString()
+                uBPost4.updatedAt = updatedAt3.toLocaleString()
+                state.userBlogPosts[action.index] = uBPost4;
+                state.editUserBlogPost = false;
+            }
             console.log(state);
             return state;
 
         case Delete_User_BlogPost:
             console.log(action.payload);
-            state.reviewExists = false;
+            if (action.payload.data.success === true) {
+                let uBPosts5 = state.userBlogPosts;
+                uBPosts5.splice(action.index, 1);
+                state.userBlogPosts = uBPosts5
+            }
+
             console.log(state);
             return state;
 

@@ -2,17 +2,27 @@ import React, { Component } from 'react';
 import { connect } from "react-redux";
 import PropTypes from 'prop-types';
 import WriteBlogPost from "../BlogPosts/WriteBlogPost";
-import UserBlogPosts from "../BlogPosts/UserBlogPosts";
 import UserNavbar from "../Navbars/userNavbar";
+import WrappedUserBlogPost from "../BlogPosts/UserBlogPost";
+import { getUserBlogPosts } from "../../Redux/Actions/blogPostActions";
 
 class UserTimeline extends Component {
+    
+    componentDidMount = () => {
+        console.log("Timeline Component Did Mount")
+        this.props.getUserBlogPosts()
+    }
+    
     render() {
         return (
             <div>
             { this.props.loginStatus.loggedIn === true && <UserNavbar></UserNavbar>}
                 <WriteBlogPost></WriteBlogPost>
                 <div className="p-3"><p>My BlogPosts</p></div>
-                <UserBlogPosts></UserBlogPosts>
+            {
+                this.props.blogPosts.userBlogPosts[0].blogPostText !== "Dummy text" &&
+                <WrappedUserBlogPost></WrappedUserBlogPost>
+            }
             </div>
         );
     }
@@ -21,7 +31,8 @@ class UserTimeline extends Component {
 UserTimeline.propTypes = {
     blogPosts: PropTypes.object.isRequired,
     users: PropTypes.object.isRequired,
-    comments: PropTypes.object.isRequired
+    comments: PropTypes.object.isRequired,
+    getUserBlogPosts: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state) => {
@@ -33,4 +44,4 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps, {})(UserTimeline)
+export default connect(mapStateToProps, { getUserBlogPosts })(UserTimeline)

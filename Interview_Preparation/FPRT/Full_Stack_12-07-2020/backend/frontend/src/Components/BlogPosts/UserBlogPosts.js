@@ -1,13 +1,22 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
 import PropTypes from 'prop-types';
+import TextareaAutosize from '@material-ui/core/TextareaAutosize';
 import Button from '@material-ui/core/Button';
-import { getUserBlogPosts, editUserBlogPost, updateUserBlogPost, deleteUserBlogPost } from "../../Redux/Actions/blogPostActions"
+import { getUserBlogPosts, setPostText, editUserBlogPost, updateUserBlogPost, deleteUserBlogPost } from "../../Redux/Actions/blogPostActions"
 
 class UserBlogPosts extends Component {
 
     componentDidMount = () => {
         this.props.getUserBlogPosts()
+    }
+
+    onChangeSetPostText = (postText) => {
+        let blogPost = {
+            blogPostText: postText,
+            user: this.props.users.user._id
+        }
+        this.props.setPostText(blogPost)
     }
 
     onClickEditBlogPost = (blogPost, index) => {
@@ -34,7 +43,14 @@ class UserBlogPosts extends Component {
                             <div>{blogPost.updatedAt}</div>
                         </div>
                         <div className="user-post-text">
-                            <p>{blogPost.blogPostText}</p>
+                            {
+                                this.props.blogPosts.editUserBlogPost === false &&
+                                <p>{blogPost.blogPostText}</p>
+                            }
+                            {
+                                this.props.blogPosts.editUserBlogPost === true &&
+                                <TextareaAutosize onChange={(e)=>{this.onChangeSetPostText(e.target.value)}} aria-label="minimum height" rowsMin={3} placeholder="Write your blog post" />
+                            }
                         </div>
                         <div>
                         {
@@ -68,6 +84,7 @@ UserBlogPosts.propTypes = {
     users: PropTypes.object.isRequired,
     comments: PropTypes.object.isRequired,
     getUserBlogPosts: PropTypes.func.isRequired,
+    setPostText: PropTypes.func.isRequired,
     editUserBlogPost: PropTypes.func.isRequired,
     updateUserBlogPost: PropTypes.func.isRequired,
     deleteUserBlogPost: PropTypes.func.isRequired
@@ -84,6 +101,7 @@ const mapStateToProps = (state) => {
 
 export default connect(mapStateToProps, { 
     getUserBlogPosts,
+    setPostText,
     editUserBlogPost,
     updateUserBlogPost,
     deleteUserBlogPost })(UserBlogPosts)

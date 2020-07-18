@@ -27,14 +27,25 @@ router.post("/make-blog-post", userAuth, async (req, res) => {
     }
 })
 
-router.patch("/update-blogPost", userAuth, async (req, res) => {
+router.patch("/update-blog-post", userAuth, async (req, res) => {
     try {
-        let blogPost = await BlogPost.findOneAndUpdate({_id: req.body._id}, {
-            blogPostText : req.body.blogPost.blogPostText
+        let blogPost2 = await BlogPost.findOneAndUpdate({_id: req.body._id}, {
+            blogPostText : req.body.blogPostText
         })
-        return res.json({ success: true, message: "BlogPost updated successfully", blogPost}) 
+        let blogPost = await BlogPost.findOne({_id: req.body._id}).populate("user")
+        return res.json({ success: true, message: "BlogPost updated successfully", blogPost, blogPost2}) 
     } catch (err) {
-        return res.json({success: false, message: "failed to update BlogPost", error: `${err}`})
+        return res.json({success: false, message: "failed to update BlogPost", error: `${err}`, input:(req.body)})
+    }
+})
+
+router.patch("/delete-blog-post", userAuth, async (req, res) => {
+    try {
+        console.log(req.body)
+        let blogPost = await BlogPost.findOneAndDelete({_id: req.body._id})
+        return res.json({ success: true, message: "BlogPost deleted successfully", blogPost}) 
+    } catch (err) {
+        return res.json({success: false, message: "failed to delete BlogPost", error: `${err}`})
     }
 })
 
