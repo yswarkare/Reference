@@ -1,4 +1,5 @@
 import blogPostState from "../States/blogPostState";
+import { success, error, info } from "consola";
 import { Get_User_BlogPosts,
     Get_BlogPost_Comments,
     Edit_User_BlogPost,
@@ -32,7 +33,7 @@ let blogPostReducer = ( state = blogPostState, action ) => {
             } else {
                 state.userBlogPostExists = false;
             }
-            console.log(state);
+            console.log(state)
             return state;
 
         case Get_BlogPost_Comments:
