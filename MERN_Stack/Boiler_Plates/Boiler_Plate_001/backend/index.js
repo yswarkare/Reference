@@ -5,8 +5,21 @@ const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const cors = require("cors")
 const User = require("./Models/User");
+const passport = require("passport");
+const { strategy } = require("./Middlewares/Passport")
+
+var http = require('http');
+
 
 const app = express();
+
+
+app.use(passport.initialize());
+
+passport.use(
+    strategy
+);
+
 
 app.use(cors())
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -32,6 +45,7 @@ const connectMongoDB = async () => {
 // Routes
 
 const userRoutes = require("./Routes/UserRoutes");
+const { jwtAuth } = require("./Utils/Auth");
 
 app.use("/api/users", userRoutes);
 
@@ -39,7 +53,9 @@ app.use("/api/users", userRoutes);
 const startServer = async () => {
     try {
         await connectMongoDB()
-        app.listen(port, ()=> {
+        http.createServer(app, (req, res) => {
+            res.writeHead(200, {'Content-Type': 'application/json'}, {'token': ""})
+        }).listen(port, ()=> {
             info({message: "App Started", badge: true})
             success({message: `Server Running at Port ${port}`, badge: true})
         })
