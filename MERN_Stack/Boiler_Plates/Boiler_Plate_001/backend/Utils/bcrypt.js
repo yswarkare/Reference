@@ -9,7 +9,7 @@ const hashPassword = async (user) => {
         console.log(user.password)
         return ({success: true, message: "Password bcrypt successful.", user: user})
     } catch (err) {
-        return ({success: false, message: "Failed to bcrypt password", error: `${err}`})
+        return ({success: false, message: "Failed to bcrypt password", error: `${err}`, errorType: "password"})
     }
 }
 
@@ -17,11 +17,11 @@ const comparePassword = async (inputPassword, hashedPassword) => {
     try {
         let isMatch = await bcrypt.compare(inputPassword, hashedPassword);
         if (isMatch === false) {
-            return ({success: false, message: "Password is incorrect."});
+            return ({success: false, message: "Password is incorrect.", errorType: "password"});
         }
         return ({success: true, message: "Password is correct."})
     } catch (err) {
-        return ({success: false, message: "Failed to compare password.", error: `${err}`})
+        return ({success: false, message: "Failed to compare password.", error: {err}, errorType: "password"})
     }
 }
 

@@ -7,9 +7,13 @@ var cookieExtractor = function(req) {
     var token = null;
     if (req && req.cookies)
     {
-        bTokenCookie = req.cookies.bearerToken;
-        bToken = bTokenCookie.split(" ");
-        token = bToken[1];
+        if (req.cookies.bearerToken){
+            bTokenCookie = req.cookies.bearerToken;
+            bToken = bTokenCookie.split(" ");
+            token = bToken[1];
+        } else {
+            token = req.cookies
+        }
     }
     return token;
 };

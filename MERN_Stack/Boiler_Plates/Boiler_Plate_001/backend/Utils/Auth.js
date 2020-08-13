@@ -25,62 +25,61 @@ const registerUser = async (userInfo, res) => {
         user.password = userInfo.password.trim();
 
         // Check empty fields
-        let errors = [];
+        
         if (user.firstName === "") {
-            errors.push("First name.")
+            res.status(401).json({success: false, message: "first name is empty", errorType: "firstName"});
         }
         if (user.middleName === "") {
-            errors.push("Middle name.")
+            res.status(401).json({success: false, message: "middle name is empty", errorType: "middleName"});
         }
         if (user.lastName === "") {
-            errors.push("Last name.")
+            res.status(401).json({success: false, message: "last name is empty", errorType: "lastName"});
         }
         if (user.username === "") {
-            errors.push("Username.")
-        }
-        if (user.emailId === "") {
-            errors.push("Email ID.")
-        }
-        if (user.password === "") {
-            errors.push("Password.")
-        }
-        if (errors.length > 0) {
-            return res.json({success: false, message: "Following fields are empty", errors: errors});
+            res.status(401).json({success: false, message: "username is empty", errorType: "username"});
         }
 
         // Check Username is already registered or not.
         let doesUsernameExists = await usernameExists(user.username);
         if (doesUsernameExists === true) {
-            return res.json({success: false, message: "Username already in use, try another"});
+            return res.status(401).json({success: false, message: "Username already in use, try another", errorType: "username"});
+        }
+
+        if (user.emailId === "") {
+            res.status(401).json({success: false, message: "emailId is empty", errorType: "emailId"});
         }
 
         // Validate Email ID.
         if (await validator.isEmail(user.emailId) === false) {
-            return res.json({success: false, message: `${user.emailId} is not a valid email id.`})
+            return res.status(401).json({success: false, message: `${user.emailId} is not a valid email id.`, errorType: "emailId"})
         }
 
         // Check Email ID is already registered or not.
         let doesEmailIdExists = await emailIdExists(user.emailId);
         if (doesEmailIdExists === true) {
-            return res.json({success: false, message: "Email ID already registered"});
+            return res.status(401).json({success: false, message: "Email ID already registered", errorType: "emailId"});
+        }
+
+        if (user.password === "") {
+            res.status(401).json({success: false, message: "password is empty", errorType: "password"});
         }
 
         // Check password restrictions
-        let isPasswordAllowed = passwordRestrictions(user);
+        let isPasswordAllowed = await passwordRestrictions(user);
         if (isPasswordAllowed.success === false) {
-            return res.json(isPasswordAllowed);
+            return res.status(401).json(isPasswordAllowed);
         }
 
         // Validate Password
         let validPassword = await validatePassword(user.password);
         if (validPassword.success === false) {
-            return res.json(validPassword);
+            return res.status(401).json(validPassword);
         }
 
         // Hash password using bcryptjs.
         let hashingPassword = await hashPassword(user);
         if (hashingPassword === false) {
-            return res.json(hashingPassword);
+            return res.status(401).json(hashingPassword);
         }
         let user01 = hashingPassword.user;
 
@@ -101,13 +100,13 @@ const registerUser = async (userInfo, res) => {
         return res.status(201).json({success: true, message: "User Registered Successfully!, Now you could login.", user: user02})
     } catch (err) {
         console.log(`${err}`);
-        return res.status(400).json({success: false, message: "Failed to register user", error: `${err}`});
+        return res.status(400).json({success: false, message: "Failed to register user", error: `${err}`, errorType: "registration"});
     }
 }
 
 const loginUser = async (userInfo, res) => {
     try {
-        /// console.log(userInfo)
+        //// console.log(userInfo)
         let userData = userInfo;
         userData.usernameOrEmailId = userInfo.usernameOrEmailId.trim();
         userData.password = userInfo.password.trim();
@@ -116,7 +115,7 @@ const loginUser = async (userInfo, res) => {
         let doesUserExists = await userExists(userData);
         //// console.log(doesUserExists)
         if (doesUserExists.success === false) {
-            return res.json(doesUserExists);
+            return res.status(401).json(doesUserExists);
         }
         let user = doesUserExists.user;
 
@@ -124,7 +123,7 @@ const loginUser = async (userInfo, res) => {
         let passwordMatch = await comparePassword(userData.password, user.password);
         //// console.log(passwordMatch)
         if (passwordMatch.success === false) {
-            return res.json(passwordMatch);
+            return res.status(401).json(passwordMatch);
         }
         
         let token = jwt.sign({

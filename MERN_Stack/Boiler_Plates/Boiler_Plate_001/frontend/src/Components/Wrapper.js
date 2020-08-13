@@ -1,29 +1,32 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
 import PropTypes from 'prop-types';
-
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { isUserLoggedIn, userLogin, verifyCookies, setUserLogout } from "../Redux/Actions/User_Actions";
+import MainHeader from "./Headers/MainHeader";
+import HomePage from "./HomePage";
+import UserLogIn from "./User/UserLogIn";
+import RegisterUser from "./User/Register_User";
+import UserAccount from "./User/User_Account";
 
 class Wrapper extends Component {
 
     componentDidMount = () => {
-
-        // let loginDetails = {
-        //     user: {
-        //         usernameOrEmailId: "yswarkare@gmail.com",
-        //         password: "yogesh702090"
-        //     }
-        // }
-        // this.props.userLogin(loginDetails)
         this.props.isUserLoggedIn();
-        // this.props.verifyCookies();
-        // this.props.setUserLogout()
     }
 
     render() {
         return (
-            <div>
-                <p>Wrapper</p>
+            <div className="wrapper">
+                <Router>
+                <MainHeader></MainHeader>
+                    <Switch>
+                        <Route exact path="/"><HomePage></HomePage></Route>
+                        <Route exact path="/user-login"><UserLogIn></UserLogIn></Route>
+                        <Route exact path="/register-user"><RegisterUser></RegisterUser></Route>
+                        <Route exact path="/user-account"><UserAccount></UserAccount></Route>
+                    </Switch>
+                </Router>
             </div>
         );
     }
