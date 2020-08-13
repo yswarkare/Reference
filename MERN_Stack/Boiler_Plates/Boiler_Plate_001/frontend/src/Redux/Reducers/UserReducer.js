@@ -32,6 +32,11 @@ import {
     Verify_Cookies,
     User_Errors } from "../Actions/Action_Types.js";
 
+import { Registration_Errors,
+        Log_In_Error,
+        Is_User_Logged_In_Error,
+        Log_Out_Error } from "../Actions/Error_Types"
+
 const userReducer = (state = userState, action) => {
     let stateCopy = JSON.parse(JSON.stringify(state));
 
@@ -56,31 +61,45 @@ const userReducer = (state = userState, action) => {
 
         case Set_User_Email_Id:
         let email = validator.isEmail(action.payload);
+        stateCopy.user.emailId = action.payload;
         if(email === true){
-            stateCopy.errors.emailId.success = false;
-            stateCopy.user.emailId = action.payload
+            stateCopy.errors.registration.emailId.success = true;
+            stateCopy.errors.registration.emailId.message = "valid email id"
         } else {
-            stateCopy.errors.emailId.success = true;
+            stateCopy.errors.registration.emailId.success = false;
+            stateCopy.errors.registration.emailId.message = "invalid email id"
         }
         stateCopy.errors.registration.success = null;
-        return stateCopy
+        return stateCopy;
 
         case Set_First_Password:
-        stateCopy.firstPassword = action.payload
-        stateCopy.errors.registration.success = null;
-        return stateCopy
+        stateCopy.passwords.first = action.payload;
+        if (stateCopy.passwords.first !== stateCopy.passwords.second){
+            stateCopy.errors.registration.password.success = false;
+            stateCopy.errors.registration.password.message = "Password didn't matched";
+        } else {
+            stateCopy.errors.registration.password.success = false;
+            stateCopy.errors.registration.password.message = "Password matched";
+        }
+        stateCopy.errors.registration.firstPassword.message = "Choose a password containing at least one lowercase, one uppercase letter, one digit and special character.";
+        stateCopy.errors.registration.secondPassword.message = "Enter the password again";
+        console.log(stateCopy);
+        return stateCopy;
 
         case Set_Second_Password:
-        if (stateCopy.firstPassword === action.payload){
-            stateCopy.user.password = action.payload 
-            stateCopy.errors.password.success = true;
-            stateCopy.errors.password.message = "";
+        stateCopy.passwords.second = action.payload;
+        stateCopy.user.password = action.payload;
+        if (stateCopy.passwords.second !== stateCopy.passwords.first){
+            stateCopy.errors.registration.password.success = false;
+            stateCopy.errors.registration.password.message = "Password didn't matched";
         } else {
-            stateCopy.errors.password.success = false;
-            stateCopy.errors.password.message = "Password didn't matched";
+            stateCopy.errors.registration.password.success = false;
+            stateCopy.errors.registration.password.message = "Password matched";
         }
-        stateCopy.errors.registration.success = null;
-        return stateCopy
+        stateCopy.errors.registration.firstPassword.message = "Choose a password containing at least one lowercase, one uppercase letter, one digit and special character.";
+        stateCopy.errors.registration.secondPassword.message = "Enter the password again";
+        console.log(stateCopy);
+        return stateCopy;
 
         case Register_User:
         console.log(action.payload);
@@ -95,22 +114,20 @@ const userReducer = (state = userState, action) => {
             stateCopy.errors.registration.errors = action.payload.data.errors;
             stateCopy.loginStatus.registrationRedirect = "/user-registration";
         }
+        stateCopy.errors.registration.firstPassword.message = "Choose a password containing at least one lowercase, one uppercase letter, one digit and special character.";
+        stateCopy.errors.registration.secondPassword.message = "Enter the password again";
         console.log(stateCopy);
         return stateCopy
 
         case Is_User_Logged_In:
         console.log(action.payload);
-        // console.log("Cookie "+Cookies.get("userToken"))
         state.user = action.payload.data.user;
-        // state.loginStatus.loggedIn = action.payload.data.success;
-        // state.loginStatus.userIsAdmin = action.payload.data.userIsAdmin;
-        // if (action.payload.data.success === true && action.payload.data.userIsAdmin === false) {
-        //     state.loginStatus.loginRedirect = "/user-account"
-        // } else if (action.payload.data.success === true && state.loginStatus.userIsAdmin === true) {
-        //     state.loginStatus.loginRedirect = "/admin-dashboard"
-        // } else {
-        //     state.loginStatus.loginRedirect = "/"
-        // }
+        state.loginStatus.loggedIn = action.payload.data.success;
+        if (action.payload.data.success === true) {
+            state.loginStatus.loginRedirect = "/user-account"
+        } else {
+            state.loginStatus.loginRedirect = "/"
+        }
         console.log(state)
         return state;
 
@@ -119,49 +136,39 @@ const userReducer = (state = userState, action) => {
         return stateCopy;
 
         case Get_Login_Username_Or_Email_ID:
-        if (validator.isEmail(action.payload) === true) {
-            stateCopy.loginDetails.emailId = action.payload
-        } else {
-            stateCopy.loginDetails.username = action.payload
-        }
+        stateCopy.loginDetails.usernameOrEmailId = action.payload
         console.log(stateCopy);
         return stateCopy
 
         case Get_Login_Password:
         stateCopy.loginDetails.password = action.payload;
+        console.log(stateCopy)
         return stateCopy
 
         case Set_Login_Redirect:
         console.log(action.payload)
-        // Cookies.set("userToken", action.payload.data.loggedIn.token)
-        if (action.payload.data.success === false) {
+        if (action.payload.data.success && action.payload.data.success === false) {
             state.errors.login.success = false;
             state.errors.login.message = action.payload.data.message;
             state.loginStatus.loginRedirect = "/user-login"
+        } else {
+            state.user = action.payload.data.loggedIn.user
+            state.loginStatus.loggedIn = action.payload.data.success;
+            state.loginStatus.loginRedirect = "/user-account"
+            state.errors.logIn.password.success = false;
+            state.errors.logIn.password.message = "Enter your password";
+            state.errors.logIn.usernameOrEmailId.success = false;
+            state.errors.logIn.usernameOrEmailId.message = "Enter your username or email id";
         }
-        // state.loginStatus.loggedIn = action.payload.data.success;
-        state.loginStatus.userIsAdmin = action.payload.data.userIsAdmin;
-        state.loginStatus.emailId = action.payload.data.emailId;
-        state.loginStatus.username = action.payload.data.username;
-        state.headers.Authorization = action.payload.data.loggedIn.token;
-        if (state.loginStatus.userIsAdmin === false) {
-            state.user = action.payload.data.user
-            state.loginStatus.loginRedirect = "/user-dashboard"
-        } else if (state.loginStatus.userIsAdmin === true) {
-            state.user = action.payload.data.admin
-            state.loginStatus.loginRedirect = "/admin-dashboard"
-        }
-        // console.log("Cookie "+Cookies.get("userToken"))
         console.log(state);
         return state
     
         case User_Logout:
         console.log(action.payload)
-        // Cookies.remove("userToken")
         state.user.token = "";
-        state.headers.Authorization = "";
+        state.loginStatus.loggedIn = false;
+        alert("You are successfully Logged Out.");
         state.loginStatus.logoutRedirect = "/";
-        state.loginStatus.userIsAdmin = false;
         console.log(state);
         return state
 
@@ -176,6 +183,8 @@ const userReducer = (state = userState, action) => {
         stateCopy.user.emailId = action.payload.data.user.emailId;
         console.log(stateCopy)
         return stateCopy;
+
+        // Update User Info
 
         case Set_User_Update:
         stateCopy.userUpdate.firstName = stateCopy.user.firstName;
@@ -254,9 +263,89 @@ const userReducer = (state = userState, action) => {
         console.log(stateCopy);
         return stateCopy;
 
+        // Errors
+
         case User_Errors:
-        console.log(action.payload);
-        return stateCopy
+            console.log(action.payload);
+            return stateCopy;
+
+        case Registration_Errors:
+            console.log(action.payload);
+            let errors_R = action.payload.error.response.data;
+            if (errors_R.errorType === "firstName"){
+                stateCopy.errors.registration.firstName.success = false;
+                stateCopy.errors.registration.firstName.message = errors_R.message;
+            } else {
+                stateCopy.errors.registration.firstName.success = true;
+                stateCopy.errors.registration.firstName.message = "your first name";
+            }
+            if (errors_R.errorType === "middleName"){
+                stateCopy.errors.registration.middleName.success = false;
+                stateCopy.errors.registration.middleName.message = errors_R.message;
+            } else {
+                stateCopy.errors.registration.middleName.success = true;
+                stateCopy.errors.registration.middleName.message = "your middle name";
+            }
+            if (errors_R.errorType === "lastName"){
+                stateCopy.errors.registration.lastName.success = false;
+                stateCopy.errors.registration.lastName.message = errors_R.message;
+            } else {
+                stateCopy.errors.registration.lastName.success = true;
+                stateCopy.errors.registration.lastName.message = "your last name";
+            }
+            if (errors_R.errorType === "username"){
+                stateCopy.errors.registration.username.success = false;
+                stateCopy.errors.registration.username.message = errors_R.message;
+            } else {
+                stateCopy.errors.registration.username.success = true;
+                stateCopy.errors.registration.username.message = "your username";
+            }
+            if (errors_R.errorType === "emailId"){
+                stateCopy.errors.registration.emailId.success = false;
+                stateCopy.errors.registration.emailId.message = errors_R.message;
+            } else {
+                stateCopy.errors.registration.emailId.success = true;
+                stateCopy.errors.registration.emailId.message = "your email id";
+            }
+            if (errors_R.errorType === "password"){
+                stateCopy.errors.registration.password.success = false;
+                stateCopy.errors.registration.firstPassword.message = "";
+                stateCopy.errors.registration.secondPassword.message = "";
+                if (errors_R.errors) {
+                    errors_R.message = errors_R.message + errors_R.errors.toString();
+                    console.log(errors_R.message)
+                }
+                stateCopy.errors.registration.password.message = errors_R.message;
+            } else {
+                stateCopy.errors.registration.password.success = true;
+                stateCopy.errors.registration.password.message = "valid password";
+                stateCopy.errors.registration.firstPassword.message = "";
+                stateCopy.errors.registration.secondPassword.message = "";
+            }
+            return stateCopy;
+
+        case Log_In_Error:
+            console.log(action.payload);
+            stateCopy.errors.logIn.errorType = action.payload.error.response.data.errorType;
+            if (stateCopy.errors.logIn.errorType === "usernameOrEmailId"){
+                stateCopy.errors.logIn.usernameOrEmailId.success = action.payload.error.response.data.success;
+                stateCopy.errors.logIn.usernameOrEmailId.message = action.payload.error.response.data.message;
+            } else if (stateCopy.errors.logIn.errorType === "password") {
+                stateCopy.errors.logIn.password.success = action.payload.error.response.data.success;
+                stateCopy.errors.logIn.password.message = action.payload.error.response.data.message;
+            } else {
+                console.log("some other error")
+            }
+            console.log(stateCopy);
+            return stateCopy;
+
+        case Is_User_Logged_In_Error:
+            console.log(action.payload);
+            return stateCopy;
+
+        case Log_Out_Error:
+            console.log(action.payload);
+            return stateCopy;
 
         default:
         return stateCopy;

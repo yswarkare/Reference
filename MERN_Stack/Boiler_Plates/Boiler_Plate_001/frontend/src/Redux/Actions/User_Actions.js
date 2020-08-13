@@ -16,6 +16,11 @@ import {
     Verify_Cookies,
     User_Errors } from "./Action_Types.js"
 
+import { Registration_Errors,
+    Log_In_Error,
+    Is_User_Logged_In_Error,
+    Log_Out_Error } from "./Error_Types";
+
 export const userErrors = (error, dispatch) => {
     return dispatch({
         type: User_Errors,
@@ -23,75 +28,118 @@ export const userErrors = (error, dispatch) => {
     })
 }
 
-export const setFirstName = (firstName) =>{
-    return ({
-        type: Set_User_First_Name,
-        payload: firstName
-    })
+export const setFirstName = (firstName) => (dispatch) =>{
+    try {
+        dispatch({
+            type: Set_User_First_Name,
+            payload: firstName
+        })
+    } catch (error) {
+        userErrors(error, dispatch);
+    }
 }
 
-export const setMiddleName = (middleName) =>{
-    return ({
-        type: Set_User_Middle_Name,
-        payload: middleName
-    })
+export const setMiddleName = (middleName) => (dispatch) =>{
+    try {        
+        dispatch({
+            type: Set_User_Middle_Name,
+            payload: middleName
+        })
+    } catch (error) {
+        userErrors(error, dispatch);
+    }
 }
 
-export const setLastName = (lastName) =>{
-    return ({
-        type: Set_User_Last_Name,
-        payload: lastName
-    })
+export const setLastName = (lastName) => (dispatch) =>{
+    try {        
+        dispatch({
+            type: Set_User_Last_Name,
+            payload: lastName
+        })
+    } catch (error) {
+        userErrors(error, dispatch);
+    }
 }
 
-export const setUsername = (username) =>{
-    return ({
-        type: Set_User_Username,
-        payload: username
-    })
+export const setUsername = (username) => (dispatch) =>{
+    try {        
+        dispatch({
+            type: Set_User_Username,
+            payload: username
+        })
+    } catch (error) {
+        userErrors(error, dispatch);
+    }
 }
 
-export const setEmailId = (emailId) =>{
-    return ({
-        type: Set_User_Email_Id,
-        payload: emailId
-    })
+export const setEmailId = (emailId) => (dispatch) =>{
+    try {
+        dispatch({
+            type: Set_User_Email_Id,
+            payload: emailId
+        })
+    } catch (error) {
+        userErrors(error, dispatch);
+    }
 }
 
-export const setPassword = (password) =>{
-    return ({
-        type: Set_First_Password,
-        payload: password
-    })
+export const setFirstPassword = (password) => (dispatch) =>{
+    try {        
+        dispatch({
+            type: Set_First_Password,
+            payload: password
+        })
+    } catch (error) {
+        userErrors(error, dispatch);
+    }
 }
 
-export const setRepeatPassword = (repeatPassword) =>{
-    return ({
-        type: Set_Second_Password,
-        payload: repeatPassword
-    })
+export const setSecondPassword = (repeatPassword) => (dispatch) =>{
+    try {        
+        dispatch({
+            type: Set_Second_Password,
+            payload: repeatPassword
+        })
+    } catch (error) {
+        userErrors(error, dispatch);
+    }
 }
 
 export const registerUser = (user) => async dispatch => {
-    let res = await Axios.post(`/users/register-user`,user)
-    dispatch({
-        type: Register_User,
-        payload: res
-    })
+    try {
+        let res = await Axios.post(`/users/register-user`,user)
+        dispatch({
+            type: Register_User,
+            payload: res
+        })
+    } catch (error) {
+        dispatch({
+            type: Registration_Errors,
+            payload: {error}
+        })
+    }
 }
 
-export const getUsernameOrEmailId = (usernameOrEmail) => {
-    return ({
-        type: Get_Login_Username_Or_Email_ID,
-        payload: usernameOrEmail
-    })
+export const getUsernameOrEmailId = (usernameOrEmail) => (dispatch) =>{
+    try {        
+        dispatch({
+            type: Get_Login_Username_Or_Email_ID,
+            payload: usernameOrEmail
+        })
+    } catch (error) {
+        userErrors(error, dispatch);
+    }
 }
 
-export const getPassword = (password) => {
-    return ({
-        type: Get_Login_Password,
-        payload: password
-    })
+export const getPassword = (password) =>  (dispatch) =>{
+    try {        
+        dispatch({
+            type: Get_Login_Password,
+            payload: password
+        })
+    } catch (error) {
+        userErrors(error, dispatch);
+    }
 }
 
 export const userLogin = (loginDetails) => async dispatch => {
@@ -101,8 +149,11 @@ export const userLogin = (loginDetails) => async dispatch => {
         type: Set_Login_Redirect,
         payload: res
         })
-    } catch (err) {
-        userErrors(err, dispatch);
+    } catch (error) {
+        dispatch({
+            type: Log_In_Error,
+            payload: {error}
+        })
     }
 }
 
@@ -113,9 +164,11 @@ export const isUserLoggedIn = () => async (dispatch) => {
             type: Is_User_Logged_In,
             payload: res
         })  
-    } catch (err) {
-        let error = {success: false, message: "User is Unauthorized to login using saved cookie", error: err}
-        userErrors(error, dispatch);
+    } catch (error) {
+        dispatch({
+            type: Is_User_Logged_In_Error,
+            payload: {error}
+        })
     }
 }
 
@@ -126,9 +179,11 @@ export const setUserLogout = (user) => async dispatch => {
             type: User_Logout,
             payload: res
         })
-    } catch (err) {
-        let error = {success: false, message: "User is Unauthorized to logout", error: err}
-        userErrors(error, dispatch);
+    } catch (error) {
+        dispatch({
+            type: Log_Out_Error,
+            payload: {error}
+        })
     }
 }
 
@@ -139,7 +194,7 @@ export const verifyCookies = () => async (dispatch) => {
             type: Verify_Cookies,
             payload: res
         })
-    } catch (err) {
-        console.log(err)
+    } catch (error) {
+        console.log(error)
     }
 }
