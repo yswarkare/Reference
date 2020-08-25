@@ -1,0 +1,16 @@
+<div class="container-fluid mt-4">
+    <div class="card-deck">
+        {{#each data}}
+        <div class="card">
+            <div class="card-body mb-3" style="min-width: 300px">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">{{this.name}}</li>
+                    <li class="list-group-item">{{this.email}}</li>
+                    <li class="list-group-item">{{this.phone}}</li>
+                    <li class="list-group-item">{{this.age}}</li>
+                </ul>
+            </div>
+        </div>     
+        {{/each}}
+    </div>    
+</div>

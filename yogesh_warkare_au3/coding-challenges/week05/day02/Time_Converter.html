@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<head>
+    <title>Time Converter</title>
+  
+</head>
+<body>
+ 
+    <form action="">
+        <input id="given-seconds" type="text">
+        <br>
+        </br>
+        <button id="convert">Convert</button>
+        <br>
+        </br>
+        <input id="result">
+    </form>
+    <br>
+    <h3 id="result-2"></h3>
+
+    <script
+    src="https://code.jquery.com/jquery-3.4.1.min.js"
+    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+    crossorigin="anonymous">
+    </script> 
+
+    <script>
+            timeConversion = function (){
+    
+    //    d = document.getElementById("given-seconds").value;
+        d = prompt("Enter Seconds");
+        d = Number(d);
+        var h = Math.floor(d / 3600);
+        var m = Math.floor(d % 3600 / 60);
+        var s = Math.floor(d % 3600 % 60);
+    
+        var hDisplay = ( h > 0 ? h + (h == 1 ? " hour, " : " hours, ") : "" );
+        var mDisplay = ( m > 0 ? m + (m == 1 ? " minute, " : " minutes, ") : "" );
+        var sDisplay = ( s > 0 ? s + (s == 1 ? " second" : " seconds") : "" );
+     
+        convertedTime = ( hDisplay + mDisplay + sDisplay );
+    
+    //    document.getElementById("result").value = convertedTime;
+        $('h3').append(convertedTime);
+        $('#result').data(convertedTime);
+        console.log(hDisplay + mDisplay + sDisplay);
+        console.log( h + ":" + m + ":" + s );  
+        }
+        timeConversion();
+        $("#convert").click (timeConversion());
+    //    convert.addEventListener("click", timeConversion);
+    </script>
+</body>
+</html>

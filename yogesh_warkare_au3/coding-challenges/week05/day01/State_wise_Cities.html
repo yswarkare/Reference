@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<head>
+    <title>Cities in a State</title>
+  
+</head>
+<body>
+    <ul></ul>
+
+    <script
+    src="https://code.jquery.com/jquery-3.4.1.min.js"
+    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+    crossorigin="anonymous">
+    </script>
+
+    <script>
+        var stateName = prompt("Enter name of a state");
+        var resultCities = [];
+        $.ajax({
+            url: 'https://raw.githubusercontent.com/attainu-nightingale/nightingale-course-module/master/coding-challenges/data/cities.json',
+            type: 'GET',
+            dataType: 'json',
+            
+            success: function (json) {
+                var citiesArray = JSON.parse(json)
+
+                for (var i=0; i< citiesArray.length; i++){
+                    if (citiesArray.state.toLowerCase() == stateName.toLowerCase()){
+                        $('ul').append('<li>'+citiesArray[i].name+'</li>');
+                        resultCities.push(citiesArray[i].name);
+                    }
+                }
+                console.log(resultCities);
+            },
+
+            error: function (error) {
+                console.log("Some error occured");
+                alert("Some error occured");
+            }
+        })
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,90 @@
+*{
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #ccc;
+    font-style: arial, helvetica, sans-serif;
+    font-size: 16px;
+    line-height: 1.2em;
+}
+
+a {
+    text-decoration: none;
+    color: #333;
+}
+
+a:hover{
+    color: rgb(196, 36, 62);
+    background-color: rgb(152, 196, 123)
+}
+
+header {
+    background-color: rgb(127, 201, 124);
+    padding: 1%;
+}
+
+header h1{
+    color: rgb(184, 29, 29);
+    text-align: center;
+}
+
+nav {
+    background-color: rgb(188, 226, 126);
+    padding: 1%;
+    box-align: center;
+}
+nav ul{
+	list-style: none;
+}
+
+nav li{
+    display: inline;
+    padding: 2%;
+    text-align: center;
+    background-color: rgb(154, 209, 66);
+    margin: 0px;
+    
+}
+
+.container {
+    background-color: rgb(188, 241, 228);
+    padding: 0.5%;
+}
+
+#main {
+    background-color: rgb(243, 161, 161);
+    padding: 1%;
+}
+
+#article ul{
+    padding: 0.5%;
+}
+
+#article li{
+    display: inline;
+    padding: 0.5%;
+    list-style: circle;
+}
+
+.wraper {
+    background-color: #ccc;
+    font-size: 0px;
+    padding: 0px;
+    line-height: 0em;
+}
+
+.wraper img{
+    width: 10%;
+    height: 190px;
+}
+
+footer {
+    background-color: rgb(127, 201, 124);
+    padding: 1%;
+    text-align:left;
+}
+
+footer p{
+    text-align: center;
+}

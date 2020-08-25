@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0-11/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <title>Add Student</title>
+</head>
+
+<body>
+    <a class="btn btn-dark" href="/logout" id="logout" style="position: fixed; top: 10px; right: 10px; color: beige;">Logout</a>
+    <div class="container-fluid p-5">
+        <form action="/addStudent" method="POST">
+            <div class="form-grpup">
+                <label for="firstname">Firstname</label>
+                <input type="text" name="firstname" id="firstname" class="form-control">
+            </div>
+            <div class="form-grpup">
+                <label for="lastname">Lastname</label>
+                <input type="text" name="lastname" id="lastname" class="form-control">
+            </div>
+            <br>
+            <div class="form-check form-check-inline">
+                <label class="form-check-label" for="gender">Gender : </label>
+                <input class="form-check-input" type="radio" name="gender" id="male" value="male">
+                <label class="form-check-label" for="male">Male</label>
+                <input class="form-check-input" type="radio" name="gender" id="female" value="female">
+                <label class="form-check-label" for="female">Female</label>
+            </div>
+            <div class="form-grpup">
+                <label for="hometown">Hometown</label>
+                <input type="text" name="hometown" id="hometown" class="form-control">
+            </div>
+            <div class="form-grpup">
+                <label for="username">Username</label>
+                <input type="text" name="username" id="username" class="form-control">
+            </div>
+            <div class="form-grpup">
+                <label for="password">Password</label>
+                <input type="password" name="password" id="password" class="form-control">
+            </div>
+            <br>
+            <div class="form-group">
+                <button class="btn btn-dark" type="submit" name="submit" value="submit">Submit</button>
+            </div>
+        </form>
+    </div>
+</body>
+
+</html>

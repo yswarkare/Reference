@@ -1,0 +1,35 @@
+body {
+    box-sizing: border-box;
+}
+
+.container-fluid {
+    width: 50%;
+    margin-top: 40px;
+    padding: 50px;
+    border: 0px;
+    border-radius: 15px;
+    background-color: beige;
+}
+
+h2 {
+    text-align: center;
+    background-color: blanchedalmond;
+    padding: 10px;
+}
+
+.tweets {
+    width: 80%;
+    margin: auto;
+    background-color: bisque;
+}
+
+h4 {
+    text-align: center;
+}
+
+#logout {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    color: beige;
+}
