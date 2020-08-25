@@ -1,0 +1,51 @@
+<div class="tab-pane fade show active" id="v-pills-editMovie" role="tabpanel" aria-labelledby="v-pills-editMovie-tab">
+    <div class="container-fluid">
+        <div class="row justify-content-center pt-2">
+            <div class="col-auto">
+                <h2>Edit Movie</h2>
+            </div>
+        </div>
+        {{#each data}}
+        <form class="pt-3" action="/editMovie" method="POST">
+            <div class="form-group row">
+                <label class="col-2 pt-2" for="name"><h6>Name&nbsp;</h6></label>
+                <input class="form-control col-6" type="text" name="name" id="name" placeholder="Name" value="{{this.name}}">
+            </div>
+            <div class="form-group row">
+                <label class="col-2 pt-2" for="hero"><h6>Hero&nbsp;</h6></label>
+                <input class="form-control col-6" type="text" name="hero" id="hero" placeholder="Hero" value="{{this.hero}}">
+            </div>
+            <div class="form-group row">
+                <label class="col-2 pt-2" for="heroine"><h6>Heroine&nbsp;</h6></label>
+                <input class="form-control col-6" type="text" name="heroine" id="heroine" placeholder="Heroine" value="{{this.heroine}}">
+            </div>
+            <div class="form-group row">
+                <label class="col-2 pt-2" for="budget"><h6>Budget&nbsp;</h6></label>
+                <input class="form-control col-6" type="text" name="budget" id="budget" placeholder="Budget" value="{{this.budget}}">
+            </div>
+            <div class="form-group row">
+                <h6 class="col-2 pt-2">Who is Favorite</h6>
+                <div class="col-6 pt-2">
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" name="favorite" id="favoriteHero" value="Hero">
+                        <label class="form-check-label" for="favoriteHero"><h6>&nbsp;Hero</h6></label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" name="favorite" id="favoriteHeroine" value="Heroine">
+                        <label class="form-check-label" for="favoriteHeroine"><h6>&nbsp;Heroine</h6></label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" name="favorite" id="favoriteBoth" value="Both Hero and Heroine">
+                        <label class="form-check-label" for="favoriteBoth"><h6>&nbsp;Both Hero and Heroine</h6></label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row justify-content-center">
+                <a href="/movie">
+                    <button class="btn primary btn-dark col-auto" type="submit" id="id" value="{{this._id}}">Submit</button>
+                </a>
+            </div>
+        </form>
+        {{/each}}
+    </div>
+</div>

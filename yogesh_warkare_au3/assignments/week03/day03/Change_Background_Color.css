@@ -1,0 +1,11 @@
+body{
+    background-color: antiquewhite;
+}
+.box{
+    width: 200px;
+    height: 200px;
+    background-color: cornsilk;
+    position: relative;
+    top: 200px;
+    left: 200px;
+}

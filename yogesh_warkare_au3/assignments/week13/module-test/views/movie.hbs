@@ -1,0 +1,47 @@
+<div class="tab-pane fade show active" id="v-pills-movie" role="tabpanel" aria-labelledby="v-pills-movie-tab">
+    <div class="container-fluid">
+        <div class="row justify-content-center pt-2">
+            <div class="col-auto">
+                <h2>Edit Movie</h2>
+            </div>
+        </div>
+        {{#each data}}
+        <div class="pt-3">
+            <div class="form-group row">
+                <label class="col-2 pt-2" for="name"><h6>Name&nbsp;</h6></label>
+                <p class="col-6" type="text" name="name" id="name" placeholder="Name">{{this.name}}</p>
+            </div>
+            <div class="form-group row">
+                <label class="col-2 pt-2" for="hero"><h6>Hero&nbsp;</h6></label>
+                <p class="col-6" type="text" name="hero" id="hero" placeholder="Hero">{{this.hero}}</p>
+            </div>
+            <div class="form-group row">
+                <label class="col-2 pt-2" for="heroine"><h6>Heroine&nbsp;</h6></label>
+                <p class="col-6" type="text" name="heroine" id="heroine" placeholder="Heroine">{{this.heroine}}</p>
+            </div>
+            <div class="form-group row">
+                <label class="col-2 pt-2" for="budget"><h6>Budget&nbsp;</h6></label>
+                <p class="col-6" type="text" name="budget" id="budget" placeholder="Budget">{{this.budget}}</p>
+            </div>
+            <div class="form-group row">
+                <h6 class="col-2 pt-2">Who is Favorite</h6>
+                <div class="col-6 pt-2">
+                    <p>{{this.favorite}}</p>
+                </div>
+            </div>
+            <div class="form-group row justify-content-center">
+                <form action="/editMovie" method="POST"></form>
+                <a href="/editMovie">
+                    <button class="btn primary btn-dark col-auto p-2" type="submit" id="id" value="{{this._id}}">Edit</button>
+                </a>
+                <div class="col-1"></div>
+                <form action="/delete" method="POST">
+                    <a href="/delete">
+                        <button class="btn primary btn-dark col-auto p-2" type="submit" id="id" value="{{this._id}}">Delete</button>
+                    </a>
+                </form>
+            </div>
+        </div>
+        {{/each}}
+    </div>
+</div>

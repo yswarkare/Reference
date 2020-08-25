@@ -1,0 +1,18 @@
+Full stack FPRT question is attached below -
+Duration - 24 hrs
+
+Create a simple blog application where you can:  
+
+1. SignUp, login and can manage your profile.
+2. A dashboard where you have a listing of blogs and can see details of it.  
+When not logged in you can perform below things:
+
+1. Can only see the blogs written by other people.
+2. Search for the blog.
+When logged in you can perform below things:
+
+1. Can create your own blog which others can see.
+    (only text blogs is required, other kinds depends on you)
+2. Follow other users(no request needed, can directly start following them)
+3. The blogs from the people you are following will be listed first then of others.
+4. Like, comment on blog, able to see other people's comments on the posts too.

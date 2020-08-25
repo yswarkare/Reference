@@ -1,0 +1,1 @@
+npm i bcryptjs console cors dotenv express jsonwebtoken mongoose passport passport-jwt valiodator --s

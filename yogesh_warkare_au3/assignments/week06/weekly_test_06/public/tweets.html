@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./tweet.css">
+    <title>Title</title>
+</head>
+
+<body>
+    <a class="btn btn-dark" href="/logout" id="logout">Logout</a>
+    <div class="container-fluid m-3 p-5">
+        <div class="heading">
+            <h2>Tweets</h2>
+        </div>
+        <div class="tweets" id="tweets">
+            <div class="row justify-content-center">
+                <div class="col-6 col-md-4 justify-content-center">
+                    <h4>Username</h4>
+                </div>
+                <div class="col-12 col-sm-6 col-md-8 justify-content-center">
+                    <h4>Tweet</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $.ajax({
+            url: "/getTweets",
+            type: 'GET',
+            datatype: 'json',
+            success: function(data) {
+                for (i = 1; i < data.length; i++) {
+                    $("#tweets").append(
+                        '<div class="row justify-content-center">' +
+                        '<div class="col-6 col-md-4 justify-content-center">' +
+                        '<h5>' + JSON.stringify(data[i].username) + '</h5>' +
+                        '</div>' +
+                        '<div class="col-12 col-sm-6 col-md-8 justify-content-center">' +
+                        '<h5>' + JSON.stringify(data[i].tweet) + '</h5>' +
+                        '</div>' +
+                        '</div>');
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>
