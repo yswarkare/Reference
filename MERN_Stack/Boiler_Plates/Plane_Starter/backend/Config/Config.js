@@ -1,10 +1,6 @@
-require("./node_modules/dotenv").config();
-
-
+require("dotenv").config();
 
 module.exports = {
-    SECRET: process.env.SECRET,
-    mongoURI:"mongodb+srv://userYogesh:yogesh702090@raingsandreviewsproject-notaz.mongodb.net/test?retryWrites=true&w=majority",
-    SECRET: "raingsandreviewsprojectsecret",
-    PORT: 5000,
+    MongoURI: process.env.MongoDB_URI,
+    port: process.env.PORT,
 }

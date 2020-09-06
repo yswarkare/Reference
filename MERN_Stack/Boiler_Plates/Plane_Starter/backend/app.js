@@ -1,88 +1,60 @@
 const express = require("express");
 const mongoose = require("mongoose");
-const { mongoURI } = require("./Config/config")
-const cors = require("cors");
-const { success, error } = require("consola");
-const passport = require("passport");
-const { strategy } = require("./middlewares/passport");
-// const path = require("path");
+const { success, error, info } = require("consola");
+const bodyParser = require("body-parser");
+const cookieParser = require("cookie-parser");
+const cors = require("cors")
+const User = require("./models/User");
 
 
-const app = express()
-
-app.use(express.json());
-
-app.use(cors());
-app.use(passport.initialize());
-
-passport.use(
-    strategy
-);
-
-const uri = mongoURI;
-
-mongoose.connect(uri, {useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true, useFindAndModify: false })
-.then(()=>success({message: `MongoDB Database Connection Established Successfully with database \n${uri}`, badge: true}))
-.catch((err)=>error({message: `MongoDB Database Connection Failed \n${err}`, badge: true}));
-
-// Routers
-
-// Admins Router
-
-const adminsRouter = require("./Routes/adminsRoutes");
-
-app.use("/api/admins", adminsRouter);
-
-// Users Router
-
-const usersRouter = require("./Routes/usersRoutes");
-
-app.use("/api/users", usersRouter);
-
-// Categories Router
-
-const categoriesRouter = require("./Routes/categoriesRoutes");
-
-app.use("/api/categories", categoriesRouter);
-
-// SubCategories Router
-
-const subCategoriesRouter = require("./Routes/subCategoriesRoutes");
-
-app.use("/api/sub-categories", subCategoriesRouter);
-
-// SubSubCategories Router
-
-const subSubCategoriesRouter = require("./Routes/subSubCategoriesRoutes");
-
-app.use("/api/sub-sub-categories", subSubCategoriesRouter);
-
-// Products Router
-
-const productsRouter = require("./Routes/productsRoutes");
-
-app.use("/api/products", productsRouter);
-
-// Reviews Router
-
-const ratingsRouter = require("./Routes/ratingsRoutes");
-
-app.use("/api/ratings", ratingsRouter);
-
-// Reviews Router
-
-const reviewsRouter = require("./Routes/reviewsRoutes");
-
-app.use("/api/reviews", reviewsRouter);
+var http = require('http');
 
 
-if(process.env.NODE_ENV === "production"){
-    app.use(express.static("ratings-and-reviews/build"));
-    
-    app.get("*", (req, res) => {
-        res.sendFile(path.resolve(__dirname, "ratings-and-reviews", "build", "index.html"));
-    })
+const app = express();
+
+app.use(cors())
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+app.use(cookieParser());
+
+// MongoDB connection
+
+const { MongoURI, port } = require("./Config/Config")
+
+const connectMongoDB = async () => {
+    try {
+        console.time("MongoDB Connection Time")
+        await mongoose.connect(MongoURI, {useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true, useFindAndModify: false })
+        
+        console.timeLog("MongoDB Connection Time")
+        return success({message: "MongoDB Connection Started", badge: true})
+    } catch (err) {
+        error({message: `Failed To Connect MongoDB DataBase\n\n${err}`, badge:true})
+        return {error: true};
+    }
 }
 
+// Routes
 
-module.exports = app;
+const userRoutes = require("./routes/user_routes");
+
+app.use("/api/users", userRoutes);
+
+// Start server
+
+const startServer = async () => {
+    try {
+        await connectMongoDB()
+        http.createServer(app, (req, res) => {
+            res.writeHead(200, {'Content-Type': 'application/json'}, {'token': ""})
+        }).listen(port, ()=> {
+            info({message: "App Started", badge: true})
+            success({message: `Server Running at Port ${port}`, badge: true})
+        })
+        return console.timeEnd("MongoDB Connection Time")
+    } catch (err) {
+        return error({message: `failed to start server\n${err}`, badge: true})
+    }
+}
+
+startServer()
