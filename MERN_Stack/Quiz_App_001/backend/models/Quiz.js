@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-const { model } = require("../../../Boiler_Plates/Plane_Starter/backend/models/User");
 
 const Schema = mongoose.Schema;
 
@@ -11,6 +10,6 @@ const quizSchema = new Schema({
     timestamps: true
 });
 
-const Quiz = mongoose.Model("quiz", quizSchema);
+const Quiz = mongoose.model("quiz", quizSchema);
 
 module.exports = Quiz;

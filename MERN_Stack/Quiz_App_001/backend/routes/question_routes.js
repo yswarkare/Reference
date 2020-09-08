@@ -19,29 +19,23 @@ router.post("/add-question", async (req, res) => {
             statement: req.body.question.statement,
             options: req.body.question.options,
             answer: req.body.question.answer,
-            quizzes: req.body.question.quizzes
+            quiz: req.body.question.quiz
         });
         let question = await newQuestion.save();
 
-        let quizzes_01 = req.body.question.quizzes;
-        for (let i = 0; i < quizzes_01; i++){
-            let quiz = await Quiz.findOne({ _id: quizzes_01[i]._id });
-            let questions_01;
-            if (quiz.questions){
-                questions_01 = quiz.questions;
-            } else {
-                questions_01 = [];
-            }
-            questions_01.push(question._id);
-            let quiz_01 = await Quiz.findOneAndUpdate({
-                _id: quizzes_01[i]._id
-            }, {
-                questions: questions_01
-            });
-        }
-        return res.status(200).json({ status: "success", message: "complete question added successfully", question: question });
+        let quiz_01 = await Quiz.findOne({ _id: req.body.question.quiz });
+        console.log(quiz_01);
+        let questions_01 = quiz_01.questions;
+        questions_01.push(question._id);
+        let quiz = await Quiz.findOneAndUpdate({
+            _id: req.body.question.quiz
+        },{
+            questions: questions_01
+        });
+        return res.status(200).json({ status: "success", message: "complete question added successfully", question: question, quiz: quiz });
     } catch (err) {
-        return res.status(401).json({ status: "failure", message: "failed to add complete question", error: {err} });
+        console.log({err})
+        return res.status(401).json({ status: "failure", message: `failed to add complete question ${err}`, error: {err} });
     }
 });
 
@@ -53,7 +47,7 @@ router.patch("/update-question/:question_id", async (req, res) => {
             statement: req.body.question.statement,
             options: req.body.question.options,
             answer: req.body.question.answer,
-            quizzes: req.body.question.quizzes
+            quiz: req.body.question.quiz
         });
         return res.status(200).json({ status: "success", message: "question updated successfully", question: question });
     } catch (err) {
