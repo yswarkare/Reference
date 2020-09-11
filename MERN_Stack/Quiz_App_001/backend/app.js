@@ -40,6 +40,14 @@ const userRoutes = require("./routes/user_routes");
 
 app.use("/api/users", userRoutes);
 
+const questionRoutes = require("./routes/question_routes");
+
+app.use("/api/questions", questionRoutes);
+
+const quizRoutes = require("./routes/quiz_routes");
+
+app.use("/api/quiz", quizRoutes);
+
 // Start server
 
 const startServer = async () => {
