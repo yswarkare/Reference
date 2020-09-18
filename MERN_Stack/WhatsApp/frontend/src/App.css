@@ -1,0 +1,192 @@
+.App {
+  text-align: center;
+  margin-top: 1rem;
+  padding-bottom: 10rem;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+a {
+  text-decoration: none;
+}
+
+.wrapper {
+  justify-content: center;
+  align-content: center;
+}
+
+/* Error */
+
+.error {
+  color: brown;
+  text-align: left;
+  font-size: 0.8rem;
+}
+
+/* Headers */
+
+.main-header {
+  display: grid;
+  grid-template-columns: 1fr 3fr 1fr 1fr;
+  grid-gap: 0.5rem;
+  padding: 0.5rem;
+  justify-self: stretch;
+}
+
+.main-header-1 {
+  justify-self: stretch;
+  justify-content: center;
+  padding: 0.5rem;
+}
+
+.main-header-2 {
+  justify-self: stretch;
+  justify-content: center;
+  padding: 0.5rem;
+}
+
+.main-header-3 {
+  justify-self: stretch;
+  justify-content: center;
+  padding: 0.5rem;
+}
+
+.main-header-4 {
+  justify-self: stretch;
+  justify-content: center;
+  padding: 0.5rem;
+}
+
+/* user-account-header */
+
+.user-account-header {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+/* User Login */
+
+.user-login {
+  display: grid;
+  grid-template-rows: auto;
+  grid-gap: 1rem;
+  padding: 2rem;
+  margin: 3rem;
+  justify-content: center;
+}
+
+/* Register User */
+
+.register-user {
+  display: grid;
+  grid-template-rows: auto;
+  justify-content: center;
+  align-content: center;
+}
+
+.register-user-container {
+  display: grid;
+  grid-template-rows: auto;
+  grid-row-gap: 0.5rem;
+  justify-self: center;
+  width: 70%;
+}
+
+.register-name {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 0.5rem;
+}
+
+.register-username-email-id {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-column-gap: 0.5rem;
+}
+
+.register-password {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-column-gap: 0.5rem;
+}
+
+.register-button {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  grid-column-gap: 0.5rem;
+}
+
+/* Dashboard */
+.dashboard {
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+}
+
+/* Message */
+
+.write-message {
+  display: grid;
+  grid-template-columns: 6fr 1fr;
+  grid-gap: 0.5rem;
+  margin: 0.5rem;
+}
+
+.show-messages {
+  display: grid;
+  grid-template-rows: auto;
+  grid-gap: 0.5rem;
+}
+
+.message {
+  display: grid;
+  grid-template-rows: auto;
+  grid-gap: 0.5rem;
+  width: 90%;
+}
+
+.message-sent {
+  justify-self: right;
+}
+
+.message-reveived {
+  justify-self: left;
+}
+
+.message-header {
+  display: grid;
+  grid-template-columns: auto;
+  grid-gap: 0.5rem;
+}
